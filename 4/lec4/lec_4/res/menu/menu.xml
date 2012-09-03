@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <item
+        android:id="@+id/new_game"
+        android:title="@string/add"/>
+    <item
+        android:id="@+id/help"
+        android:title="@string/delete"/>
+    <item 
+        android:id="@+id/compass_item"  
+        android:visible="true" 
+        android:title="Компас" 
+        android:enabled="true">
+    </item>
+    <item 
+        android:id="@+id/location_item" 
+        android:title="Локация"> 
+    </item>
+    <item 
+        android:id="@+id/converter"  
+        android:title="Конвертер">  
+    </item>
+</menu>

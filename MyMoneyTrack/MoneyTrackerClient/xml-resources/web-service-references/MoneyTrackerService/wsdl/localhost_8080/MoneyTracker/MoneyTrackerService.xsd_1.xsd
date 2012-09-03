@@ -1,0 +1,1403 @@
+<?xml version='1.0' encoding='UTF-8'?><!-- Published by JAX-WS RI at http://jax-ws.dev.java.net. RI's version is Metro/2.2.0-1 (tags/2.2.0u1-7139; 2012-06-02T10:55:19+0000) JAXWS-RI/2.2.6-2 JAXWS/2.2 svn-revision#unknown. --><xs:schema xmlns:tns="http://moneytracker.com/" xmlns:xs="http://www.w3.org/2001/XMLSchema" version="1.0" targetNamespace="http://moneytracker.com/">
+
+<xs:element name="Goodbye" type="tns:Goodbye"/>
+
+<xs:element name="GoodbyeResponse" type="tns:GoodbyeResponse"/>
+
+<xs:element name="Hello" type="tns:Hello"/>
+
+<xs:element name="HelloResponse" type="tns:HelloResponse"/>
+
+<xs:element name="IOException" type="tns:IOException"/>
+
+<xs:element name="InvalidFileFormatException" type="tns:InvalidFileFormatException"/>
+
+<xs:element name="LoginErrorException" type="tns:LoginErrorException"/>
+
+<xs:element name="RegErrorException" type="tns:RegErrorException"/>
+
+<xs:element name="createNewProduct" type="tns:createNewProduct"/>
+
+<xs:element name="createNewProductResponse" type="tns:createNewProductResponse"/>
+
+<xs:element name="createNewUserBudget" type="tns:createNewUserBudget"/>
+
+<xs:element name="createNewUserBudgetResponse" type="tns:createNewUserBudgetResponse"/>
+
+<xs:element name="createNewUserIncome" type="tns:createNewUserIncome"/>
+
+<xs:element name="createNewUserIncomeResponse" type="tns:createNewUserIncomeResponse"/>
+
+<xs:element name="createNewUserOutlay" type="tns:createNewUserOutlay"/>
+
+<xs:element name="createNewUserOutlayResponse" type="tns:createNewUserOutlayResponse"/>
+
+<xs:element name="deleteProductById" type="tns:deleteProductById"/>
+
+<xs:element name="deleteProductByIdResponse" type="tns:deleteProductByIdResponse"/>
+
+<xs:element name="deleteProductByName" type="tns:deleteProductByName"/>
+
+<xs:element name="deleteProductByNameResponse" type="tns:deleteProductByNameResponse"/>
+
+<xs:element name="deleteUserById" type="tns:deleteUserById"/>
+
+<xs:element name="deleteUserByIdResponse" type="tns:deleteUserByIdResponse"/>
+
+<xs:element name="deleteUserByLogin" type="tns:deleteUserByLogin"/>
+
+<xs:element name="deleteUserByLoginResponse" type="tns:deleteUserByLoginResponse"/>
+
+<xs:element name="getAllUserBudgetsByDescription" type="tns:getAllUserBudgetsByDescription"/>
+
+<xs:element name="getAllUserBudgetsByDescriptionResponse" type="tns:getAllUserBudgetsByDescriptionResponse"/>
+
+<xs:element name="getAllUserBudgetsByOwner" type="tns:getAllUserBudgetsByOwner"/>
+
+<xs:element name="getAllUserBudgetsByOwnerResponse" type="tns:getAllUserBudgetsByOwnerResponse"/>
+
+<xs:element name="getAllUserIncomesByDatetime" type="tns:getAllUserIncomesByDatetime"/>
+
+<xs:element name="getAllUserIncomesByDatetimeResponse" type="tns:getAllUserIncomesByDatetimeResponse"/>
+
+<xs:element name="getAllUserIncomesByDay" type="tns:getAllUserIncomesByDay"/>
+
+<xs:element name="getAllUserIncomesByDayResponse" type="tns:getAllUserIncomesByDayResponse"/>
+
+<xs:element name="getAllUserIncomesByHour" type="tns:getAllUserIncomesByHour"/>
+
+<xs:element name="getAllUserIncomesByHourResponse" type="tns:getAllUserIncomesByHourResponse"/>
+
+<xs:element name="getAllUserIncomesByMinute" type="tns:getAllUserIncomesByMinute"/>
+
+<xs:element name="getAllUserIncomesByMinuteResponse" type="tns:getAllUserIncomesByMinuteResponse"/>
+
+<xs:element name="getAllUserIncomesByMounth" type="tns:getAllUserIncomesByMounth"/>
+
+<xs:element name="getAllUserIncomesByMounthResponse" type="tns:getAllUserIncomesByMounthResponse"/>
+
+<xs:element name="getAllUserIncomesByProduct" type="tns:getAllUserIncomesByProduct"/>
+
+<xs:element name="getAllUserIncomesByProductResponse" type="tns:getAllUserIncomesByProductResponse"/>
+
+<xs:element name="getAllUserIncomesByUserAndDatetime" type="tns:getAllUserIncomesByUserAndDatetime"/>
+
+<xs:element name="getAllUserIncomesByUserAndDatetimeResponse" type="tns:getAllUserIncomesByUserAndDatetimeResponse"/>
+
+<xs:element name="getAllUserIncomesByUserAndDay" type="tns:getAllUserIncomesByUserAndDay"/>
+
+<xs:element name="getAllUserIncomesByUserAndDayResponse" type="tns:getAllUserIncomesByUserAndDayResponse"/>
+
+<xs:element name="getAllUserIncomesByUserAndHour" type="tns:getAllUserIncomesByUserAndHour"/>
+
+<xs:element name="getAllUserIncomesByUserAndHourResponse" type="tns:getAllUserIncomesByUserAndHourResponse"/>
+
+<xs:element name="getAllUserIncomesByUserAndMinute" type="tns:getAllUserIncomesByUserAndMinute"/>
+
+<xs:element name="getAllUserIncomesByUserAndMinuteResponse" type="tns:getAllUserIncomesByUserAndMinuteResponse"/>
+
+<xs:element name="getAllUserIncomesByUserAndMounth" type="tns:getAllUserIncomesByUserAndMounth"/>
+
+<xs:element name="getAllUserIncomesByUserAndMounthResponse" type="tns:getAllUserIncomesByUserAndMounthResponse"/>
+
+<xs:element name="getAllUserIncomesByUserAndYear" type="tns:getAllUserIncomesByUserAndYear"/>
+
+<xs:element name="getAllUserIncomesByUserAndYearResponse" type="tns:getAllUserIncomesByUserAndYearResponse"/>
+
+<xs:element name="getAllUserIncomesByYear" type="tns:getAllUserIncomesByYear"/>
+
+<xs:element name="getAllUserIncomesByYearResponse" type="tns:getAllUserIncomesByYearResponse"/>
+
+<xs:element name="getAllUserOutlaysByDatetime" type="tns:getAllUserOutlaysByDatetime"/>
+
+<xs:element name="getAllUserOutlaysByDatetimeResponse" type="tns:getAllUserOutlaysByDatetimeResponse"/>
+
+<xs:element name="getAllUserOutlaysByDay" type="tns:getAllUserOutlaysByDay"/>
+
+<xs:element name="getAllUserOutlaysByDayResponse" type="tns:getAllUserOutlaysByDayResponse"/>
+
+<xs:element name="getAllUserOutlaysByHour" type="tns:getAllUserOutlaysByHour"/>
+
+<xs:element name="getAllUserOutlaysByHourResponse" type="tns:getAllUserOutlaysByHourResponse"/>
+
+<xs:element name="getAllUserOutlaysByMinute" type="tns:getAllUserOutlaysByMinute"/>
+
+<xs:element name="getAllUserOutlaysByMinuteResponse" type="tns:getAllUserOutlaysByMinuteResponse"/>
+
+<xs:element name="getAllUserOutlaysByMounth" type="tns:getAllUserOutlaysByMounth"/>
+
+<xs:element name="getAllUserOutlaysByMounthResponse" type="tns:getAllUserOutlaysByMounthResponse"/>
+
+<xs:element name="getAllUserOutlaysByProduct" type="tns:getAllUserOutlaysByProduct"/>
+
+<xs:element name="getAllUserOutlaysByProductResponse" type="tns:getAllUserOutlaysByProductResponse"/>
+
+<xs:element name="getAllUserOutlaysByUserAndDatetime" type="tns:getAllUserOutlaysByUserAndDatetime"/>
+
+<xs:element name="getAllUserOutlaysByUserAndDatetimeResponse" type="tns:getAllUserOutlaysByUserAndDatetimeResponse"/>
+
+<xs:element name="getAllUserOutlaysByUserAndDay" type="tns:getAllUserOutlaysByUserAndDay"/>
+
+<xs:element name="getAllUserOutlaysByUserAndDayResponse" type="tns:getAllUserOutlaysByUserAndDayResponse"/>
+
+<xs:element name="getAllUserOutlaysByUserAndHour" type="tns:getAllUserOutlaysByUserAndHour"/>
+
+<xs:element name="getAllUserOutlaysByUserAndHourResponse" type="tns:getAllUserOutlaysByUserAndHourResponse"/>
+
+<xs:element name="getAllUserOutlaysByUserAndMinute" type="tns:getAllUserOutlaysByUserAndMinute"/>
+
+<xs:element name="getAllUserOutlaysByUserAndMinuteResponse" type="tns:getAllUserOutlaysByUserAndMinuteResponse"/>
+
+<xs:element name="getAllUserOutlaysByUserAndMounth" type="tns:getAllUserOutlaysByUserAndMounth"/>
+
+<xs:element name="getAllUserOutlaysByUserAndMounthResponse" type="tns:getAllUserOutlaysByUserAndMounthResponse"/>
+
+<xs:element name="getAllUserOutlaysByUserAndYear" type="tns:getAllUserOutlaysByUserAndYear"/>
+
+<xs:element name="getAllUserOutlaysByUserAndYearResponse" type="tns:getAllUserOutlaysByUserAndYearResponse"/>
+
+<xs:element name="getAllUserOutlaysByYear" type="tns:getAllUserOutlaysByYear"/>
+
+<xs:element name="getAllUserOutlaysByYearResponse" type="tns:getAllUserOutlaysByYearResponse"/>
+
+<xs:element name="getOverralUserBudgetSumByOwner" type="tns:getOverralUserBudgetSumByOwner"/>
+
+<xs:element name="getOverralUserBudgetSumByOwnerResponse" type="tns:getOverralUserBudgetSumByOwnerResponse"/>
+
+<xs:element name="getOverralUserIncomeSumByUser" type="tns:getOverralUserIncomeSumByUser"/>
+
+<xs:element name="getOverralUserIncomeSumByUserAndDay" type="tns:getOverralUserIncomeSumByUserAndDay"/>
+
+<xs:element name="getOverralUserIncomeSumByUserAndDayResponse" type="tns:getOverralUserIncomeSumByUserAndDayResponse"/>
+
+<xs:element name="getOverralUserIncomeSumByUserAndMounth" type="tns:getOverralUserIncomeSumByUserAndMounth"/>
+
+<xs:element name="getOverralUserIncomeSumByUserAndMounthResponse" type="tns:getOverralUserIncomeSumByUserAndMounthResponse"/>
+
+<xs:element name="getOverralUserIncomeSumByUserAndProduct" type="tns:getOverralUserIncomeSumByUserAndProduct"/>
+
+<xs:element name="getOverralUserIncomeSumByUserAndProductResponse" type="tns:getOverralUserIncomeSumByUserAndProductResponse"/>
+
+<xs:element name="getOverralUserIncomeSumByUserAndYear" type="tns:getOverralUserIncomeSumByUserAndYear"/>
+
+<xs:element name="getOverralUserIncomeSumByUserAndYearResponse" type="tns:getOverralUserIncomeSumByUserAndYearResponse"/>
+
+<xs:element name="getOverralUserIncomeSumByUserResponse" type="tns:getOverralUserIncomeSumByUserResponse"/>
+
+<xs:element name="getOverralUserOutlaySumByUser" type="tns:getOverralUserOutlaySumByUser"/>
+
+<xs:element name="getOverralUserOutlaySumByUserAndDay" type="tns:getOverralUserOutlaySumByUserAndDay"/>
+
+<xs:element name="getOverralUserOutlaySumByUserAndDayResponse" type="tns:getOverralUserOutlaySumByUserAndDayResponse"/>
+
+<xs:element name="getOverralUserOutlaySumByUserAndMounth" type="tns:getOverralUserOutlaySumByUserAndMounth"/>
+
+<xs:element name="getOverralUserOutlaySumByUserAndMounthResponse" type="tns:getOverralUserOutlaySumByUserAndMounthResponse"/>
+
+<xs:element name="getOverralUserOutlaySumByUserAndProduct" type="tns:getOverralUserOutlaySumByUserAndProduct"/>
+
+<xs:element name="getOverralUserOutlaySumByUserAndProductResponse" type="tns:getOverralUserOutlaySumByUserAndProductResponse"/>
+
+<xs:element name="getOverralUserOutlaySumByUserAndYear" type="tns:getOverralUserOutlaySumByUserAndYear"/>
+
+<xs:element name="getOverralUserOutlaySumByUserAndYearResponse" type="tns:getOverralUserOutlaySumByUserAndYearResponse"/>
+
+<xs:element name="getOverralUserOutlaySumByUserResponse" type="tns:getOverralUserOutlaySumByUserResponse"/>
+
+<xs:element name="getProductById" type="tns:getProductById"/>
+
+<xs:element name="getProductByIdResponse" type="tns:getProductByIdResponse"/>
+
+<xs:element name="getProductByName" type="tns:getProductByName"/>
+
+<xs:element name="getProductByNameResponse" type="tns:getProductByNameResponse"/>
+
+<xs:element name="getProductByPrice" type="tns:getProductByPrice"/>
+
+<xs:element name="getProductByPriceResponse" type="tns:getProductByPriceResponse"/>
+
+<xs:element name="getProductWithMaxPrice" type="tns:getProductWithMaxPrice"/>
+
+<xs:element name="getProductWithMaxPriceResponse" type="tns:getProductWithMaxPriceResponse"/>
+
+<xs:element name="getProductWithMinPrice" type="tns:getProductWithMinPrice"/>
+
+<xs:element name="getProductWithMinPriceResponse" type="tns:getProductWithMinPriceResponse"/>
+
+<xs:element name="getUserBudgetByAllParams" type="tns:getUserBudgetByAllParams"/>
+
+<xs:element name="getUserBudgetByAllParamsResponse" type="tns:getUserBudgetByAllParamsResponse"/>
+
+<xs:element name="getUserBudgetById" type="tns:getUserBudgetById"/>
+
+<xs:element name="getUserBudgetByIdResponse" type="tns:getUserBudgetByIdResponse"/>
+
+<xs:element name="getUserBudgetByOwnerAndName" type="tns:getUserBudgetByOwnerAndName"/>
+
+<xs:element name="getUserBudgetByOwnerAndNameResponse" type="tns:getUserBudgetByOwnerAndNameResponse"/>
+
+<xs:element name="getUserByEmail" type="tns:getUserByEmail"/>
+
+<xs:element name="getUserByEmailResponse" type="tns:getUserByEmailResponse"/>
+
+<xs:element name="getUserById" type="tns:getUserById"/>
+
+<xs:element name="getUserByIdResponse" type="tns:getUserByIdResponse"/>
+
+<xs:element name="getUserBylogin" type="tns:getUserBylogin"/>
+
+<xs:element name="getUserByloginResponse" type="tns:getUserByloginResponse"/>
+
+<xs:element name="getUserIncomeById" type="tns:getUserIncomeById"/>
+
+<xs:element name="getUserIncomeByIdResponse" type="tns:getUserIncomeByIdResponse"/>
+
+<xs:element name="getUserIncomesByAllParamsWithoutId" type="tns:getUserIncomesByAllParamsWithoutId"/>
+
+<xs:element name="getUserIncomesByAllParamsWithoutIdResponse" type="tns:getUserIncomesByAllParamsWithoutIdResponse"/>
+
+<xs:element name="getUserIncomesByUser" type="tns:getUserIncomesByUser"/>
+
+<xs:element name="getUserIncomesByUserResponse" type="tns:getUserIncomesByUserResponse"/>
+
+<xs:element name="getUserOutlayById" type="tns:getUserOutlayById"/>
+
+<xs:element name="getUserOutlayByIdResponse" type="tns:getUserOutlayByIdResponse"/>
+
+<xs:element name="getUserOutlaysByAllParamsWithoutId" type="tns:getUserOutlaysByAllParamsWithoutId"/>
+
+<xs:element name="getUserOutlaysByAllParamsWithoutIdResponse" type="tns:getUserOutlaysByAllParamsWithoutIdResponse"/>
+
+<xs:element name="getUserOutlaysByUser" type="tns:getUserOutlaysByUser"/>
+
+<xs:element name="getUserOutlaysByUserResponse" type="tns:getUserOutlaysByUserResponse"/>
+
+<xs:element name="loginUser" type="tns:loginUser"/>
+
+<xs:element name="loginUserResponse" type="tns:loginUserResponse"/>
+
+<xs:element name="registerUser" type="tns:registerUser"/>
+
+<xs:element name="registerUserResponse" type="tns:registerUserResponse"/>
+
+<xs:element name="updateProductDescriptionById" type="tns:updateProductDescriptionById"/>
+
+<xs:element name="updateProductDescriptionByIdResponse" type="tns:updateProductDescriptionByIdResponse"/>
+
+<xs:element name="updateProductDescriptionByName" type="tns:updateProductDescriptionByName"/>
+
+<xs:element name="updateProductDescriptionByNameResponse" type="tns:updateProductDescriptionByNameResponse"/>
+
+<xs:element name="updateProductNameById" type="tns:updateProductNameById"/>
+
+<xs:element name="updateProductNameByIdResponse" type="tns:updateProductNameByIdResponse"/>
+
+<xs:element name="updateProductPriceById" type="tns:updateProductPriceById"/>
+
+<xs:element name="updateProductPriceByIdResponse" type="tns:updateProductPriceByIdResponse"/>
+
+<xs:element name="updateProductPriceByName" type="tns:updateProductPriceByName"/>
+
+<xs:element name="updateProductPriceByNameResponse" type="tns:updateProductPriceByNameResponse"/>
+
+<xs:element name="updateUserBudgetAmount" type="tns:updateUserBudgetAmount"/>
+
+<xs:element name="updateUserBudgetAmountResponse" type="tns:updateUserBudgetAmountResponse"/>
+
+<xs:element name="updateUserIncomeByAllParams" type="tns:updateUserIncomeByAllParams"/>
+
+<xs:element name="updateUserIncomeByAllParamsResponse" type="tns:updateUserIncomeByAllParamsResponse"/>
+
+<xs:element name="updateUserIncomeProductById" type="tns:updateUserIncomeProductById"/>
+
+<xs:element name="updateUserIncomeProductByIdResponse" type="tns:updateUserIncomeProductByIdResponse"/>
+
+<xs:element name="updateUserIncomeProductCountById" type="tns:updateUserIncomeProductCountById"/>
+
+<xs:element name="updateUserIncomeProductCountByIdResponse" type="tns:updateUserIncomeProductCountByIdResponse"/>
+
+<xs:element name="updateUserOutlayByAllParams" type="tns:updateUserOutlayByAllParams"/>
+
+<xs:element name="updateUserOutlayByAllParamsResponse" type="tns:updateUserOutlayByAllParamsResponse"/>
+
+<xs:element name="updateUserOutlayProductById" type="tns:updateUserOutlayProductById"/>
+
+<xs:element name="updateUserOutlayProductByIdResponse" type="tns:updateUserOutlayProductByIdResponse"/>
+
+<xs:element name="updateUserOutlayProductCountById" type="tns:updateUserOutlayProductCountById"/>
+
+<xs:element name="updateUserOutlayProductCountByIdResponse" type="tns:updateUserOutlayProductCountByIdResponse"/>
+
+<xs:complexType name="getOverralUserBudgetSumByOwner">
+<xs:sequence>
+<xs:element name="arg0" type="xs:long"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getOverralUserBudgetSumByOwnerResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:double"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getAllUserOutlaysByMounth">
+<xs:sequence>
+<xs:element name="arg0" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getAllUserOutlaysByMounthResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:anyType" minOccurs="0" maxOccurs="unbounded"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getAllUserIncomesByMinute">
+<xs:sequence>
+<xs:element name="arg0" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getAllUserIncomesByMinuteResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:anyType" minOccurs="0" maxOccurs="unbounded"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="updateProductPriceByName">
+<xs:sequence>
+<xs:element name="arg0" type="xs:string" minOccurs="0"/>
+<xs:element name="arg1" type="xs:double"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="updateProductPriceByNameResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:product" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="product">
+<xs:sequence>
+<xs:element name="cost" type="xs:double"/>
+<xs:element name="description" type="xs:string" minOccurs="0"/>
+<xs:element name="name" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getOverralUserOutlaySumByUserAndProduct">
+<xs:sequence>
+<xs:element name="arg0" type="xs:long"/>
+<xs:element name="arg1" type="xs:long"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getOverralUserOutlaySumByUserAndProductResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:double"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="createNewUserBudget">
+<xs:sequence>
+<xs:element name="arg0" type="xs:long"/>
+<xs:element name="arg1" type="xs:string" minOccurs="0"/>
+<xs:element name="arg2" type="xs:string" minOccurs="0"/>
+<xs:element name="arg3" type="xs:double"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="createNewUserBudgetResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:userBudget" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="userBudget">
+<xs:sequence>
+<xs:element name="amount" type="xs:double"/>
+<xs:element name="description" type="xs:string" minOccurs="0"/>
+<xs:element name="name" type="xs:string" minOccurs="0"/>
+<xs:element name="owner" type="tns:user" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="user">
+<xs:sequence>
+<xs:element name="email" type="xs:string" minOccurs="0"/>
+<xs:element name="id" type="xs:long"/>
+<xs:element name="login" type="xs:string" minOccurs="0"/>
+<xs:element name="password" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="loginUser">
+<xs:sequence>
+<xs:element name="arg0" type="xs:string" minOccurs="0"/>
+<xs:element name="arg1" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="loginUserResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:long"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="LoginErrorException">
+<xs:sequence>
+<xs:element name="message" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getUserByEmail">
+<xs:sequence>
+<xs:element name="arg0" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getUserByEmailResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:user" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="deleteUserById">
+<xs:sequence>
+<xs:element name="arg0" type="xs:long"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="deleteUserByIdResponse">
+<xs:sequence/>
+</xs:complexType>
+
+<xs:complexType name="getAllUserIncomesByUserAndDatetime">
+<xs:sequence>
+<xs:element name="arg0" type="xs:long"/>
+<xs:element name="arg1" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getAllUserIncomesByUserAndDatetimeResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:anyType" minOccurs="0" maxOccurs="unbounded"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getUserBudgetByAllParams">
+<xs:sequence>
+<xs:element name="arg0" type="xs:long"/>
+<xs:element name="arg1" type="xs:long"/>
+<xs:element name="arg2" type="xs:string" minOccurs="0"/>
+<xs:element name="arg3" type="xs:string" minOccurs="0"/>
+<xs:element name="arg4" type="xs:double"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getUserBudgetByAllParamsResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:userBudget" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getAllUserOutlaysByUserAndYear">
+<xs:sequence>
+<xs:element name="arg0" type="xs:long"/>
+<xs:element name="arg1" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getAllUserOutlaysByUserAndYearResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:anyType" minOccurs="0" maxOccurs="unbounded"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getAllUserOutlaysByUserAndDatetime">
+<xs:sequence>
+<xs:element name="arg0" type="xs:long"/>
+<xs:element name="arg1" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getAllUserOutlaysByUserAndDatetimeResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:anyType" minOccurs="0" maxOccurs="unbounded"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="updateProductDescriptionByName">
+<xs:sequence>
+<xs:element name="arg0" type="xs:string" minOccurs="0"/>
+<xs:element name="arg1" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="updateProductDescriptionByNameResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:product" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getOverralUserIncomeSumByUserAndDay">
+<xs:sequence>
+<xs:element name="arg0" type="xs:long"/>
+<xs:element name="arg1" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getOverralUserIncomeSumByUserAndDayResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:double"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getAllUserIncomesByMounth">
+<xs:sequence>
+<xs:element name="arg0" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getAllUserIncomesByMounthResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:anyType" minOccurs="0" maxOccurs="unbounded"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getAllUserIncomesByUserAndDay">
+<xs:sequence>
+<xs:element name="arg0" type="xs:long"/>
+<xs:element name="arg1" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getAllUserIncomesByUserAndDayResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:anyType" minOccurs="0" maxOccurs="unbounded"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getProductWithMaxPrice">
+<xs:sequence/>
+</xs:complexType>
+
+<xs:complexType name="getProductWithMaxPriceResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:product" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getOverralUserIncomeSumByUserAndProduct">
+<xs:sequence>
+<xs:element name="arg0" type="xs:long"/>
+<xs:element name="arg1" type="xs:long"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getOverralUserIncomeSumByUserAndProductResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:double"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getAllUserIncomesByDay">
+<xs:sequence>
+<xs:element name="arg0" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getAllUserIncomesByDayResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:anyType" minOccurs="0" maxOccurs="unbounded"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getUserBylogin">
+<xs:sequence>
+<xs:element name="arg0" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getUserByloginResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:user" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="Hello">
+<xs:sequence/>
+</xs:complexType>
+
+<xs:complexType name="HelloResponse">
+<xs:sequence/>
+</xs:complexType>
+
+<xs:complexType name="getAllUserBudgetsByDescription">
+<xs:sequence>
+<xs:element name="arg0" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getAllUserBudgetsByDescriptionResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:anyType" minOccurs="0" maxOccurs="unbounded"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getAllUserIncomesByYear">
+<xs:sequence>
+<xs:element name="arg0" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getAllUserIncomesByYearResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:anyType" minOccurs="0" maxOccurs="unbounded"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getAllUserOutlaysByUserAndDay">
+<xs:sequence>
+<xs:element name="arg0" type="xs:long"/>
+<xs:element name="arg1" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getAllUserOutlaysByUserAndDayResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:anyType" minOccurs="0" maxOccurs="unbounded"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getAllUserBudgetsByOwner">
+<xs:sequence>
+<xs:element name="arg0" type="xs:long"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getAllUserBudgetsByOwnerResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:anyType" minOccurs="0" maxOccurs="unbounded"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getOverralUserOutlaySumByUser">
+<xs:sequence>
+<xs:element name="arg0" type="xs:long"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getOverralUserOutlaySumByUserResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:double"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getAllUserIncomesByDatetime">
+<xs:sequence>
+<xs:element name="arg0" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getAllUserIncomesByDatetimeResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:anyType" minOccurs="0" maxOccurs="unbounded"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getUserById">
+<xs:sequence>
+<xs:element name="arg0" type="xs:long"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getUserByIdResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:user" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="registerUser">
+<xs:sequence>
+<xs:element name="arg0" type="xs:string" minOccurs="0"/>
+<xs:element name="arg1" type="xs:string" minOccurs="0"/>
+<xs:element name="arg2" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="registerUserResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:user" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="InvalidFileFormatException">
+<xs:sequence>
+<xs:element name="message" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="IOException">
+<xs:sequence>
+<xs:element name="message" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="RegErrorException">
+<xs:sequence>
+<xs:element name="message" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="Goodbye">
+<xs:sequence/>
+</xs:complexType>
+
+<xs:complexType name="GoodbyeResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getProductWithMinPrice">
+<xs:sequence/>
+</xs:complexType>
+
+<xs:complexType name="getProductWithMinPriceResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:product" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getOverralUserIncomeSumByUserAndMounth">
+<xs:sequence>
+<xs:element name="arg0" type="xs:long"/>
+<xs:element name="arg1" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getOverralUserIncomeSumByUserAndMounthResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:double"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getAllUserOutlaysByDay">
+<xs:sequence>
+<xs:element name="arg0" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getAllUserOutlaysByDayResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:anyType" minOccurs="0" maxOccurs="unbounded"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getAllUserIncomesByHour">
+<xs:sequence>
+<xs:element name="arg0" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getAllUserIncomesByHourResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:anyType" minOccurs="0" maxOccurs="unbounded"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getProductById">
+<xs:sequence>
+<xs:element name="arg0" type="xs:long"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getProductByIdResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:product" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getOverralUserOutlaySumByUserAndDay">
+<xs:sequence>
+<xs:element name="arg0" type="xs:long"/>
+<xs:element name="arg1" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getOverralUserOutlaySumByUserAndDayResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:double"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getAllUserOutlaysByProduct">
+<xs:sequence>
+<xs:element name="arg0" type="xs:long"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getAllUserOutlaysByProductResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:anyType" minOccurs="0" maxOccurs="unbounded"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getAllUserOutlaysByUserAndHour">
+<xs:sequence>
+<xs:element name="arg0" type="xs:long"/>
+<xs:element name="arg1" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getAllUserOutlaysByUserAndHourResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:anyType" minOccurs="0" maxOccurs="unbounded"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getAllUserIncomesByProduct">
+<xs:sequence>
+<xs:element name="arg0" type="xs:long"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getAllUserIncomesByProductResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:anyType" minOccurs="0" maxOccurs="unbounded"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getAllUserIncomesByUserAndMinute">
+<xs:sequence>
+<xs:element name="arg0" type="xs:long"/>
+<xs:element name="arg1" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getAllUserIncomesByUserAndMinuteResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:anyType" minOccurs="0" maxOccurs="unbounded"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getUserOutlayById">
+<xs:sequence>
+<xs:element name="arg0" type="xs:long"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getUserOutlayByIdResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:userOutlay" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="userOutlay">
+<xs:sequence>
+<xs:element name="datetime" type="xs:string" minOccurs="0"/>
+<xs:element name="product" type="tns:product" minOccurs="0"/>
+<xs:element name="products_count" type="xs:int"/>
+<xs:element name="user" type="tns:user" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getUserOutlaysByUser">
+<xs:sequence>
+<xs:element name="arg0" type="xs:long"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getUserOutlaysByUserResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:anyType" minOccurs="0" maxOccurs="unbounded"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getUserBudgetById">
+<xs:sequence>
+<xs:element name="arg0" type="xs:long"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getUserBudgetByIdResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:userBudget" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="updateProductNameById">
+<xs:sequence>
+<xs:element name="arg0" type="xs:long"/>
+<xs:element name="arg1" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="updateProductNameByIdResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:product" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="deleteProductByName">
+<xs:sequence>
+<xs:element name="arg0" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="deleteProductByNameResponse">
+<xs:sequence/>
+</xs:complexType>
+
+<xs:complexType name="getAllUserIncomesByUserAndMounth">
+<xs:sequence>
+<xs:element name="arg0" type="xs:long"/>
+<xs:element name="arg1" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getAllUserIncomesByUserAndMounthResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:anyType" minOccurs="0" maxOccurs="unbounded"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getProductByPrice">
+<xs:sequence>
+<xs:element name="arg0" type="xs:long"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getProductByPriceResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:anyType" minOccurs="0" maxOccurs="unbounded"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getOverralUserIncomeSumByUser">
+<xs:sequence>
+<xs:element name="arg0" type="xs:long"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getOverralUserIncomeSumByUserResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:double"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getUserIncomeById">
+<xs:sequence>
+<xs:element name="arg0" type="xs:long"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getUserIncomeByIdResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:userIncome" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="userIncome">
+<xs:sequence>
+<xs:element name="datetime" type="xs:string" minOccurs="0"/>
+<xs:element name="product" type="tns:product" minOccurs="0"/>
+<xs:element name="products_count" type="xs:int"/>
+<xs:element name="user" type="tns:user" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getAllUserOutlaysByMinute">
+<xs:sequence>
+<xs:element name="arg0" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getAllUserOutlaysByMinuteResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:anyType" minOccurs="0" maxOccurs="unbounded"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getAllUserIncomesByUserAndHour">
+<xs:sequence>
+<xs:element name="arg0" type="xs:long"/>
+<xs:element name="arg1" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getAllUserIncomesByUserAndHourResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:anyType" minOccurs="0" maxOccurs="unbounded"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getUserOutlaysByAllParamsWithoutId">
+<xs:sequence>
+<xs:element name="arg0" type="xs:long"/>
+<xs:element name="arg1" type="xs:long"/>
+<xs:element name="arg2" type="xs:int"/>
+<xs:element name="arg3" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getUserOutlaysByAllParamsWithoutIdResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:userOutlay" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getOverralUserOutlaySumByUserAndMounth">
+<xs:sequence>
+<xs:element name="arg0" type="xs:long"/>
+<xs:element name="arg1" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getOverralUserOutlaySumByUserAndMounthResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:double"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getAllUserOutlaysByDatetime">
+<xs:sequence>
+<xs:element name="arg0" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getAllUserOutlaysByDatetimeResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:anyType" minOccurs="0" maxOccurs="unbounded"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="updateUserOutlayProductCountById">
+<xs:sequence>
+<xs:element name="arg0" type="xs:long"/>
+<xs:element name="arg1" type="xs:int"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="updateUserOutlayProductCountByIdResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:userOutlay" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="createNewUserIncome">
+<xs:sequence>
+<xs:element name="arg0" type="xs:long"/>
+<xs:element name="arg1" type="xs:long"/>
+<xs:element name="arg2" type="xs:int"/>
+<xs:element name="arg3" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="createNewUserIncomeResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:userIncome" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="createNewUserOutlay">
+<xs:sequence>
+<xs:element name="arg0" type="xs:long"/>
+<xs:element name="arg1" type="xs:long"/>
+<xs:element name="arg2" type="xs:int"/>
+<xs:element name="arg3" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="createNewUserOutlayResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:userOutlay" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getUserIncomesByAllParamsWithoutId">
+<xs:sequence>
+<xs:element name="arg0" type="xs:long"/>
+<xs:element name="arg1" type="xs:long"/>
+<xs:element name="arg2" type="xs:int"/>
+<xs:element name="arg3" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getUserIncomesByAllParamsWithoutIdResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:userIncome" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getAllUserIncomesByUserAndYear">
+<xs:sequence>
+<xs:element name="arg0" type="xs:long"/>
+<xs:element name="arg1" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getAllUserIncomesByUserAndYearResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:anyType" minOccurs="0" maxOccurs="unbounded"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="updateUserIncomeProductById">
+<xs:sequence>
+<xs:element name="arg0" type="xs:long"/>
+<xs:element name="arg1" type="xs:long"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="updateUserIncomeProductByIdResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:userIncome" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getAllUserOutlaysByUserAndMounth">
+<xs:sequence>
+<xs:element name="arg0" type="xs:long"/>
+<xs:element name="arg1" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getAllUserOutlaysByUserAndMounthResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:anyType" minOccurs="0" maxOccurs="unbounded"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getOverralUserIncomeSumByUserAndYear">
+<xs:sequence>
+<xs:element name="arg0" type="xs:long"/>
+<xs:element name="arg1" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getOverralUserIncomeSumByUserAndYearResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:double"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="deleteProductById">
+<xs:sequence>
+<xs:element name="arg0" type="xs:long"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="deleteProductByIdResponse">
+<xs:sequence/>
+</xs:complexType>
+
+<xs:complexType name="updateUserIncomeProductCountById">
+<xs:sequence>
+<xs:element name="arg0" type="xs:long"/>
+<xs:element name="arg1" type="xs:int"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="updateUserIncomeProductCountByIdResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:userIncome" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getAllUserOutlaysByUserAndMinute">
+<xs:sequence>
+<xs:element name="arg0" type="xs:long"/>
+<xs:element name="arg1" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getAllUserOutlaysByUserAndMinuteResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:anyType" minOccurs="0" maxOccurs="unbounded"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="updateProductPriceById">
+<xs:sequence>
+<xs:element name="arg0" type="xs:long"/>
+<xs:element name="arg1" type="xs:double"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="updateProductPriceByIdResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:product" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="createNewProduct">
+<xs:sequence>
+<xs:element name="arg0" type="xs:string" minOccurs="0"/>
+<xs:element name="arg1" type="xs:string" minOccurs="0"/>
+<xs:element name="arg2" type="xs:double" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="createNewProductResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:product" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getUserIncomesByUser">
+<xs:sequence>
+<xs:element name="arg0" type="xs:long"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getUserIncomesByUserResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:anyType" minOccurs="0" maxOccurs="unbounded"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="updateProductDescriptionById">
+<xs:sequence>
+<xs:element name="arg0" type="xs:long"/>
+<xs:element name="arg1" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="updateProductDescriptionByIdResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:product" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="updateUserBudgetAmount">
+<xs:sequence>
+<xs:element name="arg0" type="xs:long"/>
+<xs:element name="arg1" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="updateUserBudgetAmountResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:userBudget" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="deleteUserByLogin">
+<xs:sequence>
+<xs:element name="arg0" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="deleteUserByLoginResponse">
+<xs:sequence/>
+</xs:complexType>
+
+<xs:complexType name="getAllUserOutlaysByYear">
+<xs:sequence>
+<xs:element name="arg0" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getAllUserOutlaysByYearResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:anyType" minOccurs="0" maxOccurs="unbounded"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="updateUserIncomeByAllParams">
+<xs:sequence>
+<xs:element name="arg0" type="xs:long"/>
+<xs:element name="arg1" type="xs:long"/>
+<xs:element name="arg2" type="xs:long"/>
+<xs:element name="arg3" type="xs:int"/>
+<xs:element name="arg4" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="updateUserIncomeByAllParamsResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:userIncome" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="updateUserOutlayProductById">
+<xs:sequence>
+<xs:element name="arg0" type="xs:long"/>
+<xs:element name="arg1" type="xs:long"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="updateUserOutlayProductByIdResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:userOutlay" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="updateUserOutlayByAllParams">
+<xs:sequence>
+<xs:element name="arg0" type="xs:long"/>
+<xs:element name="arg1" type="xs:long"/>
+<xs:element name="arg2" type="xs:long"/>
+<xs:element name="arg3" type="xs:int"/>
+<xs:element name="arg4" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="updateUserOutlayByAllParamsResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:userOutlay" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getUserBudgetByOwnerAndName">
+<xs:sequence>
+<xs:element name="arg0" type="xs:long"/>
+<xs:element name="arg1" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getUserBudgetByOwnerAndNameResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:userBudget" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getOverralUserOutlaySumByUserAndYear">
+<xs:sequence>
+<xs:element name="arg0" type="xs:long"/>
+<xs:element name="arg1" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getOverralUserOutlaySumByUserAndYearResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:double"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getAllUserOutlaysByHour">
+<xs:sequence>
+<xs:element name="arg0" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getAllUserOutlaysByHourResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:anyType" minOccurs="0" maxOccurs="unbounded"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getProductByName">
+<xs:sequence>
+<xs:element name="arg0" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getProductByNameResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:product" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+</xs:schema>

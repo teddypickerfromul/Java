@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="hello">Hello World, MainActivity!</string>
+    <string name="app_name">Конвертор валют</string>
+    <string name="in">в</string>
+    <string name="button_konvert">Конвертировать</string>
+    <string name="add">Добавить курс</string>
+    <string name="delete">Удалить курс</string>
+    <string name="label_list_kurs">Соотношение валют</string>
+
+</resources>

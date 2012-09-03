@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<exchange>
+	<kurs>
+	  <current>usd</current>
+	  <valuta>eur</valuta>
+	  <value>1.3</value>		
+	</kurs>
+	<kurs>
+	  <current>usd</current>
+	  <valuta>rub</valuta>
+	  <value>32.49</value>		
+	</kurs>
+	<kurs>
+	  <current>eur</current>
+	  <valuta>usd</valuta>
+	  <value>0.7</value>		
+	</kurs>
+	<kurs>
+	  <current>eur</current>
+	  <valuta>rub</valuta>
+	  <value>0.1</value>		
+	</kurs>
+	<kurs>
+	  <current>rub</current>
+	  <valuta>eur</valuta>
+	  <value>42</value>		
+	</kurs>
+	<kurs>
+	  <current>rub</current>
+	  <valuta>usd</valuta>
+	  <value>32.5</value>		
+	</kurs>
+</exchange>

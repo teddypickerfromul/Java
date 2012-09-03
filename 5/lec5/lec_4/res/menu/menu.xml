@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <item
+        android:id="@+id/new_game"
+        android:title="@string/add"/>
+    <item
+        android:id="@+id/help"
+        android:title="@string/delete"/>
+    <item
+        android:id="@+id/compass"
+        android:title="@string/compass"/>
+    <item
+        android:id="@+id/gps"
+        android:title="@string/gps"/>
+     <item
+        android:id="@+id/main"
+        android:title="@string/main"/>
+    
+</menu>

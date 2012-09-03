@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical" >
+
+    <EditText
+        android:id="@+id/editTextIn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="numberDecimal"
+        android:maxLines="1" >
+
+        <requestFocus />
+    </EditText>
+
+    <LinearLayout
+        android:id="@+id/linearLayout1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <Spinner
+            android:id="@+id/spinnerCurrent"
+            android:layout_width="139dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.40"
+            android:visibility="gone" />
+
+        <TextView
+            android:id="@+id/textViewOut"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.20"
+            android:text="@string/in"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:visibility="gone" />
+
+        <Spinner
+            android:id="@+id/spinnerValuta"
+            android:layout_width="145dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.4"
+            android:visibility="gone" />
+    </LinearLayout>
+
+    <EditText
+        android:id="@+id/editTextOut"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:enabled="false"
+        android:inputType="numberDecimal"
+        android:maxLines="1" >
+    </EditText>
+
+    <Button
+        android:id="@+id/buttonKonvert"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:enabled="false"
+        android:text="@string/button_konvert" 
+        android:onClick="konvertOnClick"/>
+
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/label_list_kurs"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <EditText
+        android:id="@+id/editTextAria"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"        
+        android:enabled="false"
+        android:inputType="textMultiLine" />
+
+</LinearLayout>
