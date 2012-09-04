@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane id="AnchorPane" fx:id="error" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="480.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml">
+  <children>
+    <ImageView fx:id="img" fitHeight="143.79742431640625" fitWidth="597.8945706204153" pickOnBounds="true" preserveRatio="true">
+      <image>
+        <Image url="@houston.png" preserveRatio="false" smooth="false" />
+      </image>
+    </ImageView>
+    <Label fx:id="label" alignment="CENTER" contentDisplay="CENTER" layoutX="152.0" layoutY="158.0" prefHeight="113.0" prefWidth="296.0" text="Хьюстон, у нас проблема !" textAlignment="CENTER" textFill="#404040" wrapText="true">
+      <font>
+        <Font name="System Bold" size="31.0" />
+      </font>
+    </Label>
+    <Label fx:id="label2" layoutX="144.0" layoutY="289.0" prefHeight="101.0" prefWidth="312.0" text="Скорее всего, вы неверно ввели ваши логин и пароль. Или сервер не хочет на видеть.В любом случае лучше просто закрыть это окно." wrapText="true">
+      <font>
+        <Font size="16.0" />
+      </font>
+    </Label>
+  </children>
+</AnchorPane>
