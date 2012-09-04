@@ -29,6 +29,13 @@ public class MoneyTrackerFXClient extends Application {
 
     @Override
     public void start(Stage primaryStage) {
+        try {
+            stage = primaryStage;
+            gotoLoginForm();
+            primaryStage.show();
+        } catch (Exception ex) {
+            Logger.getLogger(MoneyTrackerFXClient.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     private Parent replaceSceneContent(String fxml) throws Exception {
@@ -48,20 +55,20 @@ public class MoneyTrackerFXClient extends Application {
 
     private void gotoLoginForm() {
         try {
-            replaceSceneContent("login.fxml");
+            replaceSceneContent("forms/login_form.fxml");
         } catch (Exception ex) {
             Logger.getLogger(MoneyTrackerFXClient.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
+
     private void gotoRegistrationForm() {
         try {
             //TODO: Загрузка из пакета
-            replaceSceneContent("login.fxml");
+            replaceSceneContent("forms/reg_form.fxml");
         } catch (Exception ex) {
             Logger.getLogger(MoneyTrackerFXClient.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }    
+    }
 
     public static void main(String[] args) {
         launch(args);
