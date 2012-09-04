@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package moneytrackerfxclient.forms;
+package moneytrackerfxclient.forms.controllers;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -13,7 +13,7 @@ import javafx.fxml.Initializable;
  *
  * @author teddy
  */
-public class Login_formController implements Initializable {
+public class Err_formController implements Initializable {
 
     /**
      * Initializes the controller class.
