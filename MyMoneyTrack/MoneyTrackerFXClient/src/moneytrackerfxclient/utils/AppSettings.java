@@ -10,7 +10,7 @@ public class AppSettings {
             synchronized (MoneyTrackerController.class) {
                 localInstance = instance;
                 if (localInstance == null) {
-                    instance = localInstance = new MoneyTrackerController();
+                    instance = localInstance = new AppSettings();
                 }
             }
         }
