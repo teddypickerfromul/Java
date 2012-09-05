@@ -13,11 +13,15 @@ import javafx.scene.control.Button;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import moneytrackerconsoleclient.*;
+import moneytrackerconsoleclient.methods.*;
+import moneytrackerfxclient.utils.*;
 
 public class MoneyTrackerFXClient extends Application {
 
     private Stage stage;
     private static MoneyTrackerFXClient instance;
+    
+    private User currentUser;
 
     public MoneyTrackerFXClient() {
         instance = this;
@@ -30,9 +34,11 @@ public class MoneyTrackerFXClient extends Application {
     @Override
     public void start(Stage primaryStage) {
         try {
+            MoneyTrackerController clientController;
             stage = primaryStage;
             gotoLoginForm();
             primaryStage.show();
+            
         } catch (Exception ex) {
             Logger.getLogger(MoneyTrackerFXClient.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -59,6 +65,12 @@ public class MoneyTrackerFXClient extends Application {
         } catch (Exception ex) {
             Logger.getLogger(MoneyTrackerFXClient.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+    
+    private void login(MoneyTrackerController controller, String login, String password) throws LoginErrorException_Exception{
+        long currentUser_id = controller.getClientPort().loginUser(login, password);
+        currentUser = controller.getClientPort().getUserById(currentUser_id);
+        System.out.println(currentUser.getId());
     }
 
     private void gotoRegistrationForm() {
