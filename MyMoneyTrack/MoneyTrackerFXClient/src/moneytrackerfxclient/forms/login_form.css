@@ -1,3 +1,49 @@
-#login{
-    -fx-background-color: red;
+
+.login_pane{
+    -fx-background-color:linear-gradient(#57809f,#3c596e);
 }
+
+.login_field{
+    -fx-font-size: 16px;
+    -fx-alignment: center;
+    -fx-border-radius: 0;
+}
+
+.pass_field{
+    -fx-font-size: 16px;
+    -fx-alignment: center;
+    -fx-border-radius: 0;
+}
+
+.reg_btn{
+    -fx-background-radius: 0,0,0;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-background-color: 
+        linear-gradient(#ff5400, #be1d00);
+}
+
+.log_btn{
+    -fx-background-radius: 0,0,0;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-background-color:
+        linear-gradient(#40ae40, #277e27);
+}
+
+.reg_btn:hover{
+    -fx-background-radius: 0,0,0;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-background-color:
+        linear-gradient(#9c2100, #a03400);
+}
+
+.log_btn:hover{
+    -fx-background-radius: 0,0,0;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-background-color:
+        linear-gradient(#1b571b, #286f28);
+}
+

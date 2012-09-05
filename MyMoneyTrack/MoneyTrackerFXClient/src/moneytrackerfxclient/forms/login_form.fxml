@@ -8,17 +8,17 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.paint.*?>
 
-<AnchorPane id="AnchorPane" fx:id="login" styleClass="login_pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="480.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml">
+<AnchorPane id="AnchorPane" fx:id="login" styleClass="login_pane" maxHeight="480" maxWidth="600" minHeight="-Infinity" minWidth="-Infinity" prefHeight="480.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml">
   <children>
-    <Button id="register_buyyon" fx:id="register_button" layoutX="180.0" layoutY="405.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="120.0" text="Регистрация" textAlignment="CENTER" />
-    <Button fx:id="login_button" layoutX="300.0" layoutY="405.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="120.0" text="Вход" />
-    <TextField fx:id="login_field" layoutX="137.0" layoutY="226.0" prefHeight="62.0" prefWidth="326.0" promptText="Ваш логин..." />
+    <Button id="register_button" fx:id="register_button" styleClass="reg_btn" layoutX="180.0" layoutY="405.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="120.0" text="Регистрация" textAlignment="CENTER" />
+    <Button id="register_button" fx:id="login_button" styleClass="log_btn" layoutX="300.0" layoutY="405.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="120.0" text="Вход" />
+    <TextField fx:id="login_field" styleClass="login_field" layoutX="137.0" layoutY="226.0" prefHeight="62.0" prefWidth="326.0" promptText="Ваш логин" />
     <ImageView fx:id="logo_icon" fitHeight="150.0" fitWidth="200.0" layoutX="225.0" layoutY="41.0" pickOnBounds="true" preserveRatio="true">
       <image>
         <Image url="@logo.png" preserveRatio="false" smooth="false" />
       </image>
     </ImageView>
-    <PasswordField fx:id="pass_field" layoutX="137.0" layoutY="307.0" prefHeight="62.0" prefWidth="326.0" promptText="Ваша почта..." />
+    <PasswordField fx:id="pass_field" styleClass="pass_field" layoutX="137.0" layoutY="307.0" prefHeight="62.0" prefWidth="326.0" promptText="Ваш пароль" />
   </children>
   <stylesheets>
     <URL value="@login_form.css" />
