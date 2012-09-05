@@ -1,5 +1,6 @@
 package moneytrackerfxclient.utils;
 
+import com.sun.deploy.util.SessionState;
 import moneytrackerconsoleclient.*;
 import moneytrackerconsoleclient.methods.MoneyTracker;
 
@@ -16,6 +17,7 @@ public class MoneyTrackerController {
                 localInstance = instance;
                 if (localInstance == null) {
                     instance = localInstance = new MoneyTrackerController();
+                    client = new MoneyTrackerClient();
                 }
             }
         }
@@ -23,10 +25,11 @@ public class MoneyTrackerController {
     }
     
     public static MoneyTracker getClientPort(){
-        return client.getPort();
+        return getInstance().getClient().getPort();
+        /*return client.getPort();*/
     }
     
     public static MoneyTrackerClient getClient(){
-        return client;
+        return getInstance().client;
     }
 }
