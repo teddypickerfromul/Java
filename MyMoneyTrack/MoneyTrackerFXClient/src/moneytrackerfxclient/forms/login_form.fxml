@@ -11,8 +11,8 @@
 
 <AnchorPane id="AnchorPane" fx:id="login" styleClass="login_pane" maxHeight="480" maxWidth="600" minHeight="-Infinity" minWidth="-Infinity" prefHeight="480.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml" fx:controller="moneytrackerfxclient.forms.controllers.Login_formController">
   <children>
-    <Button id="register_button" onAction="#checkCredentials" fx:id="register_button" styleClass="reg_btn" layoutX="180.0" layoutY="405.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="120.0" text="Регистрация" textAlignment="CENTER" />
-    <Button id="login_button" fx:id="login_button" styleClass="log_btn" layoutX="300.0" layoutY="405.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="120.0" text="Вход" />
+    <Button id="register_button" onAction="#registerUser" fx:id="register_button" styleClass="reg_btn" layoutX="180.0" layoutY="405.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="120.0" text="Регистрация" textAlignment="CENTER" />
+    <Button id="login_button"    onAction="#checkCredentials"  fx:id="login_button" styleClass="log_btn" layoutX="300.0" layoutY="405.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="120.0" text="Вход" />
     <TextField fx:id="login_field" styleClass="login_field" layoutX="137.0" layoutY="226.0" prefHeight="62.0" prefWidth="326.0" promptText="Ваш логин" />
     <ImageView fx:id="logo_icon" fitHeight="150.0" fitWidth="200.0" layoutX="225.0" layoutY="41.0" pickOnBounds="true" preserveRatio="true">
       <image>

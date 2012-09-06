@@ -9,34 +9,43 @@
 <?import javafx.scene.paint.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="480.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml">
-  <children>
-    <Accordion layoutX="198.0" layoutY="126.0" />
-    <AnchorPane fx:id="reg_header" minHeight="148.0" prefHeight="148.0" prefWidth="600.0">
-      <children>
-        <ImageView fx:id="reg_icon" fitHeight="112.0" fitWidth="112.0" layoutX="35.0" layoutY="18.0" pickOnBounds="true" preserveRatio="true">
-          <image>
-            <Image url="@reg.png" preserveRatio="false" smooth="false" />
-          </image>
-        </ImageView>
-        <Label fx:id="reg_title_label" layoutX="209.0" layoutY="38.0" prefWidth="337.0" text="Регистрация нового пользователя" textAlignment="CENTER" wrapText="true">
-          <font>
-            <Font size="30.0" />
-          </font>
-        </Label>
-      </children>
-    </AnchorPane>
-    <AnchorPane fx:id="content_panel" layoutY="157.0" prefHeight="323.0" prefWidth="600.0">
-      <children>
-        <TextField id="login" fx:id="reg_login_field" alignment="CENTER" layoutX="200.0" layoutY="47.0" prefHeight="45.0" prefWidth="199.99990000000253" promptText="Ваш логин" />
-        <TextField fx:id="email_reg_field" layoutX="200.0" layoutY="105.0" prefHeight="45.0" prefWidth="200.0" promptText="Ваша почта" />
-        <PasswordField fx:id="reg_pass_field" layoutX="200.0" layoutY="164.0" prefHeight="45.0" prefWidth="200.0" promptText="Ваш пароль" />
-        <Button fx:id="new_reg_button" layoutX="234.0" layoutY="235.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="132.0" text="Зарегистрироваться" />
-      </children>
-    </AnchorPane>
-  </children>
-  <stylesheets>
-    <URL value="@reg_form.css" />
-  </stylesheets>
+<AnchorPane id="AnchorPane" styleClass="header" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="480.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml" fx:controller="moneytrackerfxclient.forms.controllers.Reg_formController">
+    <children>
+        <Accordion layoutX="198.0" layoutY="126.0" />
+        <AnchorPane fx:id="reg_header" minHeight="148.0" prefHeight="148.0" prefWidth="600.0">
+            <children>
+                <ImageView fx:id="reg_icon" fitHeight="112.0" fitWidth="112.0" layoutX="35.0" layoutY="18.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@reg.png" preserveRatio="false" smooth="false" />
+                    </image>
+                </ImageView>
+                <Label fx:id="reg_title_label" layoutX="209.0" layoutY="38.0" prefWidth="337.0" text="Регистрация нового пользователя" textAlignment="CENTER" wrapText="true">
+                    <font>
+                        <Font size="26.0" />
+                    </font>
+                </Label>
+            </children>
+        </AnchorPane>
+        <AnchorPane fx:id="content_panel" styleClass="content" layoutY="157.0" prefHeight="323.0" prefWidth="600.0">
+            <children>
+                <TextField id="login" fx:id="reg_login_field" alignment="CENTER" layoutX="168.0" layoutY="47.0" prefHeight="45.0" prefWidth="264.0" promptText="Ваш логин">
+                    <tooltip>
+                        <Tooltip contentDisplay="TOP" text="Логин может состоять только из латинских букв и иметь длину от 3 до 15 символов" textAlignment="CENTER" fx:id="login_tooltip" />
+                    </tooltip>
+                </TextField>
+                <TextField fx:id="email_reg_field" alignment="CENTER" layoutX="168.0" layoutY="105.0" prefHeight="45.0" prefWidth="264.0" promptText="Ваша почта">
+                </TextField>
+                <PasswordField fx:id="reg_pass_field" alignment="CENTER" layoutX="168.0" layoutY="164.0" prefHeight="45.0" prefWidth="264.0" promptText="Ваш пароль">
+                    <tooltip>
+                        <Tooltip text="Пароль может состоять только из латинских букв и иметь длину от 8 до 30 символов" />
+                    </tooltip>
+                </PasswordField>
+                <Button id="login_button" onAction="#Back"  styleClass="login_button" fx:id="login_button" layoutX="168.0" layoutY="235.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="132.0" text="Назад" />
+                <Button fx:id="reg_button" onAction="#registerUser" styleClass="reg_button" layoutX="300.0" layoutY="235.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="132.0" text="Регистрация" />
+            </children>
+        </AnchorPane>
+    </children>
+    <stylesheets>
+        <URL value="@reg_form.css" />
+    </stylesheets>
 </AnchorPane>
-

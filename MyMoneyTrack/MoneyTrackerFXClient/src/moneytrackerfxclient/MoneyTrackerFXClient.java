@@ -51,22 +51,30 @@ public class MoneyTrackerFXClient extends Application {
         }
     }
 
+    //TODO: погонять
+    public void resetCurrentUser() {
+        currentUser = null;
+    }
+
+    //TODO: убрать хардкод
     private Parent replaceSceneContent(String fxml) throws Exception {
         Parent page = (Parent) FXMLLoader.load(MoneyTrackerFXClient.class.getResource(fxml), null, new JavaFXBuilderFactory());
         Scene scene = stage.getScene();
         if (scene == null) {
             scene = new Scene(page, 600, 480);
+            System.out.println(scene.getWidth());
             //TODO: редирект на login_form.fxml
             //scene.getStylesheets().add(MoneyTrackerFXClient.class.getResource("demo.css").toExternalForm());
             stage.setScene(scene);
         } else {
             stage.getScene().setRoot(page);
+
         }
         stage.sizeToScene();
         return page;
     }
 
-    private void gotoLoginForm() {
+    public void gotoLoginForm() {
         try {
             replaceSceneContent("forms/login_form.fxml");
         } catch (Exception ex) {
@@ -74,23 +82,51 @@ public class MoneyTrackerFXClient extends Application {
         }
     }
 
+    //TODO: переделать веб-метод логина
     public boolean login(/*MoneyTrackerController controller,*/String login, String password) throws LoginErrorException_Exception {
 
         long currentUser_id = this.clientController.getInstance().getClientPort().loginUser(login, password);
         System.out.println(currentUser_id);
         if (currentUser_id == -1) {
-            gotoRegistrationForm();
+            gotoFailForm();
             return false;
         } else {
             currentUser = this.clientController.getInstance().getClientPort().getUserById(currentUser_id);
-            
+            gotoAppForm();
             return true;
         }
     }
 
-    private void gotoRegistrationForm() {
+    public boolean register(/*MoneyTrackerController controller,*/String login, String password, String email) throws IOException_Exception, InvalidFileFormatException_Exception, RegErrorException_Exception {
+        currentUser = this.clientController.getInstance().getClientPort().registerUser(login, password, email);
+        if (currentUser == null) {
+            gotoFailForm();
+            return false;
+        } else {
+            gotoAppForm();
+            return true;
+        }
+    }
+
+    public void gotoRegistrationForm() {
         try {
             replaceSceneContent("forms/reg_form.fxml");
+        } catch (Exception ex) {
+            Logger.getLogger(MoneyTrackerFXClient.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    public void gotoFailForm() {
+        try {
+            replaceSceneContent("forms/err_form.fxml");
+        } catch (Exception ex) {
+            Logger.getLogger(MoneyTrackerFXClient.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    public void gotoAppForm() {
+        try {
+            replaceSceneContent("forms/app_stub.fxml");
         } catch (Exception ex) {
             Logger.getLogger(MoneyTrackerFXClient.class.getName()).log(Level.SEVERE, null, ex);
         }

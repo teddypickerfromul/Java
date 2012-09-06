@@ -6,17 +6,23 @@ package moneytrackerfxclient.forms.controllers;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Label;
 import moneytrackerfxclient.*;
 
-public class Err_formController implements Initializable {
+public class App_stubController implements Initializable {
+
+    @FXML
+    private Label name_label;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
+        test();
     }
-    
-    public void Back(){
-        MoneyTrackerFXClient.getInstance().gotoLoginForm();
+
+    public void test() {
+        name_label.setText(MoneyTrackerFXClient.getInstance().getCurrentUser().getLogin());
     }
 }

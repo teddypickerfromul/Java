@@ -1,7 +1,40 @@
-/*
- * Empty Stylesheet file.
-*/
+.header {
+    -fx-font-weight: bold;
+}
 
-.mainFxmlClass {
+.content{
+    -fx-background-color:linear-gradient(#57809f,#3c596e);
+}
 
+.reg_button{
+    -fx-background-radius: 0,0,0;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-background-color:
+        linear-gradient(#40ae40, #277e27);
+
+}
+
+.reg_button:hover{
+    -fx-background-radius: 0,0,0;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-background-color:
+        linear-gradient(#1b571b, #286f28);
+}
+
+.login_button{
+    -fx-background-radius: 0,0,0;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-background-color: 
+        linear-gradient(#ff5400, #be1d00);
+}
+
+.login_button:hover{
+    -fx-background-radius: 0,0,0;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-background-color:
+        linear-gradient(#9c2100, #a03400);
 }

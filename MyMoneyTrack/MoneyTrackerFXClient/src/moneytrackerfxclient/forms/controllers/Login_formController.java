@@ -40,4 +40,9 @@ public class Login_formController implements Initializable {
             return true;
         }
     }
+    
+    @FXML
+    protected void registerUser(){
+        MoneyTrackerFXClient.getInstance().gotoRegistrationForm();
+    }
 }
