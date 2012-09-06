@@ -1,14 +1,13 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package moneytrackerfxclient.forms.controllers;
 
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Scene;
 import javafx.scene.control.Label;
+import javafx.stage.Stage;
 import moneytrackerfxclient.*;
 
 public class App_stubController implements Initializable {
@@ -19,10 +18,9 @@ public class App_stubController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-        test();
+        //Stage stage =  MoneyTrackerFXClient.getInstance().getStage();
+        //stage.setWidth(1024.0);
+        //stage.setHeight(600.0);
     }
 
-    public void test() {
-        name_label.setText(MoneyTrackerFXClient.getInstance().getCurrentUser().getLogin());
-    }
 }

@@ -2,16 +2,17 @@
 
 <?import java.lang.*?>
 <?import java.util.*?>
+<?import java.net.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.effect.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.paint.*?>
 
-<AnchorPane id="AnchorPane" fx:id="stub" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1024.0" xmlns:fx="http://javafx.com/fxml">
-  <children>
-    <Label fx:id="name_label" layoutX="300.0" layoutY="230.0" text="Тут что то есть"/>
-  </children>
-  <effect>
-    <Bloom />
-  </effect>
+<AnchorPane id="AnchorPane" styleClass="stub" fx:id="stub" maxHeight="800.0" maxWidth="1024.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1024.0" xmlns:fx="http://javafx.com/fxml">
+    <children>
+        <Label fx:id="name_label" layoutX="300.0" layoutY="230.0" text="Тут что то есть"/>
+    </children>
+    <stylesheets>
+        <URL value="@app_stub.css" />
+    </stylesheets>
 </AnchorPane>

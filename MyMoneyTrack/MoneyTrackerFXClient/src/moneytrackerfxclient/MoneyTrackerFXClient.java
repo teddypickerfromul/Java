@@ -1,5 +1,7 @@
 package moneytrackerfxclient;
 
+import java.awt.GraphicsDevice;
+import java.awt.GraphicsEnvironment;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.application.Application;
@@ -14,12 +16,15 @@ import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import moneytrackerconsoleclient.*;
 import moneytrackerconsoleclient.methods.*;
-import moneytrackerfxclient.forms.controllers.Login_formController;
 import moneytrackerfxclient.utils.*;
 
 public class MoneyTrackerFXClient extends Application {
 
     private Stage stage;
+
+    public Stage getStage() {
+        return stage;
+    }
     private static MoneyTrackerFXClient instance;
     private User currentUser;
     MoneyTrackerController clientController;
@@ -68,7 +73,6 @@ public class MoneyTrackerFXClient extends Application {
             stage.setScene(scene);
         } else {
             stage.getScene().setRoot(page);
-
         }
         stage.sizeToScene();
         return page;
@@ -80,6 +84,12 @@ public class MoneyTrackerFXClient extends Application {
         } catch (Exception ex) {
             Logger.getLogger(MoneyTrackerFXClient.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+
+    //TODO: перенести все размеры в AppSettings
+    public void resetStageSize() {
+        getStage().setWidth(600.0);
+        getStage().setHeight(480.0);
     }
 
     //TODO: переделать веб-метод логина
@@ -126,7 +136,14 @@ public class MoneyTrackerFXClient extends Application {
 
     public void gotoAppForm() {
         try {
+            
             replaceSceneContent("forms/app_stub.fxml");
+            getStage().setWidth(1024.0);
+            getStage().setHeight(800.0);
+            //TODO: вынести в AppSettings
+            GraphicsDevice gd = GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice();
+            getStage().setX(gd.getDisplayMode().getWidth()/2 - getStage().getWidth()/2);
+            getStage().setY(gd.getDisplayMode().getHeight()/2 - getStage().getHeight()/2);
         } catch (Exception ex) {
             Logger.getLogger(MoneyTrackerFXClient.class.getName()).log(Level.SEVERE, null, ex);
         }
