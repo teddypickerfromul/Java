@@ -1,5 +1,5 @@
 .stub{
-    -fx-background-color:linear-gradient(#57809f,#3c596e);;
+    -fx-background-color:linear-gradient(#57809f,#3c596e);
 }
 
 .title_pane{
@@ -34,3 +34,41 @@
     -fx-font-size: 85%;
     -fx-text-fill: #1b571b;
 }
+
+.navigation_panel{
+    -fx-background-color: #364f62;
+}
+
+.button_pane{
+    -fx-background-color: #364f62;
+}
+
+#to_goodies_button, #to_outlays_button, #to_incomes_button, #to_budget_button{
+    -fx-background-radius: 0,0,0;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-background-color:
+        linear-gradient(#40ae40, #277e27);
+}
+
+#to_goodies_button:hover, #to_outlays_button:hover, #to_incomes_button:hover, #to_budget_button:hover{
+    -fx-background-radius: 0,0,0;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-background-color:
+        linear-gradient(#1b571b, #286f28);
+}
+
+#to_main_button{
+    -fx-background-radius: 0,0,0;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-background-color: 
+        linear-gradient(#4d718d,#4e738f)
+}
+
+#PieChart{
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+}
+

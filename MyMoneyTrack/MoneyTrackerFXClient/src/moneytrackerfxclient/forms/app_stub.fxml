@@ -5,20 +5,41 @@
 <?import java.util.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.effect.*?>
+<?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.paint.*?>
+<?import javafx.scene.chart.*?>
 
-<AnchorPane id="AnchorPane" fx:id="stub" maxHeight="800.0" maxWidth="1024.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1024.0" styleClass="stub" xmlns:fx="http://javafx.com/fxml" fx:controller="moneytrackerfxclient.forms.controllers.App_stubController" >
-  <children>
-    <AnchorPane fx:id="title_pane" styleClass="title_pane" prefHeight="25.0" prefWidth="1024.0">
-      <children>
-        <Button fx:id="exit_button" onAction="#exit" styleClass="exit_button" layoutX="942.0" mnemonicParsing="false" prefHeight="24.0" prefWidth="78.0" text="Выйти" />
-        <Label fx:id="greetings_id" styleClass="greetings_label" layoutX="15.0" layoutY="4.5" text="Привет," />
-        <Label fx:id="UserName" styleClass="username_label" layoutX="75.0" layoutY="4.5" />
-      </children>
-    </AnchorPane>
-  </children>
-  <stylesheets>
-    <URL value="@app_stub.css" />
-  </stylesheets>
+<AnchorPane id="AnchorPane" fx:id="stub" maxHeight="800.0" maxWidth="1024.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1024.0" styleClass="stub" xmlns:fx="http://javafx.com/fxml" fx:controller="moneytrackerfxclient.forms.controllers.App_stubController">
+    <children>
+        <AnchorPane fx:id="title_pane" prefHeight="25.0" prefWidth="1024.0" styleClass="title_pane">
+            <children>
+                <Button fx:id="exit_button" layoutX="946.0" mnemonicParsing="false" onAction="#exit" prefHeight="24.0" prefWidth="78.0" styleClass="exit_button" text="Выйти" />
+                <Label fx:id="greetings_id" layoutX="15.0" layoutY="4.5" styleClass="greetings_label" text="Привет," />
+                <Label fx:id="UserName" layoutX="75.0" layoutY="4.5" styleClass="username_label" />
+            </children>
+        </AnchorPane>
+        <AnchorPane fx:id="navigation_panel" layoutY="25.0" prefHeight="783.0" prefWidth="210.00009999999747" styleClass="navigation_panel">
+            <children>
+                <Button fx:id="to_main_button" id="to_main_button" layoutY="217.0" mnemonicParsing="false" prefHeight="54.0" prefWidth="211.0" text="Главное" />
+                <Button fx:id="to_goodies_button" id="to_goodies_button" layoutY="271.0" mnemonicParsing="false" prefHeight="54.0" prefWidth="211.0" text="Товары" />
+                <Button fx:id="to_outlays_button" id="to_outlays_button" layoutY="325.0" mnemonicParsing="false" prefHeight="54.0" prefWidth="211.0" text="Мои расходы" />
+                <Button fx:id="to_incomes_button" id="to_incomes_button" layoutY="379.0" mnemonicParsing="false" prefHeight="54.0" prefWidth="211.0" text="Мои доходы" />
+                <Button fx:id="to_budget_button" id="to_budget_button" layoutY="433.0" mnemonicParsing="false" prefHeight="54.0" prefWidth="211.0" text="Отчёты" />
+                <ImageView fx:id="logo" fitHeight="143.99990000000253" fitWidth="143.99990000000253" layoutX="29.0" layoutY="38.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@logo.png" preserveRatio="false" smooth="false" />
+                    </image>
+                </ImageView>
+            </children>
+        </AnchorPane>
+        <AnchorPane fx:id="content_pane" layoutX="210.0" layoutY="25.0" prefHeight="775.0" prefWidth="814.0">
+            <children>
+                <PieChart id="PieChart" fx:id="status_chart" layoutX="186.0" layoutY="34.0" prefHeight="345.0" prefWidth="415.0" />
+            </children>
+        </AnchorPane>    
+    </children>
+    <stylesheets>
+        <URL value="@app_stub.css" />
+    </stylesheets>
 </AnchorPane>

@@ -29,6 +29,10 @@ public class MoneyTrackerFXClient extends Application {
     private User currentUser;
     MoneyTrackerController clientController;
 
+    public MoneyTrackerController getClientController() {
+        return clientController.getInstance();
+    }
+
     public User getCurrentUser() {
         return currentUser;
     }
