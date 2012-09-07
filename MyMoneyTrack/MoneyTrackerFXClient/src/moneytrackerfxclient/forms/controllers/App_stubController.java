@@ -33,5 +33,6 @@ public class App_stubController implements Initializable {
     @FXML
     protected void exit(){
         MoneyTrackerFXClient.getInstance().gotoLoginForm();
+        MoneyTrackerFXClient.getInstance().resetCurrentUser();
     }
 }
