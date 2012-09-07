@@ -40,8 +40,8 @@
                         <Tooltip text="Пароль может состоять только из латинских букв и иметь длину от 8 до 30 символов" />
                     </tooltip>
                 </PasswordField>
-                <Button id="login_button" onAction="#Back"  styleClass="login_button" fx:id="login_button" layoutX="168.0" layoutY="235.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="132.0" text="Назад" />
-                <Button fx:id="reg_button" onAction="#registerUser" styleClass="reg_button" layoutX="300.0" layoutY="235.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="132.0" text="Регистрация" />
+                <Button id="login_button" onAction="#Back"  styleClass="login_button" fx:id="login_button" layoutX="168.0" layoutY="235.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="132.0" text="Назад" />
+                <Button fx:id="reg_button" onAction="#registerUser" styleClass="reg_button" layoutX="300.0" layoutY="235.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="132.0" text="Регистрация" />
             </children>
         </AnchorPane>
     </children>

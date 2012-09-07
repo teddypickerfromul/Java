@@ -1,6 +1,7 @@
 
 .login_pane{
     -fx-background-color:linear-gradient(#57809f,#3c596e);
+    -fx-font-weight: bold;
 }
 
 .login_field{

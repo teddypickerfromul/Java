@@ -17,10 +17,7 @@ public class App_stubController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
-        //Stage stage =  MoneyTrackerFXClient.getInstance().getStage();
-        //stage.setWidth(1024.0);
-        //stage.setHeight(600.0);
+        
     }
 
 }

@@ -75,6 +75,7 @@ public class MoneyTrackerFXClient extends Application {
             stage.getScene().setRoot(page);
         }
         stage.sizeToScene();
+        stage.setResizable(false);
         return page;
     }
 
