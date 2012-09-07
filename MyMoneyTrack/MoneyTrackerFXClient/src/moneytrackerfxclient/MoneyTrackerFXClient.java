@@ -76,6 +76,10 @@ public class MoneyTrackerFXClient extends Application {
         }
         stage.sizeToScene();
         stage.setResizable(false);
+        
+        GraphicsDevice gd = GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice();
+        getStage().setX(gd.getDisplayMode().getWidth() / 2 - getStage().getWidth() / 2);
+        getStage().setY(gd.getDisplayMode().getHeight() / 2 - getStage().getHeight() / 2);
         return page;
     }
 
@@ -93,7 +97,6 @@ public class MoneyTrackerFXClient extends Application {
         getStage().setHeight(480.0);
     }
 
-    //TODO: переделать веб-метод логина
     public boolean login(/*MoneyTrackerController controller,*/String login, String password) throws LoginErrorException_Exception {
 
         long currentUser_id = this.clientController.getInstance().getClientPort().loginUser(login, password);
@@ -137,14 +140,14 @@ public class MoneyTrackerFXClient extends Application {
 
     public void gotoAppForm() {
         try {
-            
+
             replaceSceneContent("forms/app_stub.fxml");
             getStage().setWidth(1024.0);
             getStage().setHeight(800.0);
             //TODO: вынести в AppSettings
             GraphicsDevice gd = GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice();
-            getStage().setX(gd.getDisplayMode().getWidth()/2 - getStage().getWidth()/2);
-            getStage().setY(gd.getDisplayMode().getHeight()/2 - getStage().getHeight()/2);
+            getStage().setX(gd.getDisplayMode().getWidth() / 2 - getStage().getWidth() / 2);
+            getStage().setY(gd.getDisplayMode().getHeight() / 2 - getStage().getHeight() / 2);
         } catch (Exception ex) {
             Logger.getLogger(MoneyTrackerFXClient.class.getName()).log(Level.SEVERE, null, ex);
         }
