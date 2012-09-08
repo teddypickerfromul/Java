@@ -67,8 +67,47 @@
         linear-gradient(#4d718d,#4e738f)
 }
 
-#PieChart{
+#status_lbl1{
+
     -fx-text-fill: white;
     -fx-font-weight: bold;
+    -fx-font-size: 120%;
+}
+
+#usermoney{
+    -fx-text-fill: white;
+    -fx-font-size: 350%;
+
+}
+
+#percenatge{
+    -fx-text-fill: white;
+    -fx-font-size: 900%;
+}
+
+#perc_ico{
+    -fx-text-fill: white;
+    -fx-font-size: 200%;
+}
+
+#lb2{
+    -fx-text-fill: white;
+
+}
+
+#in_lbl2{
+    -fx-text-fill: white;
+
+}
+
+#goods_lbl2{
+    -fx-text-fill: white;
+
+
+}
+
+#ov_incomes_label, #ov_outlays_label, #ov_products_label, #ov_incomes_label{
+    -fx-text-fill: white;
+
 }
 

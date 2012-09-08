@@ -3,12 +3,12 @@
 <?import java.lang.*?>
 <?import java.net.*?>
 <?import java.util.*?>
+<?import javafx.scene.chart.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.effect.*?>
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.paint.*?>
-<?import javafx.scene.chart.*?>
 
 <AnchorPane id="AnchorPane" fx:id="stub" maxHeight="800.0" maxWidth="1024.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1024.0" styleClass="stub" xmlns:fx="http://javafx.com/fxml" fx:controller="moneytrackerfxclient.forms.controllers.App_stubController">
     <children>
@@ -21,11 +21,11 @@
         </AnchorPane>
         <AnchorPane fx:id="navigation_panel" layoutY="25.0" prefHeight="783.0" prefWidth="210.00009999999747" styleClass="navigation_panel">
             <children>
-                <Button fx:id="to_main_button" id="to_main_button" layoutY="217.0" mnemonicParsing="false" prefHeight="54.0" prefWidth="211.0" text="Главное" />
-                <Button fx:id="to_goodies_button" id="to_goodies_button" layoutY="271.0" mnemonicParsing="false" prefHeight="54.0" prefWidth="211.0" text="Товары" />
-                <Button fx:id="to_outlays_button" id="to_outlays_button" layoutY="325.0" mnemonicParsing="false" prefHeight="54.0" prefWidth="211.0" text="Мои расходы" />
-                <Button fx:id="to_incomes_button" id="to_incomes_button" layoutY="379.0" mnemonicParsing="false" prefHeight="54.0" prefWidth="211.0" text="Мои доходы" />
-                <Button fx:id="to_budget_button" id="to_budget_button" layoutY="433.0" mnemonicParsing="false" prefHeight="54.0" prefWidth="211.0" text="Отчёты" />
+                <Button fx:id="to_main_button" layoutY="217.0" mnemonicParsing="false" prefHeight="54.0" prefWidth="211.0" text="Главное" />
+                <Button fx:id="to_goodies_button" layoutY="271.0" mnemonicParsing="false" prefHeight="54.0" prefWidth="211.0" text="Товары" />
+                <Button fx:id="to_outlays_button" layoutY="325.0" mnemonicParsing="false" prefHeight="54.0" prefWidth="211.0" text="Мои расходы" />
+                <Button fx:id="to_incomes_button" layoutY="379.0" mnemonicParsing="false" prefHeight="54.0" prefWidth="211.0" text="Мои доходы" />
+                <Button fx:id="to_budget_button" layoutY="433.0" mnemonicParsing="false" prefHeight="54.0" prefWidth="211.0" text="Отчёты" />
                 <ImageView fx:id="logo" fitHeight="143.99990000000253" fitWidth="143.99990000000253" layoutX="29.0" layoutY="38.0" pickOnBounds="true" preserveRatio="true">
                     <image>
                         <Image url="@logo.png" preserveRatio="false" smooth="false" />
@@ -35,9 +35,28 @@
         </AnchorPane>
         <AnchorPane fx:id="content_pane" layoutX="210.0" layoutY="25.0" prefHeight="775.0" prefWidth="814.0">
             <children>
-                <PieChart id="PieChart" fx:id="status_chart" layoutX="186.0" layoutY="34.0" prefHeight="345.0" prefWidth="415.0" />
+                <PieChart id="PieChart" fx:id="status_chart" layoutX="29.0" layoutY="30.0" maxHeight="345.0" maxWidth="415.0" prefHeight="288.0" prefWidth="366.0" styleClass="status_chart" />
+                <Label fx:id="status_lbl1" layoutX="407.0" layoutY="84.0" text="Всего потрачено :" />
+                <Label fx:id="usermoney" layoutX="580.0" layoutY="56.0" text="" textAlignment="CENTER">
+                    <effect>
+                        <Reflection bottomOpacity="0.07142857142857142" fraction="0.5595238095238095" topOpacity="0.5793650793650794" />
+                    </effect>
+                </Label>
+                <Label id="percenatge" fx:id="percentage_label" layoutX="497.0" layoutY="174.0" text="" textAlignment="CENTER">
+                    <effect>
+                        <Reflection fraction="0.38095238095238093" topOpacity="0.2857142857142857" />
+                    </effect>
+                </Label>
+                <Label fx:id="perc_ico" layoutX="715.0" layoutY="234.0" text="\%" />
+                <Label fx:id="perc_ico" layoutX="717.0" layoutY="234.0" text="\%" />
+                <Label id="lb2" fx:id="ov_lb2" layoutX="29.0" layoutY="374.0" text="Всего расходов (совершенных покупок) :" />
+                <Label fx:id="in_lbl2" layoutX="29.0" layoutY="422.0" text="Всего расходов (совершенных продаж) :" />
+                <Label fx:id="goods_lbl2" layoutX="29.0" layoutY="471.0" text="Всего товаров :" />
+                <Label id="ov_incomes_label" fx:id="ov_incomes_label" layoutX="675.0" layoutY="374.0" text="" />
+                <Label fx:id="ov_outlays_label" layoutX="675.0" layoutY="422.0" text="" />
+                <Label fx:id="ov_products_label" layoutX="675.0" layoutY="468.0" text="" />
             </children>
-        </AnchorPane>    
+        </AnchorPane>
     </children>
     <stylesheets>
         <URL value="@app_stub.css" />

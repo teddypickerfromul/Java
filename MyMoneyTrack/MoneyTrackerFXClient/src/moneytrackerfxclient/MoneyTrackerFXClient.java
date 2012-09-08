@@ -80,7 +80,7 @@ public class MoneyTrackerFXClient extends Application {
         }
         stage.sizeToScene();
         stage.setResizable(false);
-        
+        //TODO: scene.centerOnScreen
         GraphicsDevice gd = GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice();
         getStage().setX(gd.getDisplayMode().getWidth() / 2 - getStage().getWidth() / 2);
         getStage().setY(gd.getDisplayMode().getHeight() / 2 - getStage().getHeight() / 2);
