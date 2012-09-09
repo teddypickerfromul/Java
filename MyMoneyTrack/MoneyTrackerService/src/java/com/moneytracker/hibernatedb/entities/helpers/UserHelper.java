@@ -35,6 +35,8 @@ public class UserHelper {
             result.setLogin(login);
             result.setPassword(password);
             result.setEmail(email);
+            
+            session.saveOrUpdate(result);
         }
         return result;
     }

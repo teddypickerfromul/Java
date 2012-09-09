@@ -16,11 +16,16 @@ import com.moneytracker.utils.RegErrorException;
 import com.moneytracker.utils.Validator;
 import java.io.File;
 import java.io.IOException;
+import java.util.AbstractList;
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 import javax.jws.WebMethod;
 import javax.jws.WebParam;
 import javax.jws.WebService;
+import org.apache.commons.collections.ListUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.hibernate.HibernateException;
@@ -30,7 +35,6 @@ import org.hibernate.cfg.AnnotationConfiguration;
 import org.ini4j.InvalidFileFormatException;
 
 //TOdO: javadoc
-
 @WebService()
 public class MoneyTracker {
 
@@ -917,7 +921,7 @@ public class MoneyTracker {
         }
         return result;
     }
-    
+
     @WebMethod(operationName = "getOverralUserIncomeSumByUserAndYear")
     public double getOverralUserIncomeSumByUserAndYear(long user_id, String year) {
         double result;
@@ -938,8 +942,8 @@ public class MoneyTracker {
             }
         }
         return result;
-    }    
-    
+    }
+
     @WebMethod(operationName = "getOverralUserIncomeSumByUserAndMounth")
     public double getOverralUserIncomeSumByUserAndMounth(long user_id, String mounth) {
         double result;
@@ -961,7 +965,7 @@ public class MoneyTracker {
         }
         return result;
     }
-    
+
     @WebMethod(operationName = "getOverralUserIncomeSumByUserAndDay")
     public double getOverralUserIncomeSumByUserAndDay(long user_id, String day) {
         double result;
@@ -982,7 +986,7 @@ public class MoneyTracker {
             }
         }
         return result;
-    }    
+    }
 
     @WebMethod(operationName = "getOverralUserIncomeSumByUserAndProduct")
     public double getOverralUserIncomeSumByUserAndProduct(long user_id, long product_id) {
@@ -1456,7 +1460,7 @@ public class MoneyTracker {
         }
         return result;
     }
-    
+
     @WebMethod(operationName = "getOverralUserOutlaySumByUser")
     public double getOverralUserOutlaySumByUser(long user_id) {
         double result;
@@ -1478,7 +1482,7 @@ public class MoneyTracker {
         }
         return result;
     }
-    
+
     @WebMethod(operationName = "getOverralUserOutlaySumByUserAndYear")
     public double getOverralUserOutlaySumByUserAndYear(long user_id, String year) {
         double result;
@@ -1499,8 +1503,8 @@ public class MoneyTracker {
             }
         }
         return result;
-    }    
-    
+    }
+
     @WebMethod(operationName = "getOverralUserOutlaySumByUserAndMounth")
     public double getOverralUserOutlaySumByUserAndMounth(long user_id, String mounth) {
         double result;
@@ -1522,7 +1526,7 @@ public class MoneyTracker {
         }
         return result;
     }
-    
+
     @WebMethod(operationName = "getOverralUserOutlaySumByUserAndDay")
     public double getOverralUserOutlaySumByUserAndDay(long user_id, String day) {
         double result;
@@ -1543,7 +1547,7 @@ public class MoneyTracker {
             }
         }
         return result;
-    }    
+    }
 
     @WebMethod(operationName = "getOverralUserOutlaySumByUserAndProduct")
     public double getOverralUserOutlaySumByUserAndProduct(long user_id, long product_id) {
@@ -1566,7 +1570,7 @@ public class MoneyTracker {
             }
         }
         return result;
-    }    
+    }
 
     /*----------------------------------------------------------------------------------------------------------------------------------------------*/
     // Веб-методы для сущности UserBudget
@@ -1747,6 +1751,51 @@ public class MoneyTracker {
         return result;
     }
 
+    //TODO: реализовать нормальный List c нормальным equals() - избавиться от временных списков
+    @WebMethod(operationName = "getProductsCountUsedByUser")
+    public Set getProductsCountUsedByUser(long user_id) {
+        Set result;
+        result = null;
+        User user = UserHelper.getById(this.session, user_id);
+        if (user != null) {
+            try {
+                session.beginTransaction();
+                List tempOutlays = UserOutlayHelper.getAllByUser(this.session, user);
+                List tempIncomes = UserIncomeHelper.getAllByUser(this.session, user);
+
+                List outlaysIdList = new ArrayList();
+                List incomesIdList = new ArrayList();
+
+                for (Iterator it = tempOutlays.iterator(); it.hasNext();) {
+                    UserOutlay outlay_item = (UserOutlay) it.next();
+                    outlaysIdList.add(outlay_item.getProduct().getId());
+                }
+
+                for (Iterator it = tempIncomes.iterator(); it.hasNext();) {
+                    UserIncome outlay_item = (UserIncome) it.next();
+                    incomesIdList.add(outlay_item.getProduct().getId());
+                }
+
+                tempIncomes.clear();
+                tempOutlays.clear();
+
+                if (outlaysIdList != null && incomesIdList != null) {
+                    result = new HashSet(outlaysIdList);
+                    result.addAll(incomesIdList);
+                }
+            } catch (HibernateException ex) {
+                if (session.getTransaction().isActive()) {
+                    session.getTransaction().rollback();
+                }
+            } finally {
+                if (session != null) {
+                    session.close();
+                }
+            }
+        }
+        return result;
+    }
+
     @WebMethod(operationName = "Hello")
     public void Hello() {
         try {
@@ -1766,4 +1815,3 @@ public class MoneyTracker {
         return "Goodbye";
     }
 }
- 
