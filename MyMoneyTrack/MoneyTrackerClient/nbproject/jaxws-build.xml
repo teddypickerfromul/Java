@@ -6,34 +6,32 @@
         *** TARGETS TO ../build.xml AND MODIFY THAT FILE INSTEAD                  ***
 
         -->
-<project xmlns:xalan="http://xml.apache.org/xslt" xmlns:j2seproject3="http://www.netbeans.org/ns/j2se-project/3" xmlns:jaxws="http://www.netbeans.org/ns/jax-ws/1">
+<project xmlns:xalan="http://xml.apache.org/xslt" xmlns:webproject2="http://www.netbeans.org/ns/web-project/2" xmlns:jaxws="http://www.netbeans.org/ns/jax-ws/1">
+    <!--
+                ===================
+                JAX-WS WSGEN SECTION
+                ===================
+            -->
+    <target name="wsgen-init" depends="init, -do-compile">
+        <mkdir dir="${build.generated.sources.dir}/jax-ws/resources/"/>
+        <mkdir dir="${build.classes.dir}"/>
+        <mkdir dir="${build.classes.dir}/META-INF"/>
+        <property name="j2ee.platform.wsgen.classpath" value="${libs.jaxws21.classpath}"/>
+        <taskdef name="wsgen" classname="com.sun.tools.ws.ant.WsGen">
+            <classpath path="${java.home}/../lib/tools.jar:${build.classes.dir}:${j2ee.platform.wsgen.classpath}:${javac.classpath}"/>
+        </taskdef>
+    </target>
+    <target name="wsgen-MoneyTracker" depends="wsgen-init">
+        <copy todir="${build.classes.dir}/META-INF">
+            <fileset dir="${webinf.dir}" includes="wsit-com.moneytracker.MoneyTracker.xml"/>
+        </copy>
+        <wsgen sourcedestdir="${build.generated.sources.dir}/jax-ws" resourcedestdir="${build.generated.sources.dir}/jax-ws/resources/" destdir="${build.generated.sources.dir}/jax-ws" verbose="true" xendorsed="true" keep="true" genwsdl="true" sei="com.moneytracker.MoneyTracker">
+            <classpath path="${java.home}/../lib/tools.jar:${build.classes.dir}:${j2ee.platform.wsgen.classpath}:${javac.classpath}"/>
+        </wsgen>
+    </target>
     <!--
                 ===================
                 JAX-WS WSIMPORT SECTION
                 ===================
             -->
-    <target name="wsimport-init" depends="init">
-        <mkdir dir="${build.generated.sources.dir}/jax-ws"/>
-        <taskdef name="wsimport" classname="com.sun.tools.ws.ant.WsImport">
-            <classpath path="${libs.jaxws21.classpath}"/>
-        </taskdef>
-    </target>
-    <target name="wsimport-client-MoneyTrackerService" depends="wsimport-init">
-        <mkdir dir="${build.generated.dir}/jax-wsCache/MoneyTrackerService"/>
-        <property name="wsdl-MoneyTrackerService" location="xml-resources/web-service-references/MoneyTrackerService/wsdl/MoneyTrackerService.wsdl"/>
-        <wsimport sourcedestdir="${build.generated.dir}/jax-wsCache/MoneyTrackerService" destdir="${build.generated.dir}/jax-wsCache/MoneyTrackerService" wsdl="${wsdl-MoneyTrackerService}" catalog="catalog.xml" extension="true" verbose="true" wsdlLocation="file:/home/teddy/MoneyTrackerConsoleClient/wsdl/MoneyTrackerService.wsdl" xendorsed="true" package="moneytrackerconsoleclient.methods">
-            <depends file="${wsdl-MoneyTrackerService}"/>
-            <produces dir="${build.generated.dir}/jax-wsCache/MoneyTrackerService"/>
-        </wsimport>
-        <copy todir="${build.generated.sources.dir}/jax-ws">
-            <fileset dir="${build.generated.dir}/jax-wsCache/MoneyTrackerService">
-                <include name="**/*.java"/>
-            </fileset>
-        </copy>
-    </target>
-    <target name="wsimport-client-clean-MoneyTrackerService" depends="-init-project">
-        <delete dir="${build.generated.dir}/jax-wsCache/MoneyTrackerService"/>
-        <delete dir="${build.generated.sources.dir}/jax-ws/moneytrackerconsoleclient/methods"/>
-    </target>
-    <target name="wsimport-client-generate" depends="wsimport-client-MoneyTrackerService"/>
 </project>
