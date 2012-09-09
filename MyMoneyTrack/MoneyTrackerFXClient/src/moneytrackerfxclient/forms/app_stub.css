@@ -43,6 +43,24 @@
     -fx-background-color: #364f62;
 }
 
+.update_button{
+    -fx-background-radius: 0,0,0;
+    -fx-text-fill: black;
+    -fx-font-weight: bold;
+    -fx-background-color:
+        linear-gradient(#ffcf18, #ffe350);
+    -fx-font-size: 85%; 
+}
+
+.update_button:hover{
+    -fx-background-radius: 0,0,0;
+    -fx-text-fill: black;
+    -fx-font-weight: bold;
+    -fx-background-color:
+        linear-gradient(#f3b71b, #db960d);
+    -fx-font-size: 85%; 
+}
+
 #to_goodies_button, #to_outlays_button, #to_incomes_button, #to_budget_button{
     -fx-background-radius: 0,0,0;
     -fx-text-fill: white;
@@ -68,7 +86,6 @@
 }
 
 #status_lbl1{
-
     -fx-text-fill: white;
     -fx-font-weight: bold;
     -fx-font-size: 120%;
@@ -77,7 +94,6 @@
 #usermoney{
     -fx-text-fill: white;
     -fx-font-size: 350%;
-
 }
 
 #percenatge{
@@ -92,22 +108,19 @@
 
 #lb2{
     -fx-text-fill: white;
-
 }
 
 #in_lbl2{
     -fx-text-fill: white;
-
 }
 
-#goods_lbl2{
+#goods_lbl2, #last_mounth_lbl, #last_day_lbl{
     -fx-text-fill: white;
-
-
 }
 
-#ov_incomes_label, #ov_outlays_label, #ov_products_label, #ov_incomes_label{
+#ov_incomes_label, #ov_outlays_label, #ov_products_label, #ov_incomes_label, #ov_last_year, #ov_last_mounth{
     -fx-text-fill: white;
-
+    -fx-font-size: 110%;
+    -fx-font-weight: bold;
 }
 

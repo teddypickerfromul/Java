@@ -31,6 +31,7 @@
                         <Image url="@logo.png" preserveRatio="false" smooth="false" />
                     </image>
                 </ImageView>
+                <Button fx:id="update_button" onAction="#updateUI" styleClass="update_button" layoutX="57.0" layoutY="674.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="87.0" text="Обновить" />
             </children>
         </AnchorPane>
         <AnchorPane fx:id="content_pane" layoutX="210.0" layoutY="25.0" prefHeight="775.0" prefWidth="814.0">
@@ -48,13 +49,16 @@
                     </effect>
                 </Label>
                 <Label fx:id="perc_ico" layoutX="715.0" layoutY="234.0" text="\%" />
-                <Label fx:id="perc_ico" layoutX="717.0" layoutY="234.0" text="\%" />
                 <Label id="lb2" fx:id="ov_lb2" layoutX="29.0" layoutY="374.0" text="Всего расходов (совершенных покупок) :" />
                 <Label fx:id="in_lbl2" layoutX="29.0" layoutY="422.0" text="Всего расходов (совершенных продаж) :" />
                 <Label fx:id="goods_lbl2" layoutX="29.0" layoutY="471.0" text="Всего товаров :" />
                 <Label id="ov_incomes_label" fx:id="ov_incomes_label" layoutX="675.0" layoutY="374.0" text="" />
-                <Label fx:id="ov_outlays_label" layoutX="675.0" layoutY="422.0" text="" />
-                <Label fx:id="ov_products_label" layoutX="675.0" layoutY="468.0" text="" />
+                <Label fx:id="ov_outlays_label" id="ov_outlays_label" layoutX="675.0" layoutY="422.0" text="" />
+                <Label fx:id="ov_products_label" id="ov_products_label" layoutX="675.0" layoutY="468.0" text="" />
+                <Label fx:id="last_mounth_lbl" layoutX="29.0" layoutY="517.0" text="Всего операций за последний месяц :" />
+                <Label id="last_mounth_lbl" fx:id="last_day_lbl" layoutX="29.0" layoutY="561.0" text="Всего операций за последний день :" />
+                <Label fx:id="ov_last_year" id="ov_last_year" layoutX="675.0" layoutY="514.0" text="" />
+                <Label fx:id="ov_last_mounth" id="ov_last_mounth" layoutX="675.0" layoutY="561.0" text="" />
             </children>
         </AnchorPane>
     </children>
