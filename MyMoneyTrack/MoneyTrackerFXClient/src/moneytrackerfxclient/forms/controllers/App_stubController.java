@@ -6,6 +6,7 @@ import java.math.RoundingMode;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
+import javafx.animation.FadeTransition;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -13,6 +14,8 @@ import javafx.fxml.Initializable;
 import javafx.scene.chart.PieChart;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.layout.AnchorPane;
+import javafx.util.Duration;
 import moneytrackerfxclient.*;
 import moneytrackerfxclient.utils.CustomFormattedDateTime;
 import moneytrackerfxclient.utils.MoneyTrackerController;
@@ -49,6 +52,8 @@ public class App_stubController implements Initializable {
     private Label ov_last_year;
     @FXML
     private Label ov_last_mounth;
+    @FXML
+    private AnchorPane content_pane;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -62,6 +67,7 @@ public class App_stubController implements Initializable {
         status_chart.setData(prepareChartData());
         status_chart.setLegendVisible(false);
         status_chart.setLabelLineLength(0);
+        fadeOutContentPane();
         updateUserMoneyLabel();
         updateUserPercLabel();
         updateUserIncomeCountLabel();
@@ -69,6 +75,7 @@ public class App_stubController implements Initializable {
         updateProductsCountLabel();
         updateCurrentUserYearOperationsLabel();
         updateCurrentUserMounthOperationsLabel();
+        //MoneyTrackerFXClient.getInstance().getClientController().getClientPort().goodbye();
     }
 
     @FXML
@@ -187,5 +194,12 @@ public class App_stubController implements Initializable {
         this.CurrentUserMounthOperations = MoneyTrackerController.getInstance().getClientPort().getAllUserIncomesByUserAndMounth(MoneyTrackerFXClient.getInstance().getCurrentUser().getId(), this.datetime.now()).size();
         this.CurrentUserMounthOperations += MoneyTrackerController.getInstance().getClientPort().getAllUserOutlaysByUserAndMounth(MoneyTrackerFXClient.getInstance().getCurrentUser().getId(), this.datetime.now()).size();
         return this.CurrentUserMounthOperations;
+    }
+
+    protected void fadeOutContentPane() {
+        FadeTransition fadeTransition = new FadeTransition(Duration.millis(2000), this.content_pane);
+        fadeTransition.setFromValue(0.0);
+        fadeTransition.setToValue(1.0);
+        fadeTransition.play();
     }
 }
