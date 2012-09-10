@@ -34,7 +34,6 @@ import org.hibernate.SessionFactory;
 import org.hibernate.cfg.AnnotationConfiguration;
 import org.ini4j.InvalidFileFormatException;
 
-//TOdO: javadoc
 @WebService()
 public class MoneyTracker {
 
@@ -97,6 +96,7 @@ public class MoneyTracker {
                 session.close();
             }
         }
+        //session.close();
         return result;
     }
 
@@ -518,6 +518,7 @@ public class MoneyTracker {
                 }
             }
         }
+        //session.close();
         return result;
     }
 
@@ -738,6 +739,7 @@ public class MoneyTracker {
                 }
             }
         }
+        //session.close();
         return result;
     }
 
@@ -761,6 +763,7 @@ public class MoneyTracker {
                 }
             }
         }
+        //session.close();
         return result;
     }
 
@@ -919,6 +922,7 @@ public class MoneyTracker {
                 }
             }
         }
+        //session.close();
         return result;
     }
 
@@ -1079,6 +1083,7 @@ public class MoneyTracker {
                 }
             }
         }
+        //session.close();
         return result;
     }
 
@@ -1299,6 +1304,7 @@ public class MoneyTracker {
                 }
             }
         }
+        //session.close();
         return result;
     }
 
@@ -1322,6 +1328,7 @@ public class MoneyTracker {
                 }
             }
         }
+        //session.close();
         return result;
     }
 
@@ -1480,6 +1487,7 @@ public class MoneyTracker {
                 }
             }
         }
+        //session.close();
         return result;
     }
 
@@ -1748,6 +1756,7 @@ public class MoneyTracker {
                 }
             }
         }
+        //session.close();
         return result;
     }
 
@@ -1793,6 +1802,7 @@ public class MoneyTracker {
                 }
             }
         }
+        //session.close();
         return result;
     }
 
@@ -1810,7 +1820,7 @@ public class MoneyTracker {
     // ?
     @WebMethod(operationName = "Goodbye")
     public String Goodbye() {
-        this.session.getTransaction().commit();
+        //this.session.getTransaction().commit();
         this.session.close();
         return "Goodbye";
     }
