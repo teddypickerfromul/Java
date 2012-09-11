@@ -96,7 +96,8 @@ public class UserBudgetHelper {
         if (owner == null) {
             throw new IllegalArgumentException("owner is null");
         }
-
+        
+        
         Criteria criteria = session.createCriteria(UserBudget.class);
         criteria.add(Restrictions.eq("owner", owner));
 

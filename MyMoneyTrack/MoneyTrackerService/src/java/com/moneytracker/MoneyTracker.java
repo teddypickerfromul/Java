@@ -14,6 +14,8 @@ import com.moneytracker.hibernatedb.entities.helpers.UserOutlayHelper;
 import com.moneytracker.utils.LoginErrorException;
 import com.moneytracker.utils.RegErrorException;
 import com.moneytracker.utils.Validator;
+
+
 import java.io.File;
 import java.io.IOException;
 import java.util.AbstractList;
@@ -25,33 +27,35 @@ import java.util.Set;
 import javax.jws.WebMethod;
 import javax.jws.WebParam;
 import javax.jws.WebService;
+
 import org.apache.commons.collections.ListUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.hibernate.HibernateException;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
+//import org.hibernate.Session;
+//import org.hibernate.SessionFactory;
 import org.hibernate.cfg.AnnotationConfiguration;
 import org.ini4j.InvalidFileFormatException;
 
 @WebService()
 public class MoneyTracker {
 
-    public static final Log logger = LogFactory.getLog(MoneyTracker.class);
-    private Session session;
-    private SessionFactory sessionFactory;
-    private Validator val;
-
-    public MoneyTracker() {
-        super();
-        try {
-            this.sessionFactory = new AnnotationConfiguration().configure().buildSessionFactory();
-            this.session = sessionFactory.openSession();
-            this.val = new Validator();
-        } catch (Throwable ex) {
-            throw new ExceptionInInitializerError(ex);
-        }
-    }
+//    public static final Log logger = LogFactory.getLog(MoneyTracker.class);
+//    private Session HibernateUtil.getCurrentSession();
+//    private SessionFactory HibernateUtil.getCurrentSession()Factory;
+//    private Validator val;
+//
+//   public MoneyTracker() throws InvalidFileFormatException, IOException {
+//        super();
+//        try {
+//            HibernateUtil.getCurrentSession()Factory = new AnnotationConfiguration().configure().buildSessionFactory();
+//            HibernateUtil.getCurrentSession() = HibernateUtil.getCurrentSession()Factory.openSession();
+//           this.val = new Validator();
+//        } catch (Throwable ex) {
+//           throw new ExceptionInInitializerError(ex);
+//       }
+//   }
+    
 
     // Веб-методы для сущности User
     /*----------------------------------------------------------------------------------------------------------------------------------------------*/
@@ -60,20 +64,21 @@ public class MoneyTracker {
         User registeredUser;
         registeredUser = null;
         try {
-            session.beginTransaction();
-            registeredUser = UserHelper.register(this.val.getAppSettingsObject(), this.session, login, pass, email);
+            Validator val = new Validator();
+            HibernateUtil.getCurrentSession().beginTransaction();
+            registeredUser = UserHelper.register(val.getAppSettingsObject(), HibernateUtil.getCurrentSession(), login, pass, email);
             //TODO: убрать этот костыль
             if (registeredUser != null) {
-                session.saveOrUpdate(registeredUser);
+                HibernateUtil.getCurrentSession().saveOrUpdate(registeredUser);
             }
         } catch (HibernateException ex) {
-            if (session.getTransaction().isActive()) {
-                session.getTransaction().rollback();
+            if (HibernateUtil.getCurrentSession().getTransaction().isActive()) {
+                HibernateUtil.getCurrentSession().getTransaction().rollback();
             }
             ex.printStackTrace();
         } finally {
-            if (session != null) {
-                session.close();
+            if (HibernateUtil.getCurrentSession() != null) {
+                HibernateUtil.getCurrentSession().close();
             }
         }
         return registeredUser;
@@ -84,19 +89,21 @@ public class MoneyTracker {
         long result;
         result = -1;
         try {
-            session.beginTransaction();
-            result = UserHelper.login(this.session, login, password);
+            HibernateUtil.getCurrentSession().beginTransaction();
+            result = UserHelper.login(HibernateUtil.getCurrentSession(), login, password);
+            //HibernateUtil.getCurrentSession().flush();
+            HibernateUtil.getCurrentSession().getTransaction().commit();
         } catch (HibernateException ex) {
-            if (session.getTransaction().isActive()) {
-                session.getTransaction().rollback();
+            if (HibernateUtil.getCurrentSession().getTransaction().isActive()) {
+                HibernateUtil.getCurrentSession().getTransaction().rollback();
             }
             ex.printStackTrace();
         } finally {
-            if (session != null) {
-                session.close();
+            if (HibernateUtil.getCurrentSession() != null) {
+                HibernateUtil.getCurrentSession().close();
             }
         }
-        //session.close();
+        //HibernateUtil.getCurrentSession().close();
         return result;
     }
 
@@ -105,16 +112,16 @@ public class MoneyTracker {
         User result;
         result = null;
         try {
-            session.beginTransaction();
-            result = UserHelper.getByLogin(this.session, login);
+            HibernateUtil.getCurrentSession().beginTransaction();
+            result = UserHelper.getByLogin(HibernateUtil.getCurrentSession(), login);
         } catch (HibernateException ex) {
-            if (session.getTransaction().isActive()) {
-                session.getTransaction().rollback();
+            if (HibernateUtil.getCurrentSession().getTransaction().isActive()) {
+                HibernateUtil.getCurrentSession().getTransaction().rollback();
             }
             ex.printStackTrace();
         } finally {
-            if (session != null) {
-                session.close();
+            if (HibernateUtil.getCurrentSession() != null) {
+                HibernateUtil.getCurrentSession().close();
             }
         }
         return result;
@@ -125,16 +132,16 @@ public class MoneyTracker {
         User result;
         result = null;
         try {
-            session.beginTransaction();
-            result = UserHelper.getById(this.session, id);
+            HibernateUtil.getCurrentSession().beginTransaction();
+            result = UserHelper.getById(HibernateUtil.getCurrentSession(), id);
         } catch (HibernateException ex) {
-            if (session.getTransaction().isActive()) {
-                session.getTransaction().rollback();
+            if (HibernateUtil.getCurrentSession().getTransaction().isActive()) {
+                HibernateUtil.getCurrentSession().getTransaction().rollback();
             }
             ex.printStackTrace();
         } finally {
-            if (session != null) {
-                session.close();
+            if (HibernateUtil.getCurrentSession() != null) {
+                HibernateUtil.getCurrentSession().close();
             }
         }
         return result;
@@ -145,16 +152,16 @@ public class MoneyTracker {
         User result;
         result = null;
         try {
-            session.beginTransaction();
-            result = UserHelper.getByMail(this.session, email);
+            HibernateUtil.getCurrentSession().beginTransaction();
+            result = UserHelper.getByMail(HibernateUtil.getCurrentSession(), email);
         } catch (HibernateException ex) {
-            if (session.getTransaction().isActive()) {
-                session.getTransaction().rollback();
+            if (HibernateUtil.getCurrentSession().getTransaction().isActive()) {
+                HibernateUtil.getCurrentSession().getTransaction().rollback();
             }
             ex.printStackTrace();
         } finally {
-            if (session != null) {
-                session.close();
+            if (HibernateUtil.getCurrentSession() != null) {
+                HibernateUtil.getCurrentSession().close();
             }
         }
         return result;
@@ -163,16 +170,16 @@ public class MoneyTracker {
     @WebMethod(operationName = "deleteUserById")
     public void deleteUserById(long id) {
         try {
-            session.beginTransaction();
-            UserHelper.deleteById(this.session, id);
+            HibernateUtil.getCurrentSession().beginTransaction();
+            UserHelper.deleteById(HibernateUtil.getCurrentSession(), id);
         } catch (HibernateException ex) {
-            if (session.getTransaction().isActive()) {
-                session.getTransaction().rollback();
+            if (HibernateUtil.getCurrentSession().getTransaction().isActive()) {
+                HibernateUtil.getCurrentSession().getTransaction().rollback();
             }
             ex.printStackTrace();
         } finally {
-            if (session != null) {
-                session.close();
+            if (HibernateUtil.getCurrentSession() != null) {
+                HibernateUtil.getCurrentSession().close();
             }
         }
     }
@@ -180,16 +187,16 @@ public class MoneyTracker {
     @WebMethod(operationName = "deleteUserByLogin")
     public void deleteUserByLogin(String login) {
         try {
-            session.beginTransaction();
-            UserHelper.deleteByLogin(this.session, login);
+            HibernateUtil.getCurrentSession().beginTransaction();
+            UserHelper.deleteByLogin(HibernateUtil.getCurrentSession(), login);
         } catch (HibernateException ex) {
-            if (session.getTransaction().isActive()) {
-                session.getTransaction().rollback();
+            if (HibernateUtil.getCurrentSession().getTransaction().isActive()) {
+                HibernateUtil.getCurrentSession().getTransaction().rollback();
             }
             ex.printStackTrace();
         } finally {
-            if (session != null) {
-                session.close();
+            if (HibernateUtil.getCurrentSession() != null) {
+                HibernateUtil.getCurrentSession().close();
             }
         }
     }
@@ -201,16 +208,16 @@ public class MoneyTracker {
         Product result;
         result = null;
         try {
-            session.beginTransaction();
-            result = ProductHelper.createIfNotExists(this.session, name, description, cost);
+            HibernateUtil.getCurrentSession().beginTransaction();
+            result = ProductHelper.createIfNotExists(HibernateUtil.getCurrentSession(), name, description, cost);
         } catch (HibernateException ex) {
-            if (session.getTransaction().isActive()) {
-                session.getTransaction().rollback();
+            if (HibernateUtil.getCurrentSession().getTransaction().isActive()) {
+                HibernateUtil.getCurrentSession().getTransaction().rollback();
             }
             ex.printStackTrace();
         } finally {
-            if (session != null) {
-                session.close();
+            if (HibernateUtil.getCurrentSession() != null) {
+                HibernateUtil.getCurrentSession().close();
             }
         }
         return result;
@@ -221,16 +228,16 @@ public class MoneyTracker {
         Product result;
         result = null;
         try {
-            session.beginTransaction();
-            result = ProductHelper.getByName(this.session, name);
+            HibernateUtil.getCurrentSession().beginTransaction();
+            result = ProductHelper.getByName(HibernateUtil.getCurrentSession(), name);
         } catch (HibernateException ex) {
-            if (session.getTransaction().isActive()) {
-                session.getTransaction().rollback();
+            if (HibernateUtil.getCurrentSession().getTransaction().isActive()) {
+                HibernateUtil.getCurrentSession().getTransaction().rollback();
             }
             ex.printStackTrace();
         } finally {
-            if (session != null) {
-                session.close();
+            if (HibernateUtil.getCurrentSession() != null) {
+                HibernateUtil.getCurrentSession().close();
             }
         }
         return result;
@@ -241,16 +248,16 @@ public class MoneyTracker {
         Product result;
         result = null;
         try {
-            session.beginTransaction();
-            result = ProductHelper.getById(this.session, id);
+            HibernateUtil.getCurrentSession().beginTransaction();
+            result = ProductHelper.getById(HibernateUtil.getCurrentSession(), id);
         } catch (HibernateException ex) {
-            if (session.getTransaction().isActive()) {
-                session.getTransaction().rollback();
+            if (HibernateUtil.getCurrentSession().getTransaction().isActive()) {
+                HibernateUtil.getCurrentSession().getTransaction().rollback();
             }
             ex.printStackTrace();
         } finally {
-            if (session != null) {
-                session.close();
+            if (HibernateUtil.getCurrentSession() != null) {
+                HibernateUtil.getCurrentSession().close();
             }
         }
         return result;
@@ -261,16 +268,16 @@ public class MoneyTracker {
         List result;
         result = null;
         try {
-            session.beginTransaction();
-            result = ProductHelper.getByPrice(this.session, id);
+            HibernateUtil.getCurrentSession().beginTransaction();
+            result = ProductHelper.getByPrice(HibernateUtil.getCurrentSession(), id);
         } catch (HibernateException ex) {
-            if (session.getTransaction().isActive()) {
-                session.getTransaction().rollback();
+            if (HibernateUtil.getCurrentSession().getTransaction().isActive()) {
+                HibernateUtil.getCurrentSession().getTransaction().rollback();
             }
             ex.printStackTrace();
         } finally {
-            if (session != null) {
-                session.close();
+            if (HibernateUtil.getCurrentSession() != null) {
+                HibernateUtil.getCurrentSession().close();
             }
         }
         return result;
@@ -281,16 +288,16 @@ public class MoneyTracker {
         Product result;
         result = null;
         try {
-            session.beginTransaction();
-            result = ProductHelper.getProductWithMaxPrice(this.session);
+            HibernateUtil.getCurrentSession().beginTransaction();
+            result = ProductHelper.getProductWithMaxPrice(HibernateUtil.getCurrentSession());
         } catch (HibernateException ex) {
-            if (session.getTransaction().isActive()) {
-                session.getTransaction().rollback();
+            if (HibernateUtil.getCurrentSession().getTransaction().isActive()) {
+                HibernateUtil.getCurrentSession().getTransaction().rollback();
             }
             ex.printStackTrace();
         } finally {
-            if (session != null) {
-                session.close();
+            if (HibernateUtil.getCurrentSession() != null) {
+                HibernateUtil.getCurrentSession().close();
             }
         }
         return result;
@@ -301,16 +308,16 @@ public class MoneyTracker {
         Product result;
         result = null;
         try {
-            session.beginTransaction();
-            result = ProductHelper.getProductWithMinPrice(this.session);
+            HibernateUtil.getCurrentSession().beginTransaction();
+            result = ProductHelper.getProductWithMinPrice(HibernateUtil.getCurrentSession());
         } catch (HibernateException ex) {
-            if (session.getTransaction().isActive()) {
-                session.getTransaction().rollback();
+            if (HibernateUtil.getCurrentSession().getTransaction().isActive()) {
+                HibernateUtil.getCurrentSession().getTransaction().rollback();
             }
             ex.printStackTrace();
         } finally {
-            if (session != null) {
-                session.close();
+            if (HibernateUtil.getCurrentSession() != null) {
+                HibernateUtil.getCurrentSession().close();
             }
         }
         return result;
@@ -319,16 +326,16 @@ public class MoneyTracker {
     @WebMethod(operationName = "deleteProductById")
     public void deleteProductById(long id) {
         try {
-            session.beginTransaction();
-            ProductHelper.deleteById(this.session, id);
+            HibernateUtil.getCurrentSession().beginTransaction();
+            ProductHelper.deleteById(HibernateUtil.getCurrentSession(), id);
         } catch (HibernateException ex) {
-            if (session.getTransaction().isActive()) {
-                session.getTransaction().rollback();
+            if (HibernateUtil.getCurrentSession().getTransaction().isActive()) {
+                HibernateUtil.getCurrentSession().getTransaction().rollback();
             }
             ex.printStackTrace();
         } finally {
-            if (session != null) {
-                session.close();
+            if (HibernateUtil.getCurrentSession() != null) {
+                HibernateUtil.getCurrentSession().close();
             }
         }
     }
@@ -336,16 +343,16 @@ public class MoneyTracker {
     @WebMethod(operationName = "deleteProductByName")
     public void deleteProductByName(String name) {
         try {
-            session.beginTransaction();
-            ProductHelper.deleteByName(this.session, name);
+            HibernateUtil.getCurrentSession().beginTransaction();
+            ProductHelper.deleteByName(HibernateUtil.getCurrentSession(), name);
         } catch (HibernateException ex) {
-            if (session.getTransaction().isActive()) {
-                session.getTransaction().rollback();
+            if (HibernateUtil.getCurrentSession().getTransaction().isActive()) {
+                HibernateUtil.getCurrentSession().getTransaction().rollback();
             }
             ex.printStackTrace();
         } finally {
-            if (session != null) {
-                session.close();
+            if (HibernateUtil.getCurrentSession() != null) {
+                HibernateUtil.getCurrentSession().close();
             }
         }
     }
@@ -355,16 +362,16 @@ public class MoneyTracker {
         Product result;
         result = null;
         try {
-            session.beginTransaction();
-            result = ProductHelper.changeDescByName(this.session, name, description);
+            HibernateUtil.getCurrentSession().beginTransaction();
+            result = ProductHelper.changeDescByName(HibernateUtil.getCurrentSession(), name, description);
         } catch (HibernateException ex) {
-            if (session.getTransaction().isActive()) {
-                session.getTransaction().rollback();
+            if (HibernateUtil.getCurrentSession().getTransaction().isActive()) {
+                HibernateUtil.getCurrentSession().getTransaction().rollback();
             }
             ex.printStackTrace();
         } finally {
-            if (session != null) {
-                session.close();
+            if (HibernateUtil.getCurrentSession() != null) {
+                HibernateUtil.getCurrentSession().close();
             }
         }
         return result;
@@ -375,16 +382,16 @@ public class MoneyTracker {
         Product result;
         result = null;
         try {
-            session.beginTransaction();
-            result = ProductHelper.changeDescById(this.session, id, description);
+            HibernateUtil.getCurrentSession().beginTransaction();
+            result = ProductHelper.changeDescById(HibernateUtil.getCurrentSession(), id, description);
         } catch (HibernateException ex) {
-            if (session.getTransaction().isActive()) {
-                session.getTransaction().rollback();
+            if (HibernateUtil.getCurrentSession().getTransaction().isActive()) {
+                HibernateUtil.getCurrentSession().getTransaction().rollback();
             }
             ex.printStackTrace();
         } finally {
-            if (session != null) {
-                session.close();
+            if (HibernateUtil.getCurrentSession() != null) {
+                HibernateUtil.getCurrentSession().close();
             }
         }
         return result;
@@ -395,16 +402,16 @@ public class MoneyTracker {
         Product result;
         result = null;
         try {
-            session.beginTransaction();
-            result = ProductHelper.changeNameById(this.session, id, description);
+            HibernateUtil.getCurrentSession().beginTransaction();
+            result = ProductHelper.changeNameById(HibernateUtil.getCurrentSession(), id, description);
         } catch (HibernateException ex) {
-            if (session.getTransaction().isActive()) {
-                session.getTransaction().rollback();
+            if (HibernateUtil.getCurrentSession().getTransaction().isActive()) {
+                HibernateUtil.getCurrentSession().getTransaction().rollback();
             }
             ex.printStackTrace();
         } finally {
-            if (session != null) {
-                session.close();
+            if (HibernateUtil.getCurrentSession() != null) {
+                HibernateUtil.getCurrentSession().close();
             }
         }
         return result;
@@ -415,16 +422,16 @@ public class MoneyTracker {
         Product result;
         result = null;
         try {
-            session.beginTransaction();
-            result = ProductHelper.changePriceById(this.session, id, cost);
+            HibernateUtil.getCurrentSession().beginTransaction();
+            result = ProductHelper.changePriceById(HibernateUtil.getCurrentSession(), id, cost);
         } catch (HibernateException ex) {
-            if (session.getTransaction().isActive()) {
-                session.getTransaction().rollback();
+            if (HibernateUtil.getCurrentSession().getTransaction().isActive()) {
+                HibernateUtil.getCurrentSession().getTransaction().rollback();
             }
             ex.printStackTrace();
         } finally {
-            if (session != null) {
-                session.close();
+            if (HibernateUtil.getCurrentSession() != null) {
+                HibernateUtil.getCurrentSession().close();
             }
         }
         return result;
@@ -435,16 +442,16 @@ public class MoneyTracker {
         Product result;
         result = null;
         try {
-            session.beginTransaction();
-            result = ProductHelper.changePriceByName(this.session, name, cost);
+            HibernateUtil.getCurrentSession().beginTransaction();
+            result = ProductHelper.changePriceByName(HibernateUtil.getCurrentSession(), name, cost);
         } catch (HibernateException ex) {
-            if (session.getTransaction().isActive()) {
-                session.getTransaction().rollback();
+            if (HibernateUtil.getCurrentSession().getTransaction().isActive()) {
+                HibernateUtil.getCurrentSession().getTransaction().rollback();
             }
             ex.printStackTrace();
         } finally {
-            if (session != null) {
-                session.close();
+            if (HibernateUtil.getCurrentSession() != null) {
+                HibernateUtil.getCurrentSession().close();
             }
         }
         return result;
@@ -458,20 +465,24 @@ public class MoneyTracker {
     public UserIncome createNewUserIncome(long user_id, long product_id, int products_count, String datetime) {
         UserIncome result;
         result = null;
-        User user = UserHelper.getById(this.session, user_id);
-        Product product = ProductHelper.getById(this.session, product_id);
+        HibernateUtil.getCurrentSession().beginTransaction();
+        User user = UserHelper.getById(HibernateUtil.getCurrentSession(), user_id);
+        HibernateUtil.getCurrentSession().getTransaction().commit();
+        HibernateUtil.getCurrentSession().beginTransaction();
+        Product product = ProductHelper.getById(HibernateUtil.getCurrentSession(), product_id);
+        HibernateUtil.getCurrentSession().getTransaction().commit();
         if (user != null && product != null) {
             try {
-                session.beginTransaction();
-                result = UserIncomeHelper.createIfNotExists(this.session, user, product, products_count, datetime);
+                HibernateUtil.getCurrentSession().beginTransaction();
+                result = UserIncomeHelper.createIfNotExists(HibernateUtil.getCurrentSession(), user, product, products_count, datetime);
             } catch (HibernateException ex) {
-                if (session.getTransaction().isActive()) {
-                    session.getTransaction().rollback();
+                if (HibernateUtil.getCurrentSession().getTransaction().isActive()) {
+                    HibernateUtil.getCurrentSession().getTransaction().rollback();
                 }
                 ex.printStackTrace();
             } finally {
-                if (session != null) {
-                    session.close();
+                if (HibernateUtil.getCurrentSession() != null) {
+                    HibernateUtil.getCurrentSession().close();
                 }
             }
         }
@@ -483,16 +494,16 @@ public class MoneyTracker {
         UserIncome result;
         result = null;
         try {
-            session.beginTransaction();
-            result = UserIncomeHelper.getById(this.session, income_id);
+            HibernateUtil.getCurrentSession().beginTransaction();
+            result = UserIncomeHelper.getById(HibernateUtil.getCurrentSession(), income_id);
         } catch (HibernateException ex) {
-            if (session.getTransaction().isActive()) {
-                session.getTransaction().rollback();
+            if (HibernateUtil.getCurrentSession().getTransaction().isActive()) {
+                HibernateUtil.getCurrentSession().getTransaction().rollback();
             }
             ex.printStackTrace();
         } finally {
-            if (session != null) {
-                session.close();
+            if (HibernateUtil.getCurrentSession() != null) {
+                HibernateUtil.getCurrentSession().close();
             }
         }
         return result;
@@ -502,23 +513,26 @@ public class MoneyTracker {
     public List getUserIncomesByUser(long user_id) {
         List result;
         result = null;
-        User user = UserHelper.getById(this.session, user_id); //TODO: обработать исключения
+        HibernateUtil.getCurrentSession().beginTransaction();
+        User user = UserHelper.getById(HibernateUtil.getCurrentSession(), user_id);
+        HibernateUtil.getCurrentSession().getTransaction().commit();
         if (user != null) {
             try {
-                session.beginTransaction();
-                result = UserIncomeHelper.getAllByUser(this.session, user);
+                HibernateUtil.getCurrentSession().beginTransaction();
+                result = UserIncomeHelper.getAllByUser(HibernateUtil.getCurrentSession(), user);
+                HibernateUtil.getCurrentSession().getTransaction().commit();
             } catch (HibernateException ex) {
-                if (session.getTransaction().isActive()) {
-                    session.getTransaction().rollback();
+                if (HibernateUtil.getCurrentSession().getTransaction().isActive()) {
+                    HibernateUtil.getCurrentSession().getTransaction().rollback();
                 }
                 ex.printStackTrace();
             } finally {
-                if (session != null) {
-                    session.close();
+                if (HibernateUtil.getCurrentSession() != null) {
+                    HibernateUtil.getCurrentSession().close();
                 }
             }
         }
-        //session.close();
+        //HibernateUtil.getCurrentSession().close();
         return result;
     }
 
@@ -526,20 +540,20 @@ public class MoneyTracker {
     public UserIncome getUserIncomesByAllParamsWithoutId(long user_id, long product_id, int products_count, String datetime) {
         UserIncome result;
         result = null;
-        User user = UserHelper.getById(this.session, user_id);
-        Product product = ProductHelper.getById(this.session, product_id);
+        User user = UserHelper.getById(HibernateUtil.getCurrentSession(), user_id);
+        Product product = ProductHelper.getById(HibernateUtil.getCurrentSession(), product_id);
         if (user != null && product != null) {
             try {
-                session.beginTransaction();
-                result = UserIncomeHelper.getByAllParametersWithoutId(this.session, null, null, products_count, datetime);
+                HibernateUtil.getCurrentSession().beginTransaction();
+                result = UserIncomeHelper.getByAllParametersWithoutId(HibernateUtil.getCurrentSession(), null, null, products_count, datetime);
             } catch (HibernateException ex) {
-                if (session.getTransaction().isActive()) {
-                    session.getTransaction().rollback();
+                if (HibernateUtil.getCurrentSession().getTransaction().isActive()) {
+                    HibernateUtil.getCurrentSession().getTransaction().rollback();
                 }
                 ex.printStackTrace();
             } finally {
-                if (session != null) {
-                    session.close();
+                if (HibernateUtil.getCurrentSession() != null) {
+                    HibernateUtil.getCurrentSession().close();
                 }
             }
         }
@@ -552,16 +566,16 @@ public class MoneyTracker {
         List result;
         result = null;
         try {
-            session.beginTransaction();
-            result = UserIncomeHelper.getAllByDatetime(this.session, datetime);
+            HibernateUtil.getCurrentSession().beginTransaction();
+            result = UserIncomeHelper.getAllByDatetime(HibernateUtil.getCurrentSession(), datetime);
         } catch (HibernateException ex) {
-            if (session.getTransaction().isActive()) {
-                session.getTransaction().rollback();
+            if (HibernateUtil.getCurrentSession().getTransaction().isActive()) {
+                HibernateUtil.getCurrentSession().getTransaction().rollback();
             }
             ex.printStackTrace();
         } finally {
-            if (session != null) {
-                session.close();
+            if (HibernateUtil.getCurrentSession() != null) {
+                HibernateUtil.getCurrentSession().close();
             }
         }
         return result;
@@ -572,19 +586,21 @@ public class MoneyTracker {
     public List getAllUserIncomesByProduct(long product_id) {
         List result;
         result = null;
-        Product product = ProductHelper.getById(this.session, product_id);
+        HibernateUtil.getCurrentSession().beginTransaction();
+        Product product = ProductHelper.getById(HibernateUtil.getCurrentSession(), product_id);
+        HibernateUtil.getCurrentSession().getTransaction().commit();
         if (product != null) {
             try {
-                session.beginTransaction();
-                result = UserIncomeHelper.getAllByProduct(this.session, product);
+                HibernateUtil.getCurrentSession().beginTransaction();
+                result = UserIncomeHelper.getAllByProduct(HibernateUtil.getCurrentSession(), product);
             } catch (HibernateException ex) {
-                if (session.getTransaction().isActive()) {
-                    session.getTransaction().rollback();
+                if (HibernateUtil.getCurrentSession().getTransaction().isActive()) {
+                    HibernateUtil.getCurrentSession().getTransaction().rollback();
                 }
                 ex.printStackTrace();
             } finally {
-                if (session != null) {
-                    session.close();
+                if (HibernateUtil.getCurrentSession() != null) {
+                    HibernateUtil.getCurrentSession().close();
                 }
             }
         }
@@ -597,16 +613,16 @@ public class MoneyTracker {
         List result;
         result = null;
         try {
-            session.beginTransaction();
-            result = UserIncomeHelper.getAllByYear(this.session, year);
+            HibernateUtil.getCurrentSession().beginTransaction();
+            result = UserIncomeHelper.getAllByYear(HibernateUtil.getCurrentSession(), year);
         } catch (HibernateException ex) {
-            if (session.getTransaction().isActive()) {
-                session.getTransaction().rollback();
+            if (HibernateUtil.getCurrentSession().getTransaction().isActive()) {
+                HibernateUtil.getCurrentSession().getTransaction().rollback();
             }
             ex.printStackTrace();
         } finally {
-            if (session != null) {
-                session.close();
+            if (HibernateUtil.getCurrentSession() != null) {
+                HibernateUtil.getCurrentSession().close();
             }
         }
         return result;
@@ -618,16 +634,16 @@ public class MoneyTracker {
         List result;
         result = null;
         try {
-            session.beginTransaction();
-            result = UserIncomeHelper.getAllByMounth(this.session, mounth);
+            HibernateUtil.getCurrentSession().beginTransaction();
+            result = UserIncomeHelper.getAllByMounth(HibernateUtil.getCurrentSession(), mounth);
         } catch (HibernateException ex) {
-            if (session.getTransaction().isActive()) {
-                session.getTransaction().rollback();
+            if (HibernateUtil.getCurrentSession().getTransaction().isActive()) {
+                HibernateUtil.getCurrentSession().getTransaction().rollback();
             }
             ex.printStackTrace();
         } finally {
-            if (session != null) {
-                session.close();
+            if (HibernateUtil.getCurrentSession() != null) {
+                HibernateUtil.getCurrentSession().close();
             }
         }
         return result;
@@ -639,16 +655,16 @@ public class MoneyTracker {
         List result;
         result = null;
         try {
-            session.beginTransaction();
-            result = UserIncomeHelper.getAllByDay(this.session, day);
+            HibernateUtil.getCurrentSession().beginTransaction();
+            result = UserIncomeHelper.getAllByDay(HibernateUtil.getCurrentSession(), day);
         } catch (HibernateException ex) {
-            if (session.getTransaction().isActive()) {
-                session.getTransaction().rollback();
+            if (HibernateUtil.getCurrentSession().getTransaction().isActive()) {
+                HibernateUtil.getCurrentSession().getTransaction().rollback();
             }
             ex.printStackTrace();
         } finally {
-            if (session != null) {
-                session.close();
+            if (HibernateUtil.getCurrentSession() != null) {
+                HibernateUtil.getCurrentSession().close();
             }
         }
         return result;
@@ -660,16 +676,16 @@ public class MoneyTracker {
         List result;
         result = null;
         try {
-            session.beginTransaction();
-            result = UserIncomeHelper.getAllByHour(this.session, hour);
+            HibernateUtil.getCurrentSession().beginTransaction();
+            result = UserIncomeHelper.getAllByHour(HibernateUtil.getCurrentSession(), hour);
         } catch (HibernateException ex) {
-            if (session.getTransaction().isActive()) {
-                session.getTransaction().rollback();
+            if (HibernateUtil.getCurrentSession().getTransaction().isActive()) {
+                HibernateUtil.getCurrentSession().getTransaction().rollback();
             }
             ex.printStackTrace();
         } finally {
-            if (session != null) {
-                session.close();
+            if (HibernateUtil.getCurrentSession() != null) {
+                HibernateUtil.getCurrentSession().close();
             }
         }
         return result;
@@ -681,16 +697,16 @@ public class MoneyTracker {
         List result;
         result = null;
         try {
-            session.beginTransaction();
-            result = UserIncomeHelper.getAllByMinute(this.session, minute);
+            HibernateUtil.getCurrentSession().beginTransaction();
+            result = UserIncomeHelper.getAllByMinute(HibernateUtil.getCurrentSession(), minute);
         } catch (HibernateException ex) {
-            if (session.getTransaction().isActive()) {
-                session.getTransaction().rollback();
+            if (HibernateUtil.getCurrentSession().getTransaction().isActive()) {
+                HibernateUtil.getCurrentSession().getTransaction().rollback();
             }
             ex.printStackTrace();
         } finally {
-            if (session != null) {
-                session.close();
+            if (HibernateUtil.getCurrentSession() != null) {
+                HibernateUtil.getCurrentSession().close();
             }
         }
         return result;
@@ -700,19 +716,21 @@ public class MoneyTracker {
     public List getAllUserIncomesByUserAndDatetime(long user_id, String datetime) {
         List result;
         result = null;
-        User user = UserHelper.getById(this.session, user_id);
+        HibernateUtil.getCurrentSession().beginTransaction();
+        User user = UserHelper.getById(HibernateUtil.getCurrentSession(), user_id);
+        HibernateUtil.getCurrentSession().getTransaction().commit();
         if (user != null) {
             try {
-                session.beginTransaction();
-                result = UserIncomeHelper.getAllByUserAndDatetime(this.session, user, datetime);
+                HibernateUtil.getCurrentSession().beginTransaction();
+                result = UserIncomeHelper.getAllByUserAndDatetime(HibernateUtil.getCurrentSession(), user, datetime);
             } catch (HibernateException ex) {
-                if (session.getTransaction().isActive()) {
-                    session.getTransaction().rollback();
+                if (HibernateUtil.getCurrentSession().getTransaction().isActive()) {
+                    HibernateUtil.getCurrentSession().getTransaction().rollback();
                 }
                 ex.printStackTrace();
             } finally {
-                if (session != null) {
-                    session.close();
+                if (HibernateUtil.getCurrentSession() != null) {
+                    HibernateUtil.getCurrentSession().close();
                 }
             }
         }
@@ -723,23 +741,26 @@ public class MoneyTracker {
     public List getAllUserIncomesByUserAndYear(long user_id, String year) {
         List result;
         result = null;
-        User user = UserHelper.getById(this.session, user_id);
+        HibernateUtil.getCurrentSession().beginTransaction();
+        User user = UserHelper.getById(HibernateUtil.getCurrentSession(), user_id);
+        HibernateUtil.getCurrentSession().getTransaction().commit();
         if (user != null) {
             try {
-                session.beginTransaction();
-                result = UserIncomeHelper.getAllByUserAndYear(this.session, user, year);
+                HibernateUtil.getCurrentSession().beginTransaction();
+                result = UserIncomeHelper.getAllByUserAndYear(HibernateUtil.getCurrentSession(), user, year);
+                HibernateUtil.getCurrentSession().getTransaction().commit();
             } catch (HibernateException ex) {
-                if (session.getTransaction().isActive()) {
-                    session.getTransaction().rollback();
+                if (HibernateUtil.getCurrentSession().getTransaction().isActive()) {
+                    HibernateUtil.getCurrentSession().getTransaction().rollback();
                 }
                 ex.printStackTrace();
             } finally {
-                if (session != null) {
-                    session.close();
+                if (HibernateUtil.getCurrentSession() != null) {
+                    HibernateUtil.getCurrentSession().close();
                 }
             }
         }
-        //session.close();
+        //HibernateUtil.getCurrentSession().close();
         return result;
     }
 
@@ -747,23 +768,26 @@ public class MoneyTracker {
     public List getAllUserIncomesByUserAndMounth(long user_id, String mounth) {
         List result;
         result = null;
-        User user = UserHelper.getById(this.session, user_id);
+        HibernateUtil.getCurrentSession().beginTransaction();
+        User user = UserHelper.getById(HibernateUtil.getCurrentSession(), user_id);
+        HibernateUtil.getCurrentSession().getTransaction().commit();
         if (user != null) {
             try {
-                session.beginTransaction();
-                result = UserIncomeHelper.getAllByUserAndMounth(this.session, user, mounth);
+                HibernateUtil.getCurrentSession().beginTransaction();
+                result = UserIncomeHelper.getAllByUserAndMounth(HibernateUtil.getCurrentSession(), user, mounth);
+                HibernateUtil.getCurrentSession().getTransaction().commit();
             } catch (HibernateException ex) {
-                if (session.getTransaction().isActive()) {
-                    session.getTransaction().rollback();
+                if (HibernateUtil.getCurrentSession().getTransaction().isActive()) {
+                    HibernateUtil.getCurrentSession().getTransaction().rollback();
                 }
                 ex.printStackTrace();
             } finally {
-                if (session != null) {
-                    session.close();
+                if (HibernateUtil.getCurrentSession() != null) {
+                    HibernateUtil.getCurrentSession().close();
                 }
             }
         }
-        //session.close();
+        //HibernateUtil.getCurrentSession().close();
         return result;
     }
 
@@ -771,19 +795,21 @@ public class MoneyTracker {
     public List getAllUserIncomesByUserAndDay(long user_id, String day) {
         List result;
         result = null;
-        User user = UserHelper.getById(this.session, user_id);
+        HibernateUtil.getCurrentSession().beginTransaction();
+        User user = UserHelper.getById(HibernateUtil.getCurrentSession(), user_id);
+        HibernateUtil.getCurrentSession().getTransaction().commit();
         if (user != null) {
             try {
-                session.beginTransaction();
-                result = UserIncomeHelper.getAllByUserAndDay(this.session, user, day);
+                HibernateUtil.getCurrentSession().beginTransaction();
+                result = UserIncomeHelper.getAllByUserAndDay(HibernateUtil.getCurrentSession(), user, day);
             } catch (HibernateException ex) {
-                if (session.getTransaction().isActive()) {
-                    session.getTransaction().rollback();
+                if (HibernateUtil.getCurrentSession().getTransaction().isActive()) {
+                    HibernateUtil.getCurrentSession().getTransaction().rollback();
                 }
                 ex.printStackTrace();
             } finally {
-                if (session != null) {
-                    session.close();
+                if (HibernateUtil.getCurrentSession() != null) {
+                    HibernateUtil.getCurrentSession().close();
                 }
             }
         }
@@ -794,19 +820,21 @@ public class MoneyTracker {
     public List getAllUserIncomesByUserAndHour(long user_id, String hour) {
         List result;
         result = null;
-        User user = UserHelper.getById(this.session, user_id);
+        HibernateUtil.getCurrentSession().beginTransaction();
+        User user = UserHelper.getById(HibernateUtil.getCurrentSession(), user_id);
+        HibernateUtil.getCurrentSession().getTransaction().commit();
         if (user != null) {
             try {
-                session.beginTransaction();
-                result = UserIncomeHelper.getAllUserAndHour(this.session, user, hour);
+                HibernateUtil.getCurrentSession().beginTransaction();
+                result = UserIncomeHelper.getAllUserAndHour(HibernateUtil.getCurrentSession(), user, hour);
             } catch (HibernateException ex) {
-                if (session.getTransaction().isActive()) {
-                    session.getTransaction().rollback();
+                if (HibernateUtil.getCurrentSession().getTransaction().isActive()) {
+                    HibernateUtil.getCurrentSession().getTransaction().rollback();
                 }
                 ex.printStackTrace();
             } finally {
-                if (session != null) {
-                    session.close();
+                if (HibernateUtil.getCurrentSession() != null) {
+                    HibernateUtil.getCurrentSession().close();
                 }
             }
         }
@@ -817,19 +845,21 @@ public class MoneyTracker {
     public List getAllUserIncomesByUserAndMinute(long user_id, String minute) {
         List result;
         result = null;
-        User user = UserHelper.getById(this.session, user_id);
+        HibernateUtil.getCurrentSession().beginTransaction();
+        User user = UserHelper.getById(HibernateUtil.getCurrentSession(), user_id);
+        HibernateUtil.getCurrentSession().getTransaction().commit();
         if (user != null) {
             try {
-                session.beginTransaction();
-                result = UserIncomeHelper.getAllByUserAndMinute(this.session, user, minute);
+                HibernateUtil.getCurrentSession().beginTransaction();
+                result = UserIncomeHelper.getAllByUserAndMinute(HibernateUtil.getCurrentSession(), user, minute);
             } catch (HibernateException ex) {
-                if (session.getTransaction().isActive()) {
-                    session.getTransaction().rollback();
+                if (HibernateUtil.getCurrentSession().getTransaction().isActive()) {
+                    HibernateUtil.getCurrentSession().getTransaction().rollback();
                 }
                 ex.printStackTrace();
             } finally {
-                if (session != null) {
-                    session.close();
+                if (HibernateUtil.getCurrentSession() != null) {
+                    HibernateUtil.getCurrentSession().close();
                 }
             }
         }
@@ -840,20 +870,24 @@ public class MoneyTracker {
     public UserIncome updateUserIncomeByAllParams(long id, long user_id, long product_id, int products_count, String datetime) {
         UserIncome result;
         result = null;
-        User user = UserHelper.getById(this.session, user_id);
-        Product product = ProductHelper.getById(this.session, product_id);
+        HibernateUtil.getCurrentSession().beginTransaction();
+        User user = UserHelper.getById(HibernateUtil.getCurrentSession(), user_id);
+        HibernateUtil.getCurrentSession().getTransaction().commit();
+        HibernateUtil.getCurrentSession().beginTransaction();
+        Product product = ProductHelper.getById(HibernateUtil.getCurrentSession(), product_id);
+        HibernateUtil.getCurrentSession().getTransaction().commit();
         if (user != null && product != null) {
             try {
-                session.beginTransaction();
-                result = UserIncomeHelper.changeByAllParams(this.session, id, user, product, products_count, datetime);
+                HibernateUtil.getCurrentSession().beginTransaction();
+                result = UserIncomeHelper.changeByAllParams(HibernateUtil.getCurrentSession(), id, user, product, products_count, datetime);
             } catch (HibernateException ex) {
-                if (session.getTransaction().isActive()) {
-                    session.getTransaction().rollback();
+                if (HibernateUtil.getCurrentSession().getTransaction().isActive()) {
+                    HibernateUtil.getCurrentSession().getTransaction().rollback();
                 }
                 ex.printStackTrace();
             } finally {
-                if (session != null) {
-                    session.close();
+                if (HibernateUtil.getCurrentSession() != null) {
+                    HibernateUtil.getCurrentSession().close();
                 }
             }
         }
@@ -864,19 +898,21 @@ public class MoneyTracker {
     public UserIncome updateUserIncomeProductById(long id, long product_id) {
         UserIncome result;
         result = null;
-        Product product = ProductHelper.getById(this.session, product_id);
+        HibernateUtil.getCurrentSession().beginTransaction();
+        Product product = ProductHelper.getById(HibernateUtil.getCurrentSession(), product_id);
+        HibernateUtil.getCurrentSession().getTransaction().commit();
         if (product != null) {
             try {
-                session.beginTransaction();
-                result = UserIncomeHelper.changeProductById(this.session, id, product);
+                HibernateUtil.getCurrentSession().beginTransaction();
+                result = UserIncomeHelper.changeProductById(HibernateUtil.getCurrentSession(), id, product);
             } catch (HibernateException ex) {
-                if (session.getTransaction().isActive()) {
-                    session.getTransaction().rollback();
+                if (HibernateUtil.getCurrentSession().getTransaction().isActive()) {
+                    HibernateUtil.getCurrentSession().getTransaction().rollback();
                 }
                 ex.printStackTrace();
             } finally {
-                if (session != null) {
-                    session.close();
+                if (HibernateUtil.getCurrentSession() != null) {
+                    HibernateUtil.getCurrentSession().close();
                 }
             }
         }
@@ -888,16 +924,16 @@ public class MoneyTracker {
         UserIncome result;
         result = null;
         try {
-            session.beginTransaction();
-            result = UserIncomeHelper.changeProductCountById(this.session, id, product_count);
+            HibernateUtil.getCurrentSession().beginTransaction();
+            result = UserIncomeHelper.changeProductCountById(HibernateUtil.getCurrentSession(), id, product_count);
         } catch (HibernateException ex) {
-            if (session.getTransaction().isActive()) {
-                session.getTransaction().rollback();
+            if (HibernateUtil.getCurrentSession().getTransaction().isActive()) {
+                HibernateUtil.getCurrentSession().getTransaction().rollback();
             }
             ex.printStackTrace();
         } finally {
-            if (session != null) {
-                session.close();
+            if (HibernateUtil.getCurrentSession() != null) {
+                HibernateUtil.getCurrentSession().close();
             }
         }
         return result;
@@ -907,22 +943,25 @@ public class MoneyTracker {
     public double getOverralUserIncomeSumByUser(long user_id) {
         double result;
         result = Double.MIN_VALUE;
-        User user = UserHelper.getById(this.session, user_id);
+        HibernateUtil.getCurrentSession().beginTransaction();
+        User user = UserHelper.getById(HibernateUtil.getCurrentSession(), user_id);
+        HibernateUtil.getCurrentSession().getTransaction().commit();
         if (user != null) {
             try {
-                session.beginTransaction();
-                result = UserIncomeHelper.getOverralSumByUser(this.session, user);
+                HibernateUtil.getCurrentSession().beginTransaction();
+                result = UserIncomeHelper.getOverralSumByUser(HibernateUtil.getCurrentSession(), user);
+                HibernateUtil.getCurrentSession().getTransaction().commit();
             } catch (HibernateException es) {
-                if (session.getTransaction().isActive()) {
-                    session.getTransaction().rollback();
+                if (HibernateUtil.getCurrentSession().getTransaction().isActive()) {
+                    HibernateUtil.getCurrentSession().getTransaction().rollback();
                 }
             } finally {
-                if (session != null) {
-                    session.close();
+                if (HibernateUtil.getCurrentSession() != null) {
+                    HibernateUtil.getCurrentSession().close();
                 }
             }
         }
-        //session.close();
+        //HibernateUtil.getCurrentSession().close();
         return result;
     }
 
@@ -930,18 +969,20 @@ public class MoneyTracker {
     public double getOverralUserIncomeSumByUserAndYear(long user_id, String year) {
         double result;
         result = Double.MIN_VALUE;
-        User user = UserHelper.getById(this.session, user_id);
+        HibernateUtil.getCurrentSession().beginTransaction();
+        User user = UserHelper.getById(HibernateUtil.getCurrentSession(), user_id);
+        HibernateUtil.getCurrentSession().getTransaction().commit();
         if (user != null) {
             try {
-                session.beginTransaction();
-                result = UserIncomeHelper.getOverralSumByUserAndYear(this.session, user, year);
+                HibernateUtil.getCurrentSession().beginTransaction();
+                result = UserIncomeHelper.getOverralSumByUserAndYear(HibernateUtil.getCurrentSession(), user, year);
             } catch (HibernateException es) {
-                if (session.getTransaction().isActive()) {
-                    session.getTransaction().rollback();
+                if (HibernateUtil.getCurrentSession().getTransaction().isActive()) {
+                    HibernateUtil.getCurrentSession().getTransaction().rollback();
                 }
             } finally {
-                if (session != null) {
-                    session.close();
+                if (HibernateUtil.getCurrentSession() != null) {
+                    HibernateUtil.getCurrentSession().close();
                 }
             }
         }
@@ -952,18 +993,20 @@ public class MoneyTracker {
     public double getOverralUserIncomeSumByUserAndMounth(long user_id, String mounth) {
         double result;
         result = Double.MIN_VALUE;
-        User user = UserHelper.getById(this.session, user_id);
+        HibernateUtil.getCurrentSession().beginTransaction();
+        User user = UserHelper.getById(HibernateUtil.getCurrentSession(), user_id);
+        HibernateUtil.getCurrentSession().getTransaction().commit();
         if (user != null) {
             try {
-                session.beginTransaction();
-                result = UserIncomeHelper.getOverralSumByUserAndMounth(this.session, user, mounth);
+                HibernateUtil.getCurrentSession().beginTransaction();
+                result = UserIncomeHelper.getOverralSumByUserAndMounth(HibernateUtil.getCurrentSession(), user, mounth);
             } catch (HibernateException es) {
-                if (session.getTransaction().isActive()) {
-                    session.getTransaction().rollback();
+                if (HibernateUtil.getCurrentSession().getTransaction().isActive()) {
+                    HibernateUtil.getCurrentSession().getTransaction().rollback();
                 }
             } finally {
-                if (session != null) {
-                    session.close();
+                if (HibernateUtil.getCurrentSession() != null) {
+                    HibernateUtil.getCurrentSession().close();
                 }
             }
         }
@@ -974,18 +1017,20 @@ public class MoneyTracker {
     public double getOverralUserIncomeSumByUserAndDay(long user_id, String day) {
         double result;
         result = Double.MIN_VALUE;
-        User user = UserHelper.getById(this.session, user_id);
+        HibernateUtil.getCurrentSession().beginTransaction();
+        User user = UserHelper.getById(HibernateUtil.getCurrentSession(), user_id);
+        HibernateUtil.getCurrentSession().getTransaction().commit();
         if (user != null) {
             try {
-                session.beginTransaction();
-                result = UserIncomeHelper.getOverralSumByUserAndMounth(this.session, user, day);
+                HibernateUtil.getCurrentSession().beginTransaction();
+                result = UserIncomeHelper.getOverralSumByUserAndMounth(HibernateUtil.getCurrentSession(), user, day);
             } catch (HibernateException es) {
-                if (session.getTransaction().isActive()) {
-                    session.getTransaction().rollback();
+                if (HibernateUtil.getCurrentSession().getTransaction().isActive()) {
+                    HibernateUtil.getCurrentSession().getTransaction().rollback();
                 }
             } finally {
-                if (session != null) {
-                    session.close();
+                if (HibernateUtil.getCurrentSession() != null) {
+                    HibernateUtil.getCurrentSession().close();
                 }
             }
         }
@@ -996,19 +1041,23 @@ public class MoneyTracker {
     public double getOverralUserIncomeSumByUserAndProduct(long user_id, long product_id) {
         double result;
         result = Double.MIN_VALUE;
-        User user = UserHelper.getById(this.session, user_id);
-        Product product = ProductHelper.getById(this.session, product_id);
+        HibernateUtil.getCurrentSession().beginTransaction();
+        User user = UserHelper.getById(HibernateUtil.getCurrentSession(), user_id);
+        HibernateUtil.getCurrentSession().getTransaction().commit();
+        HibernateUtil.getCurrentSession().beginTransaction();
+        Product product = ProductHelper.getById(HibernateUtil.getCurrentSession(), product_id);
+        HibernateUtil.getCurrentSession().getTransaction().commit();
         if (user != null && product != null) {
             try {
-                session.beginTransaction();
-                result = UserIncomeHelper.getOverralSumByUserAndProduct(this.session, user, product);
+                HibernateUtil.getCurrentSession().beginTransaction();
+                result = UserIncomeHelper.getOverralSumByUserAndProduct(HibernateUtil.getCurrentSession(), user, product);
             } catch (HibernateException es) {
-                if (session.getTransaction().isActive()) {
-                    session.getTransaction().rollback();
+                if (HibernateUtil.getCurrentSession().getTransaction().isActive()) {
+                    HibernateUtil.getCurrentSession().getTransaction().rollback();
                 }
             } finally {
-                if (session != null) {
-                    session.close();
+                if (HibernateUtil.getCurrentSession() != null) {
+                    HibernateUtil.getCurrentSession().close();
                 }
             }
         }
@@ -1023,20 +1072,20 @@ public class MoneyTracker {
     public UserOutlay createNewUserOutlay(long user_id, long product_id, int products_count, String datetime) {
         UserOutlay result;
         result = null;
-        User user = UserHelper.getById(this.session, user_id);
-        Product product = ProductHelper.getById(this.session, product_id);
+        User user = UserHelper.getById(HibernateUtil.getCurrentSession(), user_id);
+        Product product = ProductHelper.getById(HibernateUtil.getCurrentSession(), product_id);
         if (user != null && product != null) {
             try {
-                session.beginTransaction();
-                result = UserOutlayHelper.createIfNotExists(this.session, user, product, products_count, datetime);
+                HibernateUtil.getCurrentSession().beginTransaction();
+                result = UserOutlayHelper.createIfNotExists(HibernateUtil.getCurrentSession(), user, product, products_count, datetime);
             } catch (HibernateException ex) {
-                if (session.getTransaction().isActive()) {
-                    session.getTransaction().rollback();
+                if (HibernateUtil.getCurrentSession().getTransaction().isActive()) {
+                    HibernateUtil.getCurrentSession().getTransaction().rollback();
                 }
                 ex.printStackTrace();
             } finally {
-                if (session != null) {
-                    session.close();
+                if (HibernateUtil.getCurrentSession() != null) {
+                    HibernateUtil.getCurrentSession().close();
                 }
             }
         }
@@ -1048,16 +1097,16 @@ public class MoneyTracker {
         UserOutlay result;
         result = null;
         try {
-            session.beginTransaction();
-            result = UserOutlayHelper.getById(this.session, income_id);
+            HibernateUtil.getCurrentSession().beginTransaction();
+            result = UserOutlayHelper.getById(HibernateUtil.getCurrentSession(), income_id);
         } catch (HibernateException ex) {
-            if (session.getTransaction().isActive()) {
-                session.getTransaction().rollback();
+            if (HibernateUtil.getCurrentSession().getTransaction().isActive()) {
+                HibernateUtil.getCurrentSession().getTransaction().rollback();
             }
             ex.printStackTrace();
         } finally {
-            if (session != null) {
-                session.close();
+            if (HibernateUtil.getCurrentSession() != null) {
+                HibernateUtil.getCurrentSession().close();
             }
         }
         return result;
@@ -1067,23 +1116,26 @@ public class MoneyTracker {
     public List getUserOutlaysByUser(long user_id) {
         List result;
         result = null;
-        User user = UserHelper.getById(this.session, user_id); //TODO: обработать исключения
+        HibernateUtil.getCurrentSession().beginTransaction();
+        User user = UserHelper.getById(HibernateUtil.getCurrentSession(), user_id);
+        HibernateUtil.getCurrentSession().getTransaction().commit();
         if (user != null) {
             try {
-                session.beginTransaction();
-                result = UserOutlayHelper.getAllByUser(this.session, user);
+                HibernateUtil.getCurrentSession().beginTransaction();
+                result = UserOutlayHelper.getAllByUser(HibernateUtil.getCurrentSession(), user);
+                HibernateUtil.getCurrentSession().getTransaction().commit();
             } catch (HibernateException ex) {
-                if (session.getTransaction().isActive()) {
-                    session.getTransaction().rollback();
+                if (HibernateUtil.getCurrentSession().getTransaction().isActive()) {
+                    HibernateUtil.getCurrentSession().getTransaction().rollback();
                 }
                 ex.printStackTrace();
             } finally {
-                if (session != null) {
-                    session.close();
+                if (HibernateUtil.getCurrentSession() != null) {
+                    HibernateUtil.getCurrentSession().close();
                 }
             }
         }
-        //session.close();
+        //HibernateUtil.getCurrentSession().close();
         return result;
     }
 
@@ -1091,20 +1143,20 @@ public class MoneyTracker {
     public UserOutlay getUserOutlayByAllParamsWithoutId(long user_id, long product_id, int products_count, String datetime) {
         UserOutlay result;
         result = null;
-        User user = UserHelper.getById(this.session, user_id);
-        Product product = ProductHelper.getById(this.session, product_id);
+        User user = UserHelper.getById(HibernateUtil.getCurrentSession(), user_id);
+        Product product = ProductHelper.getById(HibernateUtil.getCurrentSession(), product_id);
         if (user != null && product != null) {
             try {
-                session.beginTransaction();
-                result = UserOutlayHelper.getByAllParametersWithoutId(this.session, null, null, products_count, datetime);
+                HibernateUtil.getCurrentSession().beginTransaction();
+                result = UserOutlayHelper.getByAllParametersWithoutId(HibernateUtil.getCurrentSession(), null, null, products_count, datetime);
             } catch (HibernateException ex) {
-                if (session.getTransaction().isActive()) {
-                    session.getTransaction().rollback();
+                if (HibernateUtil.getCurrentSession().getTransaction().isActive()) {
+                    HibernateUtil.getCurrentSession().getTransaction().rollback();
                 }
                 ex.printStackTrace();
             } finally {
-                if (session != null) {
-                    session.close();
+                if (HibernateUtil.getCurrentSession() != null) {
+                    HibernateUtil.getCurrentSession().close();
                 }
             }
         }
@@ -1117,16 +1169,16 @@ public class MoneyTracker {
         List result;
         result = null;
         try {
-            session.beginTransaction();
-            result = UserOutlayHelper.getAllByDatetime(this.session, datetime);
+            HibernateUtil.getCurrentSession().beginTransaction();
+            result = UserOutlayHelper.getAllByDatetime(HibernateUtil.getCurrentSession(), datetime);
         } catch (HibernateException ex) {
-            if (session.getTransaction().isActive()) {
-                session.getTransaction().rollback();
+            if (HibernateUtil.getCurrentSession().getTransaction().isActive()) {
+                HibernateUtil.getCurrentSession().getTransaction().rollback();
             }
             ex.printStackTrace();
         } finally {
-            if (session != null) {
-                session.close();
+            if (HibernateUtil.getCurrentSession() != null) {
+                HibernateUtil.getCurrentSession().close();
             }
         }
         return result;
@@ -1137,19 +1189,21 @@ public class MoneyTracker {
     public List getAllUserOutlaysByProduct(long product_id) {
         List result;
         result = null;
-        Product product = ProductHelper.getById(this.session, product_id);
+        HibernateUtil.getCurrentSession().beginTransaction();
+        Product product = ProductHelper.getById(HibernateUtil.getCurrentSession(), product_id);
+        HibernateUtil.getCurrentSession().getTransaction().commit();
         if (product != null) {
             try {
-                session.beginTransaction();
-                result = UserOutlayHelper.getAllByProduct(this.session, product);
+                HibernateUtil.getCurrentSession().beginTransaction();
+                result = UserOutlayHelper.getAllByProduct(HibernateUtil.getCurrentSession(), product);
             } catch (HibernateException ex) {
-                if (session.getTransaction().isActive()) {
-                    session.getTransaction().rollback();
+                if (HibernateUtil.getCurrentSession().getTransaction().isActive()) {
+                    HibernateUtil.getCurrentSession().getTransaction().rollback();
                 }
                 ex.printStackTrace();
             } finally {
-                if (session != null) {
-                    session.close();
+                if (HibernateUtil.getCurrentSession() != null) {
+                    HibernateUtil.getCurrentSession().close();
                 }
             }
         }
@@ -1162,16 +1216,16 @@ public class MoneyTracker {
         List result;
         result = null;
         try {
-            session.beginTransaction();
-            result = UserOutlayHelper.getAllByYear(this.session, year);
+            HibernateUtil.getCurrentSession().beginTransaction();
+            result = UserOutlayHelper.getAllByYear(HibernateUtil.getCurrentSession(), year);
         } catch (HibernateException ex) {
-            if (session.getTransaction().isActive()) {
-                session.getTransaction().rollback();
+            if (HibernateUtil.getCurrentSession().getTransaction().isActive()) {
+                HibernateUtil.getCurrentSession().getTransaction().rollback();
             }
             ex.printStackTrace();
         } finally {
-            if (session != null) {
-                session.close();
+            if (HibernateUtil.getCurrentSession() != null) {
+                HibernateUtil.getCurrentSession().close();
             }
         }
         return result;
@@ -1183,16 +1237,16 @@ public class MoneyTracker {
         List result;
         result = null;
         try {
-            session.beginTransaction();
-            result = UserOutlayHelper.getAllByMounth(this.session, mounth);
+            HibernateUtil.getCurrentSession().beginTransaction();
+            result = UserOutlayHelper.getAllByMounth(HibernateUtil.getCurrentSession(), mounth);
         } catch (HibernateException ex) {
-            if (session.getTransaction().isActive()) {
-                session.getTransaction().rollback();
+            if (HibernateUtil.getCurrentSession().getTransaction().isActive()) {
+                HibernateUtil.getCurrentSession().getTransaction().rollback();
             }
             ex.printStackTrace();
         } finally {
-            if (session != null) {
-                session.close();
+            if (HibernateUtil.getCurrentSession() != null) {
+                HibernateUtil.getCurrentSession().close();
             }
         }
         return result;
@@ -1204,16 +1258,16 @@ public class MoneyTracker {
         List result;
         result = null;
         try {
-            session.beginTransaction();
-            result = UserOutlayHelper.getAllByDay(this.session, day);
+            HibernateUtil.getCurrentSession().beginTransaction();
+            result = UserOutlayHelper.getAllByDay(HibernateUtil.getCurrentSession(), day);
         } catch (HibernateException ex) {
-            if (session.getTransaction().isActive()) {
-                session.getTransaction().rollback();
+            if (HibernateUtil.getCurrentSession().getTransaction().isActive()) {
+                HibernateUtil.getCurrentSession().getTransaction().rollback();
             }
             ex.printStackTrace();
         } finally {
-            if (session != null) {
-                session.close();
+            if (HibernateUtil.getCurrentSession() != null) {
+                HibernateUtil.getCurrentSession().close();
             }
         }
         return result;
@@ -1225,16 +1279,16 @@ public class MoneyTracker {
         List result;
         result = null;
         try {
-            session.beginTransaction();
-            result = UserOutlayHelper.getAllByHour(this.session, hour);
+            HibernateUtil.getCurrentSession().beginTransaction();
+            result = UserOutlayHelper.getAllByHour(HibernateUtil.getCurrentSession(), hour);
         } catch (HibernateException ex) {
-            if (session.getTransaction().isActive()) {
-                session.getTransaction().rollback();
+            if (HibernateUtil.getCurrentSession().getTransaction().isActive()) {
+                HibernateUtil.getCurrentSession().getTransaction().rollback();
             }
             ex.printStackTrace();
         } finally {
-            if (session != null) {
-                session.close();
+            if (HibernateUtil.getCurrentSession() != null) {
+                HibernateUtil.getCurrentSession().close();
             }
         }
         return result;
@@ -1246,16 +1300,16 @@ public class MoneyTracker {
         List result;
         result = null;
         try {
-            session.beginTransaction();
-            result = UserOutlayHelper.getAllByMinute(this.session, minute);
+            HibernateUtil.getCurrentSession().beginTransaction();
+            result = UserOutlayHelper.getAllByMinute(HibernateUtil.getCurrentSession(), minute);
         } catch (HibernateException ex) {
-            if (session.getTransaction().isActive()) {
-                session.getTransaction().rollback();
+            if (HibernateUtil.getCurrentSession().getTransaction().isActive()) {
+                HibernateUtil.getCurrentSession().getTransaction().rollback();
             }
             ex.printStackTrace();
         } finally {
-            if (session != null) {
-                session.close();
+            if (HibernateUtil.getCurrentSession() != null) {
+                HibernateUtil.getCurrentSession().close();
             }
         }
         return result;
@@ -1265,19 +1319,21 @@ public class MoneyTracker {
     public List getAllUserOutlaysByUserAndDatetime(long user_id, String datetime) {
         List result;
         result = null;
-        User user = UserHelper.getById(this.session, user_id);
+        HibernateUtil.getCurrentSession().beginTransaction();
+        User user = UserHelper.getById(HibernateUtil.getCurrentSession(), user_id);
+        HibernateUtil.getCurrentSession().getTransaction().commit();
         if (user != null) {
             try {
-                session.beginTransaction();
-                result = UserOutlayHelper.getAllByUserAndDatetime(this.session, user, datetime);
+                HibernateUtil.getCurrentSession().beginTransaction();
+                result = UserOutlayHelper.getAllByUserAndDatetime(HibernateUtil.getCurrentSession(), user, datetime);
             } catch (HibernateException ex) {
-                if (session.getTransaction().isActive()) {
-                    session.getTransaction().rollback();
+                if (HibernateUtil.getCurrentSession().getTransaction().isActive()) {
+                    HibernateUtil.getCurrentSession().getTransaction().rollback();
                 }
                 ex.printStackTrace();
             } finally {
-                if (session != null) {
-                    session.close();
+                if (HibernateUtil.getCurrentSession() != null) {
+                    HibernateUtil.getCurrentSession().close();
                 }
             }
         }
@@ -1288,23 +1344,26 @@ public class MoneyTracker {
     public List getAllUserOutlaysByUserAndYear(long user_id, String year) {
         List result;
         result = null;
-        User user = UserHelper.getById(this.session, user_id);
+        HibernateUtil.getCurrentSession().beginTransaction();
+        User user = UserHelper.getById(HibernateUtil.getCurrentSession(), user_id);
+        HibernateUtil.getCurrentSession().getTransaction().commit();
         if (user != null) {
             try {
-                session.beginTransaction();
-                result = UserOutlayHelper.getAllByUserAndYear(this.session, user, year);
+                HibernateUtil.getCurrentSession().beginTransaction();
+                result = UserOutlayHelper.getAllByUserAndYear(HibernateUtil.getCurrentSession(), user, year);
+                HibernateUtil.getCurrentSession().getTransaction().commit();
             } catch (HibernateException ex) {
-                if (session.getTransaction().isActive()) {
-                    session.getTransaction().rollback();
+                if (HibernateUtil.getCurrentSession().getTransaction().isActive()) {
+                    HibernateUtil.getCurrentSession().getTransaction().rollback();
                 }
                 ex.printStackTrace();
             } finally {
-                if (session != null) {
-                    session.close();
+                if (HibernateUtil.getCurrentSession() != null) {
+                    HibernateUtil.getCurrentSession().close();
                 }
             }
         }
-        //session.close();
+        //HibernateUtil.getCurrentSession().close();
         return result;
     }
 
@@ -1312,23 +1371,26 @@ public class MoneyTracker {
     public List getAllUserOutlaysByUserAndMounth(long user_id, String mounth) {
         List result;
         result = null;
-        User user = UserHelper.getById(this.session, user_id);
+        HibernateUtil.getCurrentSession().beginTransaction();
+        User user = UserHelper.getById(HibernateUtil.getCurrentSession(), user_id);
+        HibernateUtil.getCurrentSession().getTransaction().commit();
         if (user != null) {
             try {
-                session.beginTransaction();
-                result = UserOutlayHelper.getAllByUserAndMounth(this.session, user, mounth);
+                HibernateUtil.getCurrentSession().beginTransaction();
+                result = UserOutlayHelper.getAllByUserAndMounth(HibernateUtil.getCurrentSession(), user, mounth);
+                HibernateUtil.getCurrentSession().getTransaction().commit();
             } catch (HibernateException ex) {
-                if (session.getTransaction().isActive()) {
-                    session.getTransaction().rollback();
+                if (HibernateUtil.getCurrentSession().getTransaction().isActive()) {
+                    HibernateUtil.getCurrentSession().getTransaction().rollback();
                 }
                 ex.printStackTrace();
             } finally {
-                if (session != null) {
-                    session.close();
+                if (HibernateUtil.getCurrentSession() != null) {
+                    HibernateUtil.getCurrentSession().close();
                 }
             }
         }
-        //session.close();
+        //HibernateUtil.getCurrentSession().close();
         return result;
     }
 
@@ -1336,19 +1398,21 @@ public class MoneyTracker {
     public List getAllUserOutlaysByUserAndDay(long user_id, String day) {
         List result;
         result = null;
-        User user = UserHelper.getById(this.session, user_id);
+        HibernateUtil.getCurrentSession().beginTransaction();
+        User user = UserHelper.getById(HibernateUtil.getCurrentSession(), user_id);
+        HibernateUtil.getCurrentSession().getTransaction().commit();
         if (user != null) {
             try {
-                session.beginTransaction();
-                result = UserOutlayHelper.getAllByUserAndDay(this.session, user, day);
+                HibernateUtil.getCurrentSession().beginTransaction();
+                result = UserOutlayHelper.getAllByUserAndDay(HibernateUtil.getCurrentSession(), user, day);
             } catch (HibernateException ex) {
-                if (session.getTransaction().isActive()) {
-                    session.getTransaction().rollback();
+                if (HibernateUtil.getCurrentSession().getTransaction().isActive()) {
+                    HibernateUtil.getCurrentSession().getTransaction().rollback();
                 }
                 ex.printStackTrace();
             } finally {
-                if (session != null) {
-                    session.close();
+                if (HibernateUtil.getCurrentSession() != null) {
+                    HibernateUtil.getCurrentSession().close();
                 }
             }
         }
@@ -1359,19 +1423,21 @@ public class MoneyTracker {
     public List getAllUserOutlaysByUserAndHour(long user_id, String hour) {
         List result;
         result = null;
-        User user = UserHelper.getById(this.session, user_id);
+        HibernateUtil.getCurrentSession().beginTransaction();
+        User user = UserHelper.getById(HibernateUtil.getCurrentSession(), user_id);
+        HibernateUtil.getCurrentSession().getTransaction().commit();
         if (user != null) {
             try {
-                session.beginTransaction();
-                result = UserOutlayHelper.getAllUserAndByHour(this.session, user, hour);
+                HibernateUtil.getCurrentSession().beginTransaction();
+                result = UserOutlayHelper.getAllUserAndByHour(HibernateUtil.getCurrentSession(), user, hour);
             } catch (HibernateException ex) {
-                if (session.getTransaction().isActive()) {
-                    session.getTransaction().rollback();
+                if (HibernateUtil.getCurrentSession().getTransaction().isActive()) {
+                    HibernateUtil.getCurrentSession().getTransaction().rollback();
                 }
                 ex.printStackTrace();
             } finally {
-                if (session != null) {
-                    session.close();
+                if (HibernateUtil.getCurrentSession() != null) {
+                    HibernateUtil.getCurrentSession().close();
                 }
             }
         }
@@ -1382,19 +1448,21 @@ public class MoneyTracker {
     public List getAllUserOutlaysByUserAndMinute(long user_id, String minute) {
         List result;
         result = null;
-        User user = UserHelper.getById(this.session, user_id);
+        HibernateUtil.getCurrentSession().beginTransaction();
+        User user = UserHelper.getById(HibernateUtil.getCurrentSession(), user_id);
+        HibernateUtil.getCurrentSession().getTransaction().commit();
         if (user != null) {
             try {
-                session.beginTransaction();
-                result = UserOutlayHelper.getAllByUserAndMinute(this.session, user, minute);
+                HibernateUtil.getCurrentSession().beginTransaction();
+                result = UserOutlayHelper.getAllByUserAndMinute(HibernateUtil.getCurrentSession(), user, minute);
             } catch (HibernateException ex) {
-                if (session.getTransaction().isActive()) {
-                    session.getTransaction().rollback();
+                if (HibernateUtil.getCurrentSession().getTransaction().isActive()) {
+                    HibernateUtil.getCurrentSession().getTransaction().rollback();
                 }
                 ex.printStackTrace();
             } finally {
-                if (session != null) {
-                    session.close();
+                if (HibernateUtil.getCurrentSession() != null) {
+                    HibernateUtil.getCurrentSession().close();
                 }
             }
         }
@@ -1405,20 +1473,24 @@ public class MoneyTracker {
     public UserOutlay updateUserOutlayByAllParams(long id, long user_id, long product_id, int products_count, String datetime) {
         UserOutlay result;
         result = null;
-        User user = UserHelper.getById(this.session, user_id);
-        Product product = ProductHelper.getById(this.session, product_id);
+        HibernateUtil.getCurrentSession().beginTransaction();
+        User user = UserHelper.getById(HibernateUtil.getCurrentSession(), user_id);
+        HibernateUtil.getCurrentSession().getTransaction().commit();
+        HibernateUtil.getCurrentSession().beginTransaction();
+        Product product = ProductHelper.getById(HibernateUtil.getCurrentSession(), product_id);
+        HibernateUtil.getCurrentSession().getTransaction().commit();
         if (user != null && product != null) {
             try {
-                session.beginTransaction();
-                result = UserOutlayHelper.changeByAllParams(this.session, id, user, product, products_count, datetime);
+                HibernateUtil.getCurrentSession().beginTransaction();
+                result = UserOutlayHelper.changeByAllParams(HibernateUtil.getCurrentSession(), id, user, product, products_count, datetime);
             } catch (HibernateException ex) {
-                if (session.getTransaction().isActive()) {
-                    session.getTransaction().rollback();
+                if (HibernateUtil.getCurrentSession().getTransaction().isActive()) {
+                    HibernateUtil.getCurrentSession().getTransaction().rollback();
                 }
                 ex.printStackTrace();
             } finally {
-                if (session != null) {
-                    session.close();
+                if (HibernateUtil.getCurrentSession() != null) {
+                    HibernateUtil.getCurrentSession().close();
                 }
             }
         }
@@ -1429,19 +1501,21 @@ public class MoneyTracker {
     public UserOutlay updateUserOutlayProductById(long id, long product_id) {
         UserOutlay result;
         result = null;
-        Product product = ProductHelper.getById(this.session, product_id);
+        HibernateUtil.getCurrentSession().beginTransaction();
+        Product product = ProductHelper.getById(HibernateUtil.getCurrentSession(), product_id);
+        HibernateUtil.getCurrentSession().getTransaction().commit();
         if (product != null) {
             try {
-                session.beginTransaction();
-                result = UserOutlayHelper.changeProductById(this.session, id, product);
+                HibernateUtil.getCurrentSession().beginTransaction();
+                result = UserOutlayHelper.changeProductById(HibernateUtil.getCurrentSession(), id, product);
             } catch (HibernateException ex) {
-                if (session.getTransaction().isActive()) {
-                    session.getTransaction().rollback();
+                if (HibernateUtil.getCurrentSession().getTransaction().isActive()) {
+                    HibernateUtil.getCurrentSession().getTransaction().rollback();
                 }
                 ex.printStackTrace();
             } finally {
-                if (session != null) {
-                    session.close();
+                if (HibernateUtil.getCurrentSession() != null) {
+                    HibernateUtil.getCurrentSession().close();
                 }
             }
         }
@@ -1453,16 +1527,16 @@ public class MoneyTracker {
         UserOutlay result;
         result = null;
         try {
-            session.beginTransaction();
-            result = UserOutlayHelper.changeProductCountById(this.session, id, product_count);
+            HibernateUtil.getCurrentSession().beginTransaction();
+            result = UserOutlayHelper.changeProductCountById(HibernateUtil.getCurrentSession(), id, product_count);
         } catch (HibernateException ex) {
-            if (session.getTransaction().isActive()) {
-                session.getTransaction().rollback();
+            if (HibernateUtil.getCurrentSession().getTransaction().isActive()) {
+                HibernateUtil.getCurrentSession().getTransaction().rollback();
             }
             ex.printStackTrace();
         } finally {
-            if (session != null) {
-                session.close();
+            if (HibernateUtil.getCurrentSession() != null) {
+                HibernateUtil.getCurrentSession().close();
             }
         }
         return result;
@@ -1472,22 +1546,25 @@ public class MoneyTracker {
     public double getOverralUserOutlaySumByUser(long user_id) {
         double result;
         result = Double.MIN_VALUE;
-        User user = UserHelper.getById(this.session, user_id);
+        HibernateUtil.getCurrentSession().beginTransaction();
+        User user = UserHelper.getById(HibernateUtil.getCurrentSession(), user_id);
+        HibernateUtil.getCurrentSession().getTransaction().commit();
         if (user != null) {
             try {
-                session.beginTransaction();
-                result = UserOutlayHelper.getOverralSumByUser(this.session, user);
+                HibernateUtil.getCurrentSession().beginTransaction();
+                result = UserOutlayHelper.getOverralSumByUser(HibernateUtil.getCurrentSession(), user);
+                HibernateUtil.getCurrentSession().getTransaction().commit();
             } catch (HibernateException es) {
-                if (session.getTransaction().isActive()) {
-                    session.getTransaction().rollback();
+                if (HibernateUtil.getCurrentSession().getTransaction().isActive()) {
+                    HibernateUtil.getCurrentSession().getTransaction().rollback();
                 }
             } finally {
-                if (session != null) {
-                    session.close();
+                if (HibernateUtil.getCurrentSession() != null) {
+                    HibernateUtil.getCurrentSession().close();
                 }
             }
         }
-        //session.close();
+        //HibernateUtil.getCurrentSession().close();
         return result;
     }
 
@@ -1495,18 +1572,20 @@ public class MoneyTracker {
     public double getOverralUserOutlaySumByUserAndYear(long user_id, String year) {
         double result;
         result = Double.MIN_VALUE;
-        User user = UserHelper.getById(this.session, user_id);
+        HibernateUtil.getCurrentSession().beginTransaction();
+        User user = UserHelper.getById(HibernateUtil.getCurrentSession(), user_id);
+        HibernateUtil.getCurrentSession().getTransaction().commit();
         if (user != null) {
             try {
-                session.beginTransaction();
-                result = UserOutlayHelper.getOverralSumByUserAndYear(this.session, user, year);
+                HibernateUtil.getCurrentSession().beginTransaction();
+                result = UserOutlayHelper.getOverralSumByUserAndYear(HibernateUtil.getCurrentSession(), user, year);
             } catch (HibernateException es) {
-                if (session.getTransaction().isActive()) {
-                    session.getTransaction().rollback();
+                if (HibernateUtil.getCurrentSession().getTransaction().isActive()) {
+                    HibernateUtil.getCurrentSession().getTransaction().rollback();
                 }
             } finally {
-                if (session != null) {
-                    session.close();
+                if (HibernateUtil.getCurrentSession() != null) {
+                    HibernateUtil.getCurrentSession().close();
                 }
             }
         }
@@ -1517,18 +1596,20 @@ public class MoneyTracker {
     public double getOverralUserOutlaySumByUserAndMounth(long user_id, String mounth) {
         double result;
         result = Double.MIN_VALUE;
-        User user = UserHelper.getById(this.session, user_id);
+        HibernateUtil.getCurrentSession().beginTransaction();
+        User user = UserHelper.getById(HibernateUtil.getCurrentSession(), user_id);
+        HibernateUtil.getCurrentSession().getTransaction().commit();
         if (user != null) {
             try {
-                session.beginTransaction();
-                result = UserOutlayHelper.getOverralSumByUserAndMounth(this.session, user, mounth);
+                HibernateUtil.getCurrentSession().beginTransaction();
+                result = UserOutlayHelper.getOverralSumByUserAndMounth(HibernateUtil.getCurrentSession(), user, mounth);
             } catch (HibernateException es) {
-                if (session.getTransaction().isActive()) {
-                    session.getTransaction().rollback();
+                if (HibernateUtil.getCurrentSession().getTransaction().isActive()) {
+                    HibernateUtil.getCurrentSession().getTransaction().rollback();
                 }
             } finally {
-                if (session != null) {
-                    session.close();
+                if (HibernateUtil.getCurrentSession() != null) {
+                    HibernateUtil.getCurrentSession().close();
                 }
             }
         }
@@ -1539,18 +1620,20 @@ public class MoneyTracker {
     public double getOverralUserOutlaySumByUserAndDay(long user_id, String day) {
         double result;
         result = Double.MIN_VALUE;
-        User user = UserHelper.getById(this.session, user_id);
+        HibernateUtil.getCurrentSession().beginTransaction();
+        User user = UserHelper.getById(HibernateUtil.getCurrentSession(), user_id);
+        HibernateUtil.getCurrentSession().getTransaction().commit();
         if (user != null) {
             try {
-                session.beginTransaction();
-                result = UserOutlayHelper.getOverralSumByUserAndMounth(this.session, user, day);
+                HibernateUtil.getCurrentSession().beginTransaction();
+                result = UserOutlayHelper.getOverralSumByUserAndMounth(HibernateUtil.getCurrentSession(), user, day);
             } catch (HibernateException es) {
-                if (session.getTransaction().isActive()) {
-                    session.getTransaction().rollback();
+                if (HibernateUtil.getCurrentSession().getTransaction().isActive()) {
+                    HibernateUtil.getCurrentSession().getTransaction().rollback();
                 }
             } finally {
-                if (session != null) {
-                    session.close();
+                if (HibernateUtil.getCurrentSession() != null) {
+                    HibernateUtil.getCurrentSession().close();
                 }
             }
         }
@@ -1561,19 +1644,23 @@ public class MoneyTracker {
     public double getOverralUserOutlaySumByUserAndProduct(long user_id, long product_id) {
         double result;
         result = Double.MIN_VALUE;
-        User user = UserHelper.getById(this.session, user_id);
-        Product product = ProductHelper.getById(this.session, product_id);
+        HibernateUtil.getCurrentSession().beginTransaction();
+        User user = UserHelper.getById(HibernateUtil.getCurrentSession(), user_id);
+        HibernateUtil.getCurrentSession().getTransaction().commit();
+        HibernateUtil.getCurrentSession().beginTransaction();
+        Product product = ProductHelper.getById(HibernateUtil.getCurrentSession(), product_id);
+        HibernateUtil.getCurrentSession().getTransaction().commit();
         if (user != null && product != null) {
             try {
-                session.beginTransaction();
-                result = UserOutlayHelper.getOverralSumByUserAndProduct(this.session, user, product);
+                HibernateUtil.getCurrentSession().beginTransaction();
+                result = UserOutlayHelper.getOverralSumByUserAndProduct(HibernateUtil.getCurrentSession(), user, product);
             } catch (HibernateException es) {
-                if (session.getTransaction().isActive()) {
-                    session.getTransaction().rollback();
+                if (HibernateUtil.getCurrentSession().getTransaction().isActive()) {
+                    HibernateUtil.getCurrentSession().getTransaction().rollback();
                 }
             } finally {
-                if (session != null) {
-                    session.close();
+                if (HibernateUtil.getCurrentSession() != null) {
+                    HibernateUtil.getCurrentSession().close();
                 }
             }
         }
@@ -1587,19 +1674,21 @@ public class MoneyTracker {
     public UserBudget createNewUserBudget(long owner_id, String name, String description, double amount) {
         UserBudget result;
         result = null;
-        User user = UserHelper.getById(this.session, owner_id);
+        HibernateUtil.getCurrentSession().beginTransaction();
+        User user = UserHelper.getById(HibernateUtil.getCurrentSession(), owner_id);
+        HibernateUtil.getCurrentSession().getTransaction().commit();
         if (user != null) {
             try {
-                session.beginTransaction();
-                result = UserBudgetHelper.createIfNotExists(this.session, user, name, description, amount);
+                HibernateUtil.getCurrentSession().beginTransaction();
+                result = UserBudgetHelper.createIfNotExists(HibernateUtil.getCurrentSession(), user, name, description, amount);
             } catch (HibernateException ex) {
-                if (session.getTransaction().isActive()) {
-                    session.getTransaction().rollback();
+                if (HibernateUtil.getCurrentSession().getTransaction().isActive()) {
+                    HibernateUtil.getCurrentSession().getTransaction().rollback();
                 }
                 ex.printStackTrace();
             } finally {
-                if (session != null) {
-                    session.close();
+                if (HibernateUtil.getCurrentSession() != null) {
+                    HibernateUtil.getCurrentSession().close();
                 }
             }
         }
@@ -1610,19 +1699,21 @@ public class MoneyTracker {
     public UserBudget getUserBudgetByAllParams(long id, long owner_id, String name, String description, double amount) {
         UserBudget result;
         result = null;
-        User owner = UserHelper.getById(this.session, owner_id);
+        HibernateUtil.getCurrentSession().beginTransaction();
+        User owner = UserHelper.getById(HibernateUtil.getCurrentSession(), owner_id);
+        HibernateUtil.getCurrentSession().getTransaction().commit();
         if (owner != null) {
             try {
-                session.beginTransaction();
-                result = UserBudgetHelper.getByAllParameters(this.session, id, owner, name, description, amount);
+                HibernateUtil.getCurrentSession().beginTransaction();
+                result = UserBudgetHelper.getByAllParameters(HibernateUtil.getCurrentSession(), id, owner, name, description, amount);
             } catch (HibernateException ex) {
-                if (session.getTransaction().isActive()) {
-                    session.getTransaction().rollback();
+                if (HibernateUtil.getCurrentSession().getTransaction().isActive()) {
+                    HibernateUtil.getCurrentSession().getTransaction().rollback();
                 }
                 ex.printStackTrace();
             } finally {
-                if (session != null) {
-                    session.close();
+                if (HibernateUtil.getCurrentSession() != null) {
+                    HibernateUtil.getCurrentSession().close();
                 }
             }
         }
@@ -1633,19 +1724,21 @@ public class MoneyTracker {
     public List getAllUserBudgetsByOwner(long owner_id) {
         List result;
         result = null;
-        User owner = UserHelper.getById(this.session, owner_id);
+        HibernateUtil.getCurrentSession().beginTransaction();
+        User owner = UserHelper.getById(HibernateUtil.getCurrentSession(), owner_id);
+        HibernateUtil.getCurrentSession().getTransaction().commit();
         if (owner != null) {
             try {
-                session.beginTransaction();
-                result = UserBudgetHelper.getAllByOwner(this.session, owner);
+                HibernateUtil.getCurrentSession().beginTransaction();
+                result = UserBudgetHelper.getAllByOwner(HibernateUtil.getCurrentSession(), owner);
             } catch (HibernateException ex) {
-                if (session.getTransaction().isActive()) {
-                    session.getTransaction().rollback();
+                if (HibernateUtil.getCurrentSession().getTransaction().isActive()) {
+                    HibernateUtil.getCurrentSession().getTransaction().rollback();
                 }
                 ex.printStackTrace();
             } finally {
-                if (session != null) {
-                    session.close();
+                if (HibernateUtil.getCurrentSession() != null) {
+                    HibernateUtil.getCurrentSession().close();
                 }
             }
         }
@@ -1657,16 +1750,16 @@ public class MoneyTracker {
         UserBudget result;
         result = null;
         try {
-            session.beginTransaction();
-            result = UserBudgetHelper.getById(this.session, id);
+            HibernateUtil.getCurrentSession().beginTransaction();
+            result = UserBudgetHelper.getById(HibernateUtil.getCurrentSession(), id);
         } catch (HibernateException ex) {
-            if (session.getTransaction().isActive()) {
-                session.getTransaction().rollback();
+            if (HibernateUtil.getCurrentSession().getTransaction().isActive()) {
+                HibernateUtil.getCurrentSession().getTransaction().rollback();
             }
             ex.printStackTrace();
         } finally {
-            if (session != null) {
-                session.close();
+            if (HibernateUtil.getCurrentSession() != null) {
+                HibernateUtil.getCurrentSession().close();
             }
         }
         return result;
@@ -1676,18 +1769,20 @@ public class MoneyTracker {
     public UserBudget getUserBudgetByOwnerAndName(long owner_id, String name) {
         UserBudget result;
         result = null;
-        User owner = UserHelper.getById(this.session, owner_id);
+        HibernateUtil.getCurrentSession().beginTransaction();
+        User owner = UserHelper.getById(HibernateUtil.getCurrentSession(), owner_id);
+        HibernateUtil.getCurrentSession().getTransaction().commit();
         if (owner != null) {
             try {
-                session.beginTransaction();
-                result = UserBudgetHelper.getByUserAndName(this.session, owner, name);
+                HibernateUtil.getCurrentSession().beginTransaction();
+                result = UserBudgetHelper.getByUserAndName(HibernateUtil.getCurrentSession(), owner, name);
             } catch (HibernateException ex) {
-                if (session.getTransaction().isActive()) {
-                    session.getTransaction().rollback();
+                if (HibernateUtil.getCurrentSession().getTransaction().isActive()) {
+                    HibernateUtil.getCurrentSession().getTransaction().rollback();
                 }
             } finally {
-                if (session != null) {
-                    session.close();
+                if (HibernateUtil.getCurrentSession() != null) {
+                    HibernateUtil.getCurrentSession().close();
                 }
             }
         }
@@ -1699,16 +1794,16 @@ public class MoneyTracker {
         List result;
         result = null;
         try {
-            session.beginTransaction();
-            result = UserBudgetHelper.getAllByDescription(this.session, description);
+            HibernateUtil.getCurrentSession().beginTransaction();
+            result = UserBudgetHelper.getAllByDescription(HibernateUtil.getCurrentSession(), description);
         } catch (HibernateException ex) {
-            if (session.getTransaction().isActive()) {
-                session.getTransaction().rollback();
+            if (HibernateUtil.getCurrentSession().getTransaction().isActive()) {
+                HibernateUtil.getCurrentSession().getTransaction().rollback();
             }
             ex.printStackTrace();
         } finally {
-            if (session != null) {
-                session.close();
+            if (HibernateUtil.getCurrentSession() != null) {
+                HibernateUtil.getCurrentSession().close();
             }
         }
         return result;
@@ -1718,19 +1813,21 @@ public class MoneyTracker {
     public UserBudget updateUserBudgetAmount(long owner_id, String name) {
         UserBudget result;
         result = null;
-        User owner = UserHelper.getById(this.session, owner_id);
+        HibernateUtil.getCurrentSession().beginTransaction();
+        User owner = UserHelper.getById(HibernateUtil.getCurrentSession(), owner_id);
+        HibernateUtil.getCurrentSession().getTransaction().commit();
         if (owner != null) {
             try {
-                session.beginTransaction();
-                result = UserBudgetHelper.updateOwnerAmount(this.session, owner, name);
+                HibernateUtil.getCurrentSession().beginTransaction();
+                result = UserBudgetHelper.updateOwnerAmount(HibernateUtil.getCurrentSession(), owner, name);
             } catch (HibernateException ex) {
-                if (session.getTransaction().isActive()) {
-                    session.getTransaction().rollback();
+                if (HibernateUtil.getCurrentSession().getTransaction().isActive()) {
+                    HibernateUtil.getCurrentSession().getTransaction().rollback();
                 }
                 ex.printStackTrace();
             } finally {
-                if (session != null) {
-                    session.close();
+                if (HibernateUtil.getCurrentSession() != null) {
+                    HibernateUtil.getCurrentSession().close();
                 }
             }
         }
@@ -1741,22 +1838,25 @@ public class MoneyTracker {
     public double getOverralUserBudgetSumByOwner(long owner_id) {
         double result;
         result = Double.MIN_VALUE;
-        User owner = UserHelper.getById(this.session, owner_id);
+        HibernateUtil.getCurrentSession().beginTransaction();
+        User owner = UserHelper.getById(HibernateUtil.getCurrentSession(), owner_id);
+        HibernateUtil.getCurrentSession().getTransaction().commit();
         if (owner != null) {
             try {
-                session.beginTransaction();
-                result = UserBudgetHelper.getOverralSumByOwner(this.session, owner);
+                HibernateUtil.getCurrentSession().beginTransaction();
+                result = UserBudgetHelper.getOverralSumByOwner(HibernateUtil.getCurrentSession(), owner);
+                HibernateUtil.getCurrentSession().getTransaction().commit();
             } catch (HibernateException ex) {
-                if (session.getTransaction().isActive()) {
-                    session.getTransaction().rollback();
+                if (HibernateUtil.getCurrentSession().getTransaction().isActive()) {
+                    HibernateUtil.getCurrentSession().getTransaction().rollback();
                 }
             } finally {
-                if (session != null) {
-                    session.close();
+                if (HibernateUtil.getCurrentSession() != null) {
+                    HibernateUtil.getCurrentSession().close();
                 }
             }
         }
-        //session.close();
+        //HibernateUtil.getCurrentSession().close();
         return result;
     }
 
@@ -1765,12 +1865,18 @@ public class MoneyTracker {
     public Set getProductsCountUsedByUser(long user_id) {
         Set result;
         result = null;
-        User user = UserHelper.getById(this.session, user_id);
+        HibernateUtil.getCurrentSession().beginTransaction();
+        User user = UserHelper.getById(HibernateUtil.getCurrentSession(), user_id);
+        HibernateUtil.getCurrentSession().getTransaction().commit();
         if (user != null) {
             try {
-                session.beginTransaction();
-                List tempOutlays = UserOutlayHelper.getAllByUser(this.session, user);
-                List tempIncomes = UserIncomeHelper.getAllByUser(this.session, user);
+                HibernateUtil.getCurrentSession().beginTransaction();
+                List tempOutlays = UserOutlayHelper.getAllByUser(HibernateUtil.getCurrentSession(), user);
+                HibernateUtil.getCurrentSession().getTransaction().commit();
+                
+                HibernateUtil.getCurrentSession().beginTransaction();
+                List tempIncomes = UserIncomeHelper.getAllByUser(HibernateUtil.getCurrentSession(), user);
+                HibernateUtil.getCurrentSession().getTransaction().commit();
 
                 List outlaysIdList = new ArrayList();
                 List incomesIdList = new ArrayList();
@@ -1792,36 +1898,26 @@ public class MoneyTracker {
                     result = new HashSet(outlaysIdList);
                     result.addAll(incomesIdList);
                 }
+                HibernateUtil.getCurrentSession().getTransaction().commit();
             } catch (HibernateException ex) {
-                if (session.getTransaction().isActive()) {
-                    session.getTransaction().rollback();
+                if (HibernateUtil.getCurrentSession().getTransaction().isActive()) {
+                    HibernateUtil.getCurrentSession().getTransaction().rollback();
                 }
             } finally {
-                if (session != null) {
-                    session.close();
+                if (HibernateUtil.getCurrentSession() != null) {
+                    HibernateUtil.getCurrentSession().close();
                 }
             }
         }
-        //session.close();
+        //HibernateUtil.getCurrentSession().close();
         return result;
     }
 
-    @WebMethod(operationName = "Hello")
-    public void Hello() {
-        try {
-            this.sessionFactory = new AnnotationConfiguration().configure().buildSessionFactory();
-            this.session = sessionFactory.openSession();
-            this.val = new Validator();
-        } catch (Throwable ex) {
-            throw new ExceptionInInitializerError(ex);
-        }
-    }
-
-    // ?
+ 
     @WebMethod(operationName = "Goodbye")
     public String Goodbye() {
-        //this.session.getTransaction().commit();
-        this.session.close();
+        //HibernateUtil.getCurrentSession().getTransaction().commit();
+        HibernateUtil.getCurrentSession().close();
         return "Goodbye";
     }
 }

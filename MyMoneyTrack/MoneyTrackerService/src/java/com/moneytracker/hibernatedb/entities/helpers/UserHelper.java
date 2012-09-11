@@ -21,6 +21,24 @@ import java.io.IOException;
 import org.ini4j.InvalidFileFormatException;
 import com.moneytracker.utils.RegErrorException;
 import org.hibernate.loader.custom.Return;
+import org.hibernate.validator.internal.util.logging.Log_$logger;
+import org.hibernate.Criteria;
+import org.hibernate.Session;
+import org.hibernate.criterion.Restrictions;
+import com.moneytracker.utils.LoginErrorException;
+import com.moneytracker.utils.Validator;
+import java.io.IOException;
+import org.ini4j.InvalidFileFormatException;
+import com.moneytracker.utils.RegErrorException;
+import org.hibernate.Criteria;
+import org.hibernate.Session;
+import org.hibernate.criterion.Restrictions;
+import com.moneytracker.utils.LoginErrorException;
+import com.moneytracker.utils.Validator;
+import java.io.IOException;
+import org.ini4j.InvalidFileFormatException;
+import com.moneytracker.utils.RegErrorException;
+import org.hibernate.loader.custom.Return;
 
 
 
@@ -130,6 +148,8 @@ public class UserHelper {
             throw new IllegalArgumentException("session is null");
         }
 
+        System.out.println("current tx : = "+session.getTransaction().isActive());
+        
         Criteria criteria = session.createCriteria(User.class);
         criteria.add(Restrictions.eq("id", id));
         criteria.setMaxResults(1);
