@@ -40,23 +40,6 @@ import org.ini4j.InvalidFileFormatException;
 @WebService()
 public class MoneyTracker {
 
-//    public static final Log logger = LogFactory.getLog(MoneyTracker.class);
-//    private Session HibernateUtil.getCurrentSession();
-//    private SessionFactory HibernateUtil.getCurrentSession()Factory;
-//    private Validator val;
-//
-//   public MoneyTracker() throws InvalidFileFormatException, IOException {
-//        super();
-//        try {
-//            HibernateUtil.getCurrentSession()Factory = new AnnotationConfiguration().configure().buildSessionFactory();
-//            HibernateUtil.getCurrentSession() = HibernateUtil.getCurrentSession()Factory.openSession();
-//           this.val = new Validator();
-//        } catch (Throwable ex) {
-//           throw new ExceptionInInitializerError(ex);
-//       }
-//   }
-    
-
     // Веб-методы для сущности User
     /*----------------------------------------------------------------------------------------------------------------------------------------------*/
     @WebMethod(operationName = "registerUser")
@@ -1873,7 +1856,7 @@ public class MoneyTracker {
                 HibernateUtil.getCurrentSession().beginTransaction();
                 List tempOutlays = UserOutlayHelper.getAllByUser(HibernateUtil.getCurrentSession(), user);
                 HibernateUtil.getCurrentSession().getTransaction().commit();
-                
+
                 HibernateUtil.getCurrentSession().beginTransaction();
                 List tempIncomes = UserIncomeHelper.getAllByUser(HibernateUtil.getCurrentSession(), user);
                 HibernateUtil.getCurrentSession().getTransaction().commit();
@@ -1913,7 +1896,6 @@ public class MoneyTracker {
         return result;
     }
 
- 
     @WebMethod(operationName = "Goodbye")
     public String Goodbye() {
         //HibernateUtil.getCurrentSession().getTransaction().commit();
