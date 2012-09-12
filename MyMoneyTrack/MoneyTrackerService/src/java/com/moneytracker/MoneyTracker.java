@@ -206,6 +206,26 @@ public class MoneyTracker {
         return result;
     }
 
+    @WebMethod(operationName = "getAllProducts")
+    public List getAllProducts() {
+        List result;
+        result = null;
+        try {
+            HibernateUtil.getCurrentSession().beginTransaction();
+            result = ProductHelper.getAll(HibernateUtil.getCurrentSession());
+            HibernateUtil.getCurrentSession().getTransaction().commit();
+        } catch (HibernateException ex) {
+            if (HibernateUtil.getCurrentSession().getTransaction().isActive()) {
+                HibernateUtil.getCurrentSession().getTransaction().rollback();
+            }
+        } finally {
+            if (HibernateUtil.getCurrentSession() != null) {
+                HibernateUtil.getCurrentSession().close();
+            }
+        }
+        return result;
+    }
+
     @WebMethod(operationName = "getProductByName")
     public Product getProductByName(String name) {
         Product result;

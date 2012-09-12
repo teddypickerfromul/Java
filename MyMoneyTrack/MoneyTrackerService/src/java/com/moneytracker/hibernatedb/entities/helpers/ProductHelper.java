@@ -30,6 +30,18 @@ public class ProductHelper {
         return result;
     }
 
+    //TODO: убрать зависимость от названия сущности
+    public static List getAll(Session session) {
+        if (session == null) {
+            throw new IllegalArgumentException("session is null");
+        }
+
+        List result;
+        result = session.createQuery("FROM Product").list();
+
+        return result;
+    }
+
     public static Product getByName(Session session, String name) {
         if (session == null) {
             throw new IllegalArgumentException("session is null");
