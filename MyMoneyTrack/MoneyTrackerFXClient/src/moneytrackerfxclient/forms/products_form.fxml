@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.net.*?>
+<?import java.util.*?>
+<?import javafx.scene.chart.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.paint.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" styleClass="mainFxmlClass" xmlns:fx="http://javafx.com/fxml" fx:controller="moneytrackerfxclient.forms.controllers.Products_formController">
+    <children>
+        <AnchorPane fx:id="title_pane" prefHeight="25.0" prefWidth="1024.0" styleClass="title_pane">
+            <children>
+                <Button fx:id="exit_button" layoutX="946.0" mnemonicParsing="false" onAction="#exit" prefHeight="24.0" prefWidth="78.0" styleClass="exit_button" text="Выйти" />
+                <Label fx:id="greetings_id" layoutX="15.0" layoutY="4.5" styleClass="greetings_label" text="Привет," />
+                <Label fx:id="UserName" layoutX="75.0" layoutY="4.5" styleClass="username_label" />
+            </children>
+        </AnchorPane>
+        <AnchorPane fx:id="navigation_panel" layoutY="25.0" prefHeight="783.0" prefWidth="210.00009999999747" styleClass="navigation_panel">
+            <children>
+                <Button fx:id="to_main_button" onAction="#gotoStatsForm" layoutY="217.0" mnemonicParsing="false" prefHeight="54.0" prefWidth="211.0" text="Главное" />
+                <Button fx:id="to_goodies_button" layoutY="271.0" mnemonicParsing="false" prefHeight="54.0" prefWidth="211.0" text="Товары" />
+                <Button fx:id="to_outlays_button" layoutY="325.0" mnemonicParsing="false" prefHeight="54.0" prefWidth="211.0" text="Мои расходы" />
+                <Button fx:id="to_incomes_button" layoutY="379.0" mnemonicParsing="false" prefHeight="54.0" prefWidth="211.0" text="Мои доходы" />
+                <Button fx:id="to_budget_button" layoutY="433.0" mnemonicParsing="false" prefHeight="54.0" prefWidth="211.0" text="Отчёты" />
+                <ImageView fx:id="logo" fitHeight="143.99990000000253" fitWidth="143.99990000000253" layoutX="29.0" layoutY="38.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@logo.png" preserveRatio="false" smooth="false" />
+                    </image>
+                </ImageView>
+                <Button fx:id="update_button" styleClass="update_button" layoutX="57.0" layoutY="674.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="87.0" text="Обновить" />
+            </children>
+        </AnchorPane>
+        <AnchorPane fx:id="content_pane" styleClass="content_pane" layoutX="210.0" layoutY="25.0" prefHeight="775.0" prefWidth="814.0">
+            <children>
+                <TableView fx:id="products_table" editable="true" layoutX="56.0" layoutY="38.0" prefHeight="480.0" prefWidth="711.0">
+                    <columns>
+                        <TableColumn prefWidth="75.0" text="Наименование товара" fx:id="products_table_name" />
+                        <TableColumn prefWidth="75.0" text="Краткое описание" fx:id="products_table_desc" />
+                        <TableColumn prefWidth="75.0" text="Стоимость за условную единицу, р." fx:id="products_table_cost" />
+                    </columns>
+                </TableView>
+            </children>
+        </AnchorPane>
+    </children>
+    <stylesheets>
+        <URL value="@products_form.css"/>
+    </stylesheets>
+</AnchorPane>
+
+

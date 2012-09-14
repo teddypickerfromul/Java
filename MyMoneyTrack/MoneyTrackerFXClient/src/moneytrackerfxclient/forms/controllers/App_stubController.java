@@ -154,6 +154,11 @@ public class App_stubController implements Initializable {
         ov_last_mounth.setText(Integer.toString(this.CurrentUserMounthOperations));
     }
 
+    @FXML
+    protected void gotoProductsForm() {
+        MoneyTrackerFXClient.getInstance().gotoProductsForm();
+    }
+
     protected void updateOverralDataStatus() {
         getCurrentUserBudgetsAmount();
         getCurrentUserIncomesAmount();

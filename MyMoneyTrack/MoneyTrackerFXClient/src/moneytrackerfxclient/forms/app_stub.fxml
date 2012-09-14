@@ -22,7 +22,7 @@
         <AnchorPane fx:id="navigation_panel" layoutY="25.0" prefHeight="783.0" prefWidth="210.00009999999747" styleClass="navigation_panel">
             <children>
                 <Button fx:id="to_main_button" layoutY="217.0" mnemonicParsing="false" prefHeight="54.0" prefWidth="211.0" text="Главное" />
-                <Button fx:id="to_goodies_button" layoutY="271.0" mnemonicParsing="false" prefHeight="54.0" prefWidth="211.0" text="Товары" />
+                <Button fx:id="to_goodies_button" onAction="#gotoProductsForm" layoutY="271.0" mnemonicParsing="false" prefHeight="54.0" prefWidth="211.0" text="Товары" />
                 <Button fx:id="to_outlays_button" layoutY="325.0" mnemonicParsing="false" prefHeight="54.0" prefWidth="211.0" text="Мои расходы" />
                 <Button fx:id="to_incomes_button" layoutY="379.0" mnemonicParsing="false" prefHeight="54.0" prefWidth="211.0" text="Мои доходы" />
                 <Button fx:id="to_budget_button" layoutY="433.0" mnemonicParsing="false" prefHeight="54.0" prefWidth="211.0" text="Отчёты" />

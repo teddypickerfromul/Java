@@ -9,6 +9,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.JavaFXBuilderFactory;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import moneytrackerconsoleclient.*;
 import moneytrackerconsoleclient.methods.*;
@@ -84,7 +85,24 @@ public class MoneyTrackerFXClient extends Application {
 
     public void gotoLoginForm() {
         try {
+            getStage().setTitle("MoneyTracker");
+            stage.getIcons().add(new Image("moneytrackerfxclient/forms/logo_icon.png"));
             replaceSceneContent("forms/login_form.fxml");
+        } catch (Exception ex) {
+            Logger.getLogger(MoneyTrackerFXClient.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    public void gotoProductsForm() {
+        try {
+            getStage().setTitle("MoneyTracker::Товары");
+            replaceSceneContent("forms/products_form.fxml");
+            getStage().setWidth(1024.0);
+            getStage().setHeight(800.0);
+            //TODO: вынести в AppSettings
+            GraphicsDevice gd = GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice();
+            getStage().setX(gd.getDisplayMode().getWidth() / 2 - getStage().getWidth() / 2);
+            getStage().setY(gd.getDisplayMode().getHeight() / 2 - getStage().getHeight() / 2);
         } catch (Exception ex) {
             Logger.getLogger(MoneyTrackerFXClient.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -123,6 +141,7 @@ public class MoneyTrackerFXClient extends Application {
 
     public void gotoRegistrationForm() {
         try {
+            getStage().setTitle("MoneyTracker::Регистрация");
             replaceSceneContent("forms/reg_form.fxml");
         } catch (Exception ex) {
             Logger.getLogger(MoneyTrackerFXClient.class.getName()).log(Level.SEVERE, null, ex);
@@ -131,6 +150,7 @@ public class MoneyTrackerFXClient extends Application {
 
     public void gotoFailForm() {
         try {
+            getStage().setTitle("MoneyTracker::Ошибка");
             replaceSceneContent("forms/err_form.fxml");
         } catch (Exception ex) {
             Logger.getLogger(MoneyTrackerFXClient.class.getName()).log(Level.SEVERE, null, ex);
@@ -139,7 +159,7 @@ public class MoneyTrackerFXClient extends Application {
 
     public void gotoAppForm() {
         try {
-
+            getStage().setTitle("MoneyTracker::Статистика");
             replaceSceneContent("forms/app_stub.fxml");
             getStage().setWidth(1024.0);
             getStage().setHeight(800.0);
