@@ -1,6 +1,7 @@
 package moneytrackerfxclient.forms.controllers;
 
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Observable;
@@ -20,7 +21,7 @@ import moneytrackerconsoleclient.methods.Product;
 import moneytrackerfxclient.MoneyTrackerFXClient;
 
 public class Products_formController implements Initializable {
-
+    
     @FXML
     private AnchorPane content_pane;
     @FXML
@@ -28,67 +29,67 @@ public class Products_formController implements Initializable {
     @FXML
     private TableView products_table;
     @FXML
-    private TableColumn /*<Product, String>*/ products_table_name;
+    private TableColumn products_table_name;
     @FXML
-    private TableColumn /*<Product, String>*/ products_table_desc;
+    private TableColumn products_table_desc;
     @FXML
-    private TableColumn /*<Product, Double>*/ products_table_cost;
+    private TableColumn products_table_cost;
+    private List<Product> ls = new ArrayList<Product>() {
+    };
+    private final ObservableList<Product> data = FXCollections.observableArrayList();
     
-    private ObservableList productsList;
-
-    public void getProductsList() {
-        this.productsList = FXCollections.observableList(MoneyTrackerFXClient.getInstance().getClientController().getClientPort().getAllProducts());
-    }
-    
-    public void setProductsTableCellFactories(){
-        products_table_name.setCellFactory(new PropertyValueFactory<Product, String>("name"));
-        products_table_desc.setCellFactory(new PropertyValueFactory<Product, String>("description"));
-        products_table_cost.setCellFactory(new PropertyValueFactory<Product, Double>("cost"));
-    }
-
-    protected void fillProductsTable() {
-        getProductsList();
-        
-        products_table.setItems(this.productsList);
-        setProductsTableCellFactories();
-
-        printList();
-
-    }
-
-    private void printList() {
-        for (Iterator it = this.productsList.iterator(); it.hasNext();) {
-            Product item = (Product) it.next();
-            System.out.println(" :" + item.getName() + " : " + item.getDescription() + " : " + item.getCost());
+    public void updateProductsList() {
+        ls = MoneyTrackerFXClient.getInstance().getClientController().getClientPort().getAllProducts();
+        Iterator it = ls.iterator();
+        while (it.hasNext()) {
+            data.add((Product) it.next());
         }
     }
-
+    
+    public void setProductsTableCellFactories() {
+        products_table_name.setCellValueFactory(new PropertyValueFactory<Product, String>("name"));
+        products_table_desc.setCellValueFactory(new PropertyValueFactory<Product, String>("description"));
+        products_table_cost.setCellValueFactory(new PropertyValueFactory<Product, Double>("cost"));
+        products_table.setItems(data);
+    }
+    
+    protected void clearLists(){
+        ls.clear();
+        data.clear();
+    }
+    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        getProductsList();
-        greetUser();
+        setProductsTableCellFactories();
+        updateProductsList();
         fadeOutContentPane();
-        fillProductsTable();
     }
-
+    
+    public void updateUI() {
+        clearLists();
+        setProductsTableCellFactories();
+        updateProductsList();
+        fadeOutContentPane();
+    }
+    
     @FXML
     protected void exit() {
         MoneyTrackerFXClient.getInstance().gotoLoginForm();
         MoneyTrackerFXClient.getInstance().resetCurrentUser();
     }
-
+    
     @FXML
     protected void gotoStatsForm() {
         MoneyTrackerFXClient.getInstance().gotoAppForm();
     }
-
+    
     protected void fadeOutContentPane() {
         FadeTransition fadeTransition = new FadeTransition(Duration.millis(2000), this.content_pane);
         fadeTransition.setFromValue(0.0);
         fadeTransition.setToValue(1.0);
         fadeTransition.play();
     }
-
+    
     @FXML
     protected void greetUser() {
         UserName.setText(MoneyTrackerFXClient.getInstance().getCurrentUser().getLogin());

@@ -128,3 +128,14 @@
     -fx-font-weight: bold;
 }
 
+.table-view{
+    -fx-font-size: 80%;
+    -fx-font-weight: bolder;
+}
+
+#products_table table-view .column-header{
+    -fx-font-size: 100%;
+    -fx-font-weight: bold;
+    -fx-text-fill: white;
+    -fx-background-color:#364f62; 
+}

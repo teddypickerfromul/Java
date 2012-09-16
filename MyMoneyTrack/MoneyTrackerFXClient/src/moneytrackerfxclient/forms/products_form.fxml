@@ -31,16 +31,16 @@
                         <Image url="@logo.png" preserveRatio="false" smooth="false" />
                     </image>
                 </ImageView>
-                <Button fx:id="update_button" styleClass="update_button" layoutX="57.0" layoutY="674.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="87.0" text="Обновить" />
+                <Button fx:id="update_button"  onAction="#updateUI" styleClass="update_button" layoutX="57.0" layoutY="674.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="87.0" text="Обновить" />
             </children>
         </AnchorPane>
         <AnchorPane fx:id="content_pane" styleClass="content_pane" layoutX="210.0" layoutY="25.0" prefHeight="775.0" prefWidth="814.0">
             <children>
-                <TableView fx:id="products_table" editable="true" layoutX="56.0" layoutY="38.0" prefHeight="480.0" prefWidth="711.0">
+                <TableView fx:id="products_table" id="products_table" editable="true" layoutX="56.0" layoutY="38.0" prefHeight="480.0" prefWidth="711.0">
                     <columns>
-                        <TableColumn prefWidth="75.0" text="Наименование товара" fx:id="products_table_name" />
-                        <TableColumn prefWidth="75.0" text="Краткое описание" fx:id="products_table_desc" />
-                        <TableColumn prefWidth="75.0" text="Стоимость за условную единицу, р." fx:id="products_table_cost" />
+                        <TableColumn maxWidth="220.0" styleClass="table_column_header" minWidth="180.0" prefWidth="180.0" text="Наименование товара" fx:id="products_table_name" />
+                        <TableColumn maxWidth="360.0" styleClass="table_column_header" minWidth="360.0" prefWidth="360.0" text="Краткое описание" fx:id="products_table_desc" />
+                        <TableColumn maxWidth="171.0" styleClass="table_column_header" minWidth="171.0" prefWidth="171.0" text="Стоимость за условную единицу, р." fx:id="products_table_cost" />
                     </columns>
                 </TableView>
             </children>

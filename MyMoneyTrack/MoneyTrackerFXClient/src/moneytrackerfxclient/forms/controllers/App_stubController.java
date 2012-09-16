@@ -173,19 +173,19 @@ public class App_stubController implements Initializable {
 
     protected int getCurrentUserOutlaysCount() {
         this.userOutlayList = MoneyTrackerFXClient.getInstance().getClientController().getClientPort().getUserOutlaysByUser(MoneyTrackerFXClient.getInstance().getCurrentUser().getId());
-        System.out.println("outlays = " + MoneyTrackerFXClient.getInstance().getClientController().getClientPort().getUserOutlaysByUser(MoneyTrackerFXClient.getInstance().getCurrentUser().getId()));
+//        System.out.println("outlays = " + MoneyTrackerFXClient.getInstance().getClientController().getClientPort().getUserOutlaysByUser(MoneyTrackerFXClient.getInstance().getCurrentUser().getId()));
         return this.userOutlayList.size();
     }
 
     protected int getCurrentUserIncomesCount() {
         this.userIncomeList = MoneyTrackerFXClient.getInstance().getClientController().getClientPort().getUserIncomesByUser(MoneyTrackerFXClient.getInstance().getCurrentUser().getId());
-        System.out.println("incomes = " + MoneyTrackerFXClient.getInstance().getClientController().getClientPort().getUserIncomesByUser(MoneyTrackerFXClient.getInstance().getCurrentUser().getId()));
+//        System.out.println("incomes = " + MoneyTrackerFXClient.getInstance().getClientController().getClientPort().getUserIncomesByUser(MoneyTrackerFXClient.getInstance().getCurrentUser().getId()));
         return this.userIncomeList.size();
     }
 
     protected int getCurrentUserProductsCount() {
         this.userProductsCount = MoneyTrackerFXClient.getInstance().getClientController().getClientPort().getProductsCountUsedByUser(MoneyTrackerFXClient.getInstance().getCurrentUser().getId()).size();
-        System.out.println("products = " + this.userProductsCount);
+//        System.out.println("products = " + this.userProductsCount);
         return this.userProductsCount;
     }
 
