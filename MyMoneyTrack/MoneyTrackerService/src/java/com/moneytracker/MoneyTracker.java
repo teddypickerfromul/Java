@@ -207,7 +207,7 @@ public class MoneyTracker {
     }
 
     @WebMethod(operationName = "getAllProducts")
-    public List getAllProducts() {
+    public List <Product> getAllProducts() {
         List result;
         result = null;
         try {
