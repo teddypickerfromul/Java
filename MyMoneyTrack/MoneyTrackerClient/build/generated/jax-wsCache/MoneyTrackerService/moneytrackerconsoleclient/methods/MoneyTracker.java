@@ -171,6 +171,18 @@ public interface MoneyTracker {
 
     /**
      * 
+     * @return
+     *     returns java.util.List<moneytrackerconsoleclient.methods.Product>
+     */
+    @WebMethod
+    @WebResult(targetNamespace = "")
+    @RequestWrapper(localName = "getAllProducts", targetNamespace = "http://moneytracker.com/", className = "moneytrackerconsoleclient.methods.GetAllProducts")
+    @ResponseWrapper(localName = "getAllProductsResponse", targetNamespace = "http://moneytracker.com/", className = "moneytrackerconsoleclient.methods.GetAllProductsResponse")
+    @Action(input = "http://moneytracker.com/MoneyTracker/getAllProductsRequest", output = "http://moneytracker.com/MoneyTracker/getAllProductsResponse")
+    public List<Product> getAllProducts();
+
+    /**
+     * 
      * @param arg0
      * @return
      *     returns moneytrackerconsoleclient.methods.Product
@@ -1383,12 +1395,18 @@ public interface MoneyTracker {
 
     /**
      * 
+     * @param arg0
+     * @return
+     *     returns java.util.List<java.lang.Object>
      */
-    @WebMethod(operationName = "Hello")
-    @RequestWrapper(localName = "Hello", targetNamespace = "http://moneytracker.com/", className = "moneytrackerconsoleclient.methods.Hello")
-    @ResponseWrapper(localName = "HelloResponse", targetNamespace = "http://moneytracker.com/", className = "moneytrackerconsoleclient.methods.HelloResponse")
-    @Action(input = "http://moneytracker.com/MoneyTracker/HelloRequest", output = "http://moneytracker.com/MoneyTracker/HelloResponse")
-    public void hello();
+    @WebMethod
+    @WebResult(targetNamespace = "")
+    @RequestWrapper(localName = "getProductsCountUsedByUser", targetNamespace = "http://moneytracker.com/", className = "moneytrackerconsoleclient.methods.GetProductsCountUsedByUser")
+    @ResponseWrapper(localName = "getProductsCountUsedByUserResponse", targetNamespace = "http://moneytracker.com/", className = "moneytrackerconsoleclient.methods.GetProductsCountUsedByUserResponse")
+    @Action(input = "http://moneytracker.com/MoneyTracker/getProductsCountUsedByUserRequest", output = "http://moneytracker.com/MoneyTracker/getProductsCountUsedByUserResponse")
+    public List<Object> getProductsCountUsedByUser(
+        @WebParam(name = "arg0", targetNamespace = "")
+        long arg0);
 
     /**
      * 
@@ -1401,5 +1419,26 @@ public interface MoneyTracker {
     @ResponseWrapper(localName = "GoodbyeResponse", targetNamespace = "http://moneytracker.com/", className = "moneytrackerconsoleclient.methods.GoodbyeResponse")
     @Action(input = "http://moneytracker.com/MoneyTracker/GoodbyeRequest", output = "http://moneytracker.com/MoneyTracker/GoodbyeResponse")
     public String goodbye();
+
+    /**
+     * 
+     * @param arg2
+     * @param arg1
+     * @param arg0
+     * @return
+     *     returns moneytrackerconsoleclient.methods.Product
+     */
+    @WebMethod
+    @WebResult(targetNamespace = "")
+    @RequestWrapper(localName = "updateProductByAllParams", targetNamespace = "http://moneytracker.com/", className = "moneytrackerconsoleclient.methods.UpdateProductByAllParams")
+    @ResponseWrapper(localName = "updateProductByAllParamsResponse", targetNamespace = "http://moneytracker.com/", className = "moneytrackerconsoleclient.methods.UpdateProductByAllParamsResponse")
+    @Action(input = "http://moneytracker.com/MoneyTracker/updateProductByAllParamsRequest", output = "http://moneytracker.com/MoneyTracker/updateProductByAllParamsResponse")
+    public Product updateProductByAllParams(
+        @WebParam(name = "arg0", targetNamespace = "")
+        String arg0,
+        @WebParam(name = "arg1", targetNamespace = "")
+        String arg1,
+        @WebParam(name = "arg2", targetNamespace = "")
+        double arg2);
 
 }

@@ -17,7 +17,7 @@ import javax.xml.ws.WebServiceFeature;
  * Generated source version: 2.2
  * 
  */
-@WebServiceClient(name = "MoneyTrackerService", targetNamespace = "http://moneytracker.com/", wsdlLocation = "file:/home/teddy/MoneyTrackerConsoleClient/wsdl/MoneyTrackerService.wsdl")
+@WebServiceClient(name = "MoneyTrackerService", targetNamespace = "http://moneytracker.com/", wsdlLocation = "http://localhost:8080/MoneyTracker/MoneyTrackerService?wsdl")
 public class MoneyTrackerService
     extends Service
 {
@@ -30,7 +30,7 @@ public class MoneyTrackerService
         URL url = null;
         WebServiceException e = null;
         try {
-            url = new URL("file:/home/teddy/MoneyTrackerConsoleClient/wsdl/MoneyTrackerService.wsdl");
+            url = new URL("http://localhost:8080/MoneyTracker/MoneyTrackerService?wsdl");
         } catch (MalformedURLException ex) {
             e = new WebServiceException(ex);
         }

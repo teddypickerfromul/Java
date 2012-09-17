@@ -51,14 +51,15 @@ public class ObjectFactory {
     private final static QName _GetOverralUserIncomeSumByUserAndMounth_QNAME = new QName("http://moneytracker.com/", "getOverralUserIncomeSumByUserAndMounth");
     private final static QName _GetProductWithMinPrice_QNAME = new QName("http://moneytracker.com/", "getProductWithMinPrice");
     private final static QName _GetAllUserOutlaysByDay_QNAME = new QName("http://moneytracker.com/", "getAllUserOutlaysByDay");
+    private final static QName _GetAllProductsResponse_QNAME = new QName("http://moneytracker.com/", "getAllProductsResponse");
     private final static QName _GetAllUserIncomesByProductResponse_QNAME = new QName("http://moneytracker.com/", "getAllUserIncomesByProductResponse");
     private final static QName _GetOverralUserOutlaySumByUser_QNAME = new QName("http://moneytracker.com/", "getOverralUserOutlaySumByUser");
     private final static QName _InvalidFileFormatException_QNAME = new QName("http://moneytracker.com/", "InvalidFileFormatException");
     private final static QName _GetAllUserOutlaysByUserAndHourResponse_QNAME = new QName("http://moneytracker.com/", "getAllUserOutlaysByUserAndHourResponse");
-    private final static QName _Hello_QNAME = new QName("http://moneytracker.com/", "Hello");
     private final static QName _GetAllUserIncomesByUserAndMounth_QNAME = new QName("http://moneytracker.com/", "getAllUserIncomesByUserAndMounth");
     private final static QName _GetOverralUserIncomeSumByUserAndMounthResponse_QNAME = new QName("http://moneytracker.com/", "getOverralUserIncomeSumByUserAndMounthResponse");
     private final static QName _GetAllUserOutlaysByUserAndMinuteResponse_QNAME = new QName("http://moneytracker.com/", "getAllUserOutlaysByUserAndMinuteResponse");
+    private final static QName _UpdateProductByAllParamsResponse_QNAME = new QName("http://moneytracker.com/", "updateProductByAllParamsResponse");
     private final static QName _GetUserBudgetByIdResponse_QNAME = new QName("http://moneytracker.com/", "getUserBudgetByIdResponse");
     private final static QName _GetUserOutlaysByUser_QNAME = new QName("http://moneytracker.com/", "getUserOutlaysByUser");
     private final static QName _GetUserBudgetById_QNAME = new QName("http://moneytracker.com/", "getUserBudgetById");
@@ -75,6 +76,7 @@ public class ObjectFactory {
     private final static QName _GetAllUserOutlaysByMinute_QNAME = new QName("http://moneytracker.com/", "getAllUserOutlaysByMinute");
     private final static QName _GetUserBylogin_QNAME = new QName("http://moneytracker.com/", "getUserBylogin");
     private final static QName _GetAllUserIncomesByUserAndHour_QNAME = new QName("http://moneytracker.com/", "getAllUserIncomesByUserAndHour");
+    private final static QName _GetProductsCountUsedByUser_QNAME = new QName("http://moneytracker.com/", "getProductsCountUsedByUser");
     private final static QName _GetAllUserIncomesByUserAndYear_QNAME = new QName("http://moneytracker.com/", "getAllUserIncomesByUserAndYear");
     private final static QName _UpdateUserIncomeProductById_QNAME = new QName("http://moneytracker.com/", "updateUserIncomeProductById");
     private final static QName _GetOverralUserIncomeSumByUserAndYear_QNAME = new QName("http://moneytracker.com/", "getOverralUserIncomeSumByUserAndYear");
@@ -90,6 +92,7 @@ public class ObjectFactory {
     private final static QName _UpdateUserOutlayProductByIdResponse_QNAME = new QName("http://moneytracker.com/", "updateUserOutlayProductByIdResponse");
     private final static QName _GetAllUserIncomesByMinuteResponse_QNAME = new QName("http://moneytracker.com/", "getAllUserIncomesByMinuteResponse");
     private final static QName _GetAllUserOutlaysByProductResponse_QNAME = new QName("http://moneytracker.com/", "getAllUserOutlaysByProductResponse");
+    private final static QName _GetAllProducts_QNAME = new QName("http://moneytracker.com/", "getAllProducts");
     private final static QName _GetAllUserBudgetsByDescriptionResponse_QNAME = new QName("http://moneytracker.com/", "getAllUserBudgetsByDescriptionResponse");
     private final static QName _DeleteUserByIdResponse_QNAME = new QName("http://moneytracker.com/", "deleteUserByIdResponse");
     private final static QName _DeleteProductById_QNAME = new QName("http://moneytracker.com/", "deleteProductById");
@@ -143,6 +146,7 @@ public class ObjectFactory {
     private final static QName _GetAllUserOutlaysByMounthResponse_QNAME = new QName("http://moneytracker.com/", "getAllUserOutlaysByMounthResponse");
     private final static QName _GetProductByPrice_QNAME = new QName("http://moneytracker.com/", "getProductByPrice");
     private final static QName _GetUserOutlayById_QNAME = new QName("http://moneytracker.com/", "getUserOutlayById");
+    private final static QName _GetProductsCountUsedByUserResponse_QNAME = new QName("http://moneytracker.com/", "getProductsCountUsedByUserResponse");
     private final static QName _GetAllUserIncomesByUserAndMounthResponse_QNAME = new QName("http://moneytracker.com/", "getAllUserIncomesByUserAndMounthResponse");
     private final static QName _UpdateProductNameById_QNAME = new QName("http://moneytracker.com/", "updateProductNameById");
     private final static QName _DeleteProductByName_QNAME = new QName("http://moneytracker.com/", "deleteProductByName");
@@ -161,15 +165,15 @@ public class ObjectFactory {
     private final static QName _GetOverralUserIncomeSumByUser_QNAME = new QName("http://moneytracker.com/", "getOverralUserIncomeSumByUser");
     private final static QName _GetAllUserOutlaysByUserAndMounth_QNAME = new QName("http://moneytracker.com/", "getAllUserOutlaysByUserAndMounth");
     private final static QName _GetUserOutlaysByAllParamsWithoutIdResponse_QNAME = new QName("http://moneytracker.com/", "getUserOutlaysByAllParamsWithoutIdResponse");
-    private final static QName _CreateNewUserOutlay_QNAME = new QName("http://moneytracker.com/", "createNewUserOutlay");
     private final static QName _CreateNewUserIncome_QNAME = new QName("http://moneytracker.com/", "createNewUserIncome");
+    private final static QName _CreateNewUserOutlay_QNAME = new QName("http://moneytracker.com/", "createNewUserOutlay");
     private final static QName _GetUserIncomesByAllParamsWithoutId_QNAME = new QName("http://moneytracker.com/", "getUserIncomesByAllParamsWithoutId");
-    private final static QName _HelloResponse_QNAME = new QName("http://moneytracker.com/", "HelloResponse");
     private final static QName _GetAllUserOutlaysByUserAndDayResponse_QNAME = new QName("http://moneytracker.com/", "getAllUserOutlaysByUserAndDayResponse");
     private final static QName _CreateNewProductResponse_QNAME = new QName("http://moneytracker.com/", "createNewProductResponse");
     private final static QName _GetAllUserBudgetsByOwnerResponse_QNAME = new QName("http://moneytracker.com/", "getAllUserBudgetsByOwnerResponse");
     private final static QName _UpdateUserIncomeByAllParamsResponse_QNAME = new QName("http://moneytracker.com/", "updateUserIncomeByAllParamsResponse");
     private final static QName _UpdateUserBudgetAmount_QNAME = new QName("http://moneytracker.com/", "updateUserBudgetAmount");
+    private final static QName _UpdateProductByAllParams_QNAME = new QName("http://moneytracker.com/", "updateProductByAllParams");
     private final static QName _GetUserByIdResponse_QNAME = new QName("http://moneytracker.com/", "getUserByIdResponse");
     private final static QName _UpdateProductPriceByNameResponse_QNAME = new QName("http://moneytracker.com/", "updateProductPriceByNameResponse");
     private final static QName _GetUserIncomesByUser_QNAME = new QName("http://moneytracker.com/", "getUserIncomesByUser");
@@ -277,14 +281,6 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link CreateNewUserIncome }
-     * 
-     */
-    public CreateNewUserIncome createCreateNewUserIncome() {
-        return new CreateNewUserIncome();
-    }
-
-    /**
      * Create an instance of {@link CreateNewUserOutlay }
      * 
      */
@@ -293,19 +289,19 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link CreateNewUserIncome }
+     * 
+     */
+    public CreateNewUserIncome createCreateNewUserIncome() {
+        return new CreateNewUserIncome();
+    }
+
+    /**
      * Create an instance of {@link CreateNewProductResponse }
      * 
      */
     public CreateNewProductResponse createCreateNewProductResponse() {
         return new CreateNewProductResponse();
-    }
-
-    /**
-     * Create an instance of {@link HelloResponse }
-     * 
-     */
-    public HelloResponse createHelloResponse() {
-        return new HelloResponse();
     }
 
     /**
@@ -338,6 +334,14 @@ public class ObjectFactory {
      */
     public UpdateUserBudgetAmount createUpdateUserBudgetAmount() {
         return new UpdateUserBudgetAmount();
+    }
+
+    /**
+     * Create an instance of {@link UpdateProductByAllParams }
+     * 
+     */
+    public UpdateProductByAllParams createUpdateProductByAllParams() {
+        return new UpdateProductByAllParams();
     }
 
     /**
@@ -805,6 +809,14 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link GetProductsCountUsedByUserResponse }
+     * 
+     */
+    public GetProductsCountUsedByUserResponse createGetProductsCountUsedByUserResponse() {
+        return new GetProductsCountUsedByUserResponse();
+    }
+
+    /**
      * Create an instance of {@link GetAllUserOutlaysByProduct }
      * 
      */
@@ -909,6 +921,14 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link GetProductsCountUsedByUser }
+     * 
+     */
+    public GetProductsCountUsedByUser createGetProductsCountUsedByUser() {
+        return new GetProductsCountUsedByUser();
+    }
+
+    /**
      * Create an instance of {@link GetAllUserIncomesByUserAndYear }
      * 
      */
@@ -986,6 +1006,14 @@ public class ObjectFactory {
      */
     public GetUserBudgetByOwnerAndNameResponse createGetUserBudgetByOwnerAndNameResponse() {
         return new GetUserBudgetByOwnerAndNameResponse();
+    }
+
+    /**
+     * Create an instance of {@link GetAllProducts }
+     * 
+     */
+    public GetAllProducts createGetAllProducts() {
+        return new GetAllProducts();
     }
 
     /**
@@ -1341,6 +1369,14 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link GetAllProductsResponse }
+     * 
+     */
+    public GetAllProductsResponse createGetAllProductsResponse() {
+        return new GetAllProductsResponse();
+    }
+
+    /**
      * Create an instance of {@link GetAllUserOutlaysByDay }
      * 
      */
@@ -1381,14 +1417,6 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link Hello }
-     * 
-     */
-    public Hello createHello() {
-        return new Hello();
-    }
-
-    /**
      * Create an instance of {@link GetAllUserOutlaysByUserAndHourResponse }
      * 
      */
@@ -1410,6 +1438,14 @@ public class ObjectFactory {
      */
     public GetAllUserIncomesByUserAndMounth createGetAllUserIncomesByUserAndMounth() {
         return new GetAllUserIncomesByUserAndMounth();
+    }
+
+    /**
+     * Create an instance of {@link UpdateProductByAllParamsResponse }
+     * 
+     */
+    public UpdateProductByAllParamsResponse createUpdateProductByAllParamsResponse() {
+        return new UpdateProductByAllParamsResponse();
     }
 
     /**
@@ -1792,6 +1828,15 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link GetAllProductsResponse }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://moneytracker.com/", name = "getAllProductsResponse")
+    public JAXBElement<GetAllProductsResponse> createGetAllProductsResponse(GetAllProductsResponse value) {
+        return new JAXBElement<GetAllProductsResponse>(_GetAllProductsResponse_QNAME, GetAllProductsResponse.class, null, value);
+    }
+
+    /**
      * Create an instance of {@link JAXBElement }{@code <}{@link GetAllUserIncomesByProductResponse }{@code >}}
      * 
      */
@@ -1828,15 +1873,6 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link Hello }{@code >}}
-     * 
-     */
-    @XmlElementDecl(namespace = "http://moneytracker.com/", name = "Hello")
-    public JAXBElement<Hello> createHello(Hello value) {
-        return new JAXBElement<Hello>(_Hello_QNAME, Hello.class, null, value);
-    }
-
-    /**
      * Create an instance of {@link JAXBElement }{@code <}{@link GetAllUserIncomesByUserAndMounth }{@code >}}
      * 
      */
@@ -1861,6 +1897,15 @@ public class ObjectFactory {
     @XmlElementDecl(namespace = "http://moneytracker.com/", name = "getAllUserOutlaysByUserAndMinuteResponse")
     public JAXBElement<GetAllUserOutlaysByUserAndMinuteResponse> createGetAllUserOutlaysByUserAndMinuteResponse(GetAllUserOutlaysByUserAndMinuteResponse value) {
         return new JAXBElement<GetAllUserOutlaysByUserAndMinuteResponse>(_GetAllUserOutlaysByUserAndMinuteResponse_QNAME, GetAllUserOutlaysByUserAndMinuteResponse.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link UpdateProductByAllParamsResponse }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://moneytracker.com/", name = "updateProductByAllParamsResponse")
+    public JAXBElement<UpdateProductByAllParamsResponse> createUpdateProductByAllParamsResponse(UpdateProductByAllParamsResponse value) {
+        return new JAXBElement<UpdateProductByAllParamsResponse>(_UpdateProductByAllParamsResponse_QNAME, UpdateProductByAllParamsResponse.class, null, value);
     }
 
     /**
@@ -2008,6 +2053,15 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link GetProductsCountUsedByUser }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://moneytracker.com/", name = "getProductsCountUsedByUser")
+    public JAXBElement<GetProductsCountUsedByUser> createGetProductsCountUsedByUser(GetProductsCountUsedByUser value) {
+        return new JAXBElement<GetProductsCountUsedByUser>(_GetProductsCountUsedByUser_QNAME, GetProductsCountUsedByUser.class, null, value);
+    }
+
+    /**
      * Create an instance of {@link JAXBElement }{@code <}{@link GetAllUserIncomesByUserAndYear }{@code >}}
      * 
      */
@@ -2140,6 +2194,15 @@ public class ObjectFactory {
     @XmlElementDecl(namespace = "http://moneytracker.com/", name = "getAllUserOutlaysByProductResponse")
     public JAXBElement<GetAllUserOutlaysByProductResponse> createGetAllUserOutlaysByProductResponse(GetAllUserOutlaysByProductResponse value) {
         return new JAXBElement<GetAllUserOutlaysByProductResponse>(_GetAllUserOutlaysByProductResponse_QNAME, GetAllUserOutlaysByProductResponse.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link GetAllProducts }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://moneytracker.com/", name = "getAllProducts")
+    public JAXBElement<GetAllProducts> createGetAllProducts(GetAllProducts value) {
+        return new JAXBElement<GetAllProducts>(_GetAllProducts_QNAME, GetAllProducts.class, null, value);
     }
 
     /**
@@ -2620,6 +2683,15 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link GetProductsCountUsedByUserResponse }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://moneytracker.com/", name = "getProductsCountUsedByUserResponse")
+    public JAXBElement<GetProductsCountUsedByUserResponse> createGetProductsCountUsedByUserResponse(GetProductsCountUsedByUserResponse value) {
+        return new JAXBElement<GetProductsCountUsedByUserResponse>(_GetProductsCountUsedByUserResponse_QNAME, GetProductsCountUsedByUserResponse.class, null, value);
+    }
+
+    /**
      * Create an instance of {@link JAXBElement }{@code <}{@link GetAllUserIncomesByUserAndMounthResponse }{@code >}}
      * 
      */
@@ -2782,15 +2854,6 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link CreateNewUserOutlay }{@code >}}
-     * 
-     */
-    @XmlElementDecl(namespace = "http://moneytracker.com/", name = "createNewUserOutlay")
-    public JAXBElement<CreateNewUserOutlay> createCreateNewUserOutlay(CreateNewUserOutlay value) {
-        return new JAXBElement<CreateNewUserOutlay>(_CreateNewUserOutlay_QNAME, CreateNewUserOutlay.class, null, value);
-    }
-
-    /**
      * Create an instance of {@link JAXBElement }{@code <}{@link CreateNewUserIncome }{@code >}}
      * 
      */
@@ -2800,21 +2863,21 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link CreateNewUserOutlay }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://moneytracker.com/", name = "createNewUserOutlay")
+    public JAXBElement<CreateNewUserOutlay> createCreateNewUserOutlay(CreateNewUserOutlay value) {
+        return new JAXBElement<CreateNewUserOutlay>(_CreateNewUserOutlay_QNAME, CreateNewUserOutlay.class, null, value);
+    }
+
+    /**
      * Create an instance of {@link JAXBElement }{@code <}{@link GetUserIncomesByAllParamsWithoutId }{@code >}}
      * 
      */
     @XmlElementDecl(namespace = "http://moneytracker.com/", name = "getUserIncomesByAllParamsWithoutId")
     public JAXBElement<GetUserIncomesByAllParamsWithoutId> createGetUserIncomesByAllParamsWithoutId(GetUserIncomesByAllParamsWithoutId value) {
         return new JAXBElement<GetUserIncomesByAllParamsWithoutId>(_GetUserIncomesByAllParamsWithoutId_QNAME, GetUserIncomesByAllParamsWithoutId.class, null, value);
-    }
-
-    /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link HelloResponse }{@code >}}
-     * 
-     */
-    @XmlElementDecl(namespace = "http://moneytracker.com/", name = "HelloResponse")
-    public JAXBElement<HelloResponse> createHelloResponse(HelloResponse value) {
-        return new JAXBElement<HelloResponse>(_HelloResponse_QNAME, HelloResponse.class, null, value);
     }
 
     /**
@@ -2860,6 +2923,15 @@ public class ObjectFactory {
     @XmlElementDecl(namespace = "http://moneytracker.com/", name = "updateUserBudgetAmount")
     public JAXBElement<UpdateUserBudgetAmount> createUpdateUserBudgetAmount(UpdateUserBudgetAmount value) {
         return new JAXBElement<UpdateUserBudgetAmount>(_UpdateUserBudgetAmount_QNAME, UpdateUserBudgetAmount.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link UpdateProductByAllParams }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://moneytracker.com/", name = "updateProductByAllParams")
+    public JAXBElement<UpdateProductByAllParams> createUpdateProductByAllParams(UpdateProductByAllParams value) {
+        return new JAXBElement<UpdateProductByAllParams>(_UpdateProductByAllParams_QNAME, UpdateProductByAllParams.class, null, value);
     }
 
     /**

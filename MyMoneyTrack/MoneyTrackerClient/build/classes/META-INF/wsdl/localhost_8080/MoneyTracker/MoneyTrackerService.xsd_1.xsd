@@ -284,10 +284,6 @@
 
 <xs:element name="registerUserResponse" type="tns:registerUserResponse"/>
 
-<xs:element name="updateProductByAllParams" type="tns:updateProductByAllParams"/>
-
-<xs:element name="updateProductByAllParamsResponse" type="tns:updateProductByAllParamsResponse"/>
-
 <xs:element name="updateProductDescriptionById" type="tns:updateProductDescriptionById"/>
 
 <xs:element name="updateProductDescriptionByIdResponse" type="tns:updateProductDescriptionByIdResponse"/>
@@ -1288,20 +1284,6 @@
 </xs:complexType>
 
 <xs:complexType name="updateProductDescriptionByIdResponse">
-<xs:sequence>
-<xs:element name="return" type="tns:product" minOccurs="0"/>
-</xs:sequence>
-</xs:complexType>
-
-<xs:complexType name="updateProductByAllParams">
-<xs:sequence>
-<xs:element name="arg0" type="xs:string" minOccurs="0"/>
-<xs:element name="arg1" type="xs:string" minOccurs="0"/>
-<xs:element name="arg2" type="xs:double"/>
-</xs:sequence>
-</xs:complexType>
-
-<xs:complexType name="updateProductByAllParamsResponse">
 <xs:sequence>
 <xs:element name="return" type="tns:product" minOccurs="0"/>
 </xs:sequence>
