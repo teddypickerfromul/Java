@@ -38,11 +38,19 @@
             <children>
                 <TableView fx:id="products_table" id="products_table" editable="true" layoutX="56.0" layoutY="38.0" prefHeight="480.0" prefWidth="711.0">
                     <columns>
-                        <TableColumn maxWidth="220.0" styleClass="table_column_header" minWidth="180.0" prefWidth="180.0" text="Наименование товара" fx:id="products_table_name" />
-                        <TableColumn maxWidth="360.0" styleClass="table_column_header" minWidth="360.0" prefWidth="360.0" text="Краткое описание" fx:id="products_table_desc" />
-                        <TableColumn maxWidth="171.0" styleClass="table_column_header" minWidth="171.0" prefWidth="171.0" text="Стоимость за условную единицу, р." fx:id="products_table_cost" />
+                        <TableColumn maxWidth="220.0" styleClass="column_header" minWidth="180.0" prefWidth="180.0" text="Наименование товара" fx:id="products_table_name" />
+                        <TableColumn maxWidth="360.0" styleClass="column_header" minWidth="360.0" prefWidth="360.0" text="Краткое описание" fx:id="products_table_desc" />
+                        <TableColumn maxWidth="171.0" styleClass="column_header" minWidth="171.0" prefWidth="171.0" text="Стоимость за условную единицу, р." fx:id="products_table_cost" />
                     </columns>
                 </TableView>
+                <AnchorPane fx:id="new_product_pane" styleClass="new_product_pane" layoutX="49.0" layoutY="546.0" prefHeight="102.0" prefWidth="711.0">
+                    <children>
+                        <TextField fx:id="product_name_field" styleClass="product_name_field" layoutX="13.0" layoutY="24.0" prefHeight="54.0" prefWidth="169.0" promptText="Имя товара - 85 символов" />
+                        <TextField fx:id="product_price_field" styleClass="product_price_field" layoutX="415.0" layoutY="24.0" prefHeight="54.0" prefWidth="162.0" promptText="Краткое описание - 1000 символов" />
+                        <Button fx:id="add_product_button" onAction="#addNewProduct" styleClass="add_product_button" layoutX="590.0" layoutY="24.0" mnemonicParsing="false" prefHeight="55.0" prefWidth="107.0" text="Добавить" />
+                        <TextArea fx:id="product_desc_text_area" styleClass="product_desc_text_area" layoutX="194.0" layoutY="24.0" prefHeight="54.0" prefWidth="211.0" wrapText="true" promptText="Цена товара" />
+                    </children>
+                </AnchorPane>                
             </children>
         </AnchorPane>
     </children>

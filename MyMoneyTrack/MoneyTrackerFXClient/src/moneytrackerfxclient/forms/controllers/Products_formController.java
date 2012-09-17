@@ -14,6 +14,8 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.util.Duration;
@@ -34,6 +36,16 @@ public class Products_formController implements Initializable {
     private TableColumn products_table_desc;
     @FXML
     private TableColumn products_table_cost;
+    
+    @FXML
+    private TextField product_name_field;
+    
+    @FXML
+    private TextField product_price_field;
+    
+    @FXML
+    private TextArea product_desc_text_area;
+    
     private List<Product> ls = new ArrayList<Product>() {
     };
     private final ObservableList<Product> data = FXCollections.observableArrayList();
@@ -69,7 +81,7 @@ public class Products_formController implements Initializable {
         clearLists();
         setProductsTableCellFactories();
         updateProductsList();
-        fadeOutContentPane();
+        //fadeOutContentPane();
     }
     
     @FXML
@@ -88,6 +100,19 @@ public class Products_formController implements Initializable {
         fadeTransition.setFromValue(0.0);
         fadeTransition.setToValue(1.0);
         fadeTransition.play();
+    }
+    
+    @FXML
+    protected boolean addNewProduct(){
+        if(product_name_field.getText().length() < 85 && product_name_field.getText().length() != 0 && product_desc_text_area.getText().length() < 1000 && product_desc_text_area.getText().length() != 0 && product_price_field.getText().length() != 0){
+    
+            MoneyTrackerFXClient.getInstance().getClientController().getClientPort().createNewProduct(product_name_field.getText(), product_desc_text_area.getText(), new Double(product_price_field.getText()));
+            updateUI();
+            return true;
+        } else {
+            return false;
+        }
+    
     }
     
     @FXML

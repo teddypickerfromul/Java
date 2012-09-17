@@ -129,13 +129,79 @@
 }
 
 .table-view{
-    -fx-font-size: 80%;
+    -fx-font-size: 85%;
     -fx-font-weight: bolder;
 }
 
-#products_table table-view .column-header{
+.table-row-cell:empty {    
+    -fx-background-color: #466780;
+}
+
+.table-row-cell:active{
+    -fx-background-color: #ffe24e;
+}
+
+.table-row-cell{
+    -fx-background-color: #364f62;
+}
+
+.table-row-cell:hover{
+    -fx-text-fill: #3c596d;
+    -fx-background-color: #ffe24e;
+}
+
+.table-row-cell:odd{
+    -fx-background-color: #466780;
+}
+
+.table-row-cell:odd:hover{
+    -fx-text-fill: #3c596d;
+    -fx-background-color: #ffe24e;
+}
+
+.table-cell{
+    -fx-text-fill: white;
+}
+.table-cell:hover{
+    -fx-text-fill: #3c596d;
+}
+
+.table-view .column-header-background {
+    -fx-background-color: #49a354;
+}
+
+.table-view .column-header .label {
+    -fx-text-fill: white;
     -fx-font-size: 100%;
     -fx-font-weight: bold;
+}
+
+.table-view .column-header{
+    -fx-border-insets: 0 0 0 0;
+    -fx-border-width: 0px;
+}
+
+.add_product_button{
+    -fx-background-radius: 0,0,0;
     -fx-text-fill: white;
-    -fx-background-color:#364f62; 
+    -fx-font-weight: bold;
+    -fx-background-color:
+        linear-gradient(#40ae40, #277e27);
+
+}
+
+.add_product_button:hover{
+    -fx-background-radius: 0,0,0;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-background-color:
+        linear-gradient(#1b571b, #286f28);
+}
+
+.new_product_pane{
+    -fx-background-color: #364f62;
+}
+
+.product_name_field, .product_price_field, .product_desc_text_area{
+    -fx-border-radius: 0;
 }
