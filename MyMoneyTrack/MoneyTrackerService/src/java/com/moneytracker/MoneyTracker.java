@@ -459,10 +459,39 @@ public class MoneyTracker {
         }
         return result;
     }
+    
+    @WebMethod(operationName="updateProductByAllParams")
+    public Product updateProductByAllParams(String name, String desc, double price){
+        Product result;
+        result = null;
+        try{
+            HibernateUtil.getCurrentSession().beginTransaction();
+            result = ProductHelper.getByName(HibernateUtil.getCurrentSession(), name);
+            HibernateUtil.getCurrentSession().getTransaction().commit();
+            if(result != null){
+                long result_id = result.getId();
+                HibernateUtil.getCurrentSession().beginTransaction();
+                ProductHelper.changeNameById(HibernateUtil.getCurrentSession(), result_id, name);
+                ProductHelper.changeDescByName(HibernateUtil.getCurrentSession(), result.getName(), desc);
+                ProductHelper.changePriceById(HibernateUtil.getCurrentSession(), result_id, price);
+                HibernateUtil.getCurrentSession().getTransaction().commit();
+            }
+        } catch (HibernateException ex){
+            if(HibernateUtil.getCurrentSession().getTransaction().isActive()) {
+                HibernateUtil.getCurrentSession().getTransaction().rollback();
+            }
+            ex.printStackTrace();
+        } finally {
+            if(HibernateUtil.getCurrentSession() != null) {
+                HibernateUtil.getCurrentSession().close();
+            }
+        }
+        return result;
+    }
 
     /*----------------------------------------------------------------------------------------------------------------------------------------------*/
     // Веб-методы для сущности UserIncome
-    //TODO: из-за связи OneToOne возвращается все (то есть поля и User и Обьект)
+    // TODO: из-за связи OneToOne возвращается все (то есть поля и User и Обьект)
     // Обьект User и Product берем из таблицы по их Id
     @WebMethod(operationName = "createNewUserIncome")
     public UserIncome createNewUserIncome(long user_id, long product_id, int products_count, String datetime) {
