@@ -59,11 +59,12 @@ public class Products_formController implements Initializable {
         }
     }
 
-    public void setProductsTableCellFactories() {
-
+    
+    //TODO: исправить привязку к типу поля Product
+    public void setProductsTableCellValueFactories() {
         products_table_name.setCellValueFactory(new PropertyValueFactory<Product, String>("name"));
         products_table_desc.setCellValueFactory(new PropertyValueFactory<Product, String>("description"));
-        products_table_cost.setCellValueFactory(new PropertyValueFactory<Product, Double>("cost"));
+        //products_table_cost.setCellValueFactory(new PropertyValueFactory<Product, Double>("cost"));
         products_table.setItems(data);
     }
 
@@ -78,17 +79,25 @@ public class Products_formController implements Initializable {
         products_table_name.setEditable(true);
         products_table_desc.setEditable(true);
         products_table_cost.setEditable(true);
-        //createCustomCellFactoty();
-        handleProductNameColumnCell();
-        products_table_name.setCellFactory(createEditableCellFactoty());
-        setProductsTableCellFactories();
+        registerColumnHandlers();
+        setProductNameColumnCellHandler();
+        setProductDescColumnCellHandler();
+        //setProductCostColumnCellHandler();
+        
+        setProductsTableCellValueFactories();
         updateProductsList();
         fadeOutContentPane();
+    }
+    
+    protected void registerColumnHandlers(){
+        products_table_name.setCellFactory(createEditableCellFactory());
+        products_table_desc.setCellFactory(createEditableCellFactory());
+        products_table_cost.setCellFactory(createEditableCellFactory());
     }
 
     public void updateUI() {
         clearLists();
-        setProductsTableCellFactories();
+        setProductsTableCellValueFactories();
         updateProductsList();
         fadeOutContentPane();
     }
@@ -124,7 +133,7 @@ public class Products_formController implements Initializable {
         }
     }
 
-    private Callback<TableColumn, TableCell> createEditableCellFactoty() {
+    private Callback<TableColumn, TableCell> createEditableCellFactory() {
         Callback<TableColumn, TableCell> cellFactory = new Callback<TableColumn, TableCell>() {
             @Override
             public TableCell call(TableColumn p) {
@@ -134,30 +143,61 @@ public class Products_formController implements Initializable {
         return cellFactory;
     }
 
-    private void handleProductNameColumnCell() {
+    private void setProductNameColumnCellHandler() {
         products_table_name.setOnEditCommit(new EventHandler<CellEditEvent<Product, String>>() {
             @Override
             public void handle(CellEditEvent<Product, String> t) {
-                if (t.getNewValue().equals(t.getOldValue())) {
-                    System.out.println("exact : nothing to do");
-                } else {
+                if (!(t.getNewValue().equals(t.getOldValue()))) {
                     if (t.getNewValue().length() <= 85) {
                         String old_name = t.getOldValue();
                         Product updated = (Product) t.getTableView().getItems().get(t.getTablePosition().getRow());
                         updated.setName(t.getNewValue());
-                        System.out.println("updating for product " + updated + "...");
-                        System.out.println(updated.getName());
                         MoneyTrackerFXClient.getInstance().getClientController().getClientPort().updateProductByAllParams(old_name, updated.getName(), updated.getDescription(), updated.getCost());
-                        System.out.println("update completed!");
                     }
                     else {
-                        System.out.println("Product name's length must be less or equal to 85 characters!");
+                        System.out.println("Product's name length must be less or equal to 85 characters!");
                     }
                 }
             }
         });
     }
-
+    
+    private void setProductDescColumnCellHandler(){
+        products_table_desc.setOnEditCommit(new EventHandler<CellEditEvent<Product, String>>() {
+            @Override
+            public void handle(CellEditEvent<Product, String> t) {
+                if(!(t.getNewValue().equals(t.getOldValue()))) {
+                    if (t.getNewValue().length() <= 1000) {
+                        Product updated = (Product) t.getTableView().getItems().get(t.getTablePosition().getRow());
+                        System.out.println(updated.getName()+" : "+t.getNewValue());
+                        MoneyTrackerFXClient.getInstance().getClientController().getClientPort().updateProductDescriptionByName(updated.getName(), t.getNewValue());
+                    }
+                    else {
+                        System.out.println("Product's description length must be less or equal to 1000 characters!");
+                    }
+                }
+            }
+        });
+    }
+    
+    private void setProductCostColumnCellHandler(){
+        products_table_cost.setOnEditCommit(new EventHandler<CellEditEvent<Product, Double>>() {
+            @Override
+            public void handle(CellEditEvent<Product, Double> t) {
+                if(!(t.getNewValue().equals(t.getOldValue()))) {
+                    if (Double.valueOf(t.getNewValue()) >= 0.0) {
+                        Product updated = (Product) t.getTableView().getItems().get(t.getTablePosition().getRow());
+                        MoneyTrackerFXClient.getInstance().getClientController().getClientPort().updateProductPriceByName(updated.getName(), Double.valueOf(t.getNewValue()));
+                    }
+                    else {
+                        System.out.println("Product's description length must be less or equal to 1000 characters!");
+                    }
+                }
+            }
+        });
+    }    
+    
+    
     @FXML
     protected void greetUser() {
         UserName.setText(MoneyTrackerFXClient.getInstance().getCurrentUser().getLogin());

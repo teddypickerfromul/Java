@@ -1,3 +1,5 @@
+//TODO: Сделать обертку для <Product, String> и <Product, double>
+
 
 package moneytrackerfxclient.forms.controllers.custom;
 
@@ -94,17 +96,13 @@ public class EditingStringCell extends TableCell<Product, String> {
     private String getString() {
         return getItem() == null ? "" : getItem().toString();
     }
-    /**
-     *
-     * @param forward true gets the column to the right, false the column to the left of the current column
-     * @return
-     */
+
     private TableColumn<Product, ?> getNextColumn(boolean forward) {
         List<TableColumn<Product, ?>> columns = new ArrayList<>();
         for (TableColumn<Product, ?> column : getTableView().getColumns()) {
             columns.addAll(getLeaves(column));
         }
-        //There is no other column that supports editing.
+        
         if (columns.size() < 2) {
             return null;
         }
@@ -127,7 +125,7 @@ public class EditingStringCell extends TableCell<Product, String> {
     private List<TableColumn<Product, ?>> getLeaves(TableColumn<Product, ?> root) {
         List<TableColumn<Product, ?>> columns = new ArrayList<>();
         if (root.getColumns().isEmpty()) {
-            //We only want the leaves that are editable.
+            
             if (root.isEditable()) {
                 columns.add(root);
             }
