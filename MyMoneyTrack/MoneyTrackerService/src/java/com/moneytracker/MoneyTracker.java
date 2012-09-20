@@ -461,12 +461,12 @@ public class MoneyTracker {
     }
     
     @WebMethod(operationName="updateProductByAllParams")
-    public Product updateProductByAllParams(String name, String desc, double price){
+    public Product updateProductByAllParams(String old_name, String name, String desc, double price){
         Product result;
         result = null;
         try{
             HibernateUtil.getCurrentSession().beginTransaction();
-            result = ProductHelper.getByName(HibernateUtil.getCurrentSession(), name);
+            result = ProductHelper.getByName(HibernateUtil.getCurrentSession(), old_name);
             HibernateUtil.getCurrentSession().getTransaction().commit();
             if(result != null){
                 long result_id = result.getId();
