@@ -32,8 +32,6 @@ import org.apache.commons.collections.ListUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.hibernate.HibernateException;
-//import org.hibernate.Session;
-//import org.hibernate.SessionFactory;
 import org.hibernate.cfg.AnnotationConfiguration;
 import org.ini4j.InvalidFileFormatException;
 
@@ -50,6 +48,7 @@ public class MoneyTracker {
             Validator val = new Validator();
             HibernateUtil.getCurrentSession().beginTransaction();
             registeredUser = UserHelper.register(val.getAppSettingsObject(), HibernateUtil.getCurrentSession(), login, pass, email);
+            HibernateUtil.getCurrentSession().getTransaction().commit();
             //TODO: убрать этот костыль
             if (registeredUser != null) {
                 HibernateUtil.getCurrentSession().saveOrUpdate(registeredUser);
@@ -74,7 +73,6 @@ public class MoneyTracker {
         try {
             HibernateUtil.getCurrentSession().beginTransaction();
             result = UserHelper.login(HibernateUtil.getCurrentSession(), login, password);
-            //HibernateUtil.getCurrentSession().flush();
             HibernateUtil.getCurrentSession().getTransaction().commit();
         } catch (HibernateException ex) {
             if (HibernateUtil.getCurrentSession().getTransaction().isActive()) {
@@ -97,6 +95,7 @@ public class MoneyTracker {
         try {
             HibernateUtil.getCurrentSession().beginTransaction();
             result = UserHelper.getByLogin(HibernateUtil.getCurrentSession(), login);
+            HibernateUtil.getCurrentSession().getTransaction().commit();
         } catch (HibernateException ex) {
             if (HibernateUtil.getCurrentSession().getTransaction().isActive()) {
                 HibernateUtil.getCurrentSession().getTransaction().rollback();
@@ -117,6 +116,7 @@ public class MoneyTracker {
         try {
             HibernateUtil.getCurrentSession().beginTransaction();
             result = UserHelper.getById(HibernateUtil.getCurrentSession(), id);
+            HibernateUtil.getCurrentSession().getTransaction().commit();
         } catch (HibernateException ex) {
             if (HibernateUtil.getCurrentSession().getTransaction().isActive()) {
                 HibernateUtil.getCurrentSession().getTransaction().rollback();
@@ -137,6 +137,7 @@ public class MoneyTracker {
         try {
             HibernateUtil.getCurrentSession().beginTransaction();
             result = UserHelper.getByMail(HibernateUtil.getCurrentSession(), email);
+            HibernateUtil.getCurrentSession().getTransaction().commit();
         } catch (HibernateException ex) {
             if (HibernateUtil.getCurrentSession().getTransaction().isActive()) {
                 HibernateUtil.getCurrentSession().getTransaction().rollback();
@@ -155,6 +156,7 @@ public class MoneyTracker {
         try {
             HibernateUtil.getCurrentSession().beginTransaction();
             UserHelper.deleteById(HibernateUtil.getCurrentSession(), id);
+            HibernateUtil.getCurrentSession().getTransaction().commit();
         } catch (HibernateException ex) {
             if (HibernateUtil.getCurrentSession().getTransaction().isActive()) {
                 HibernateUtil.getCurrentSession().getTransaction().rollback();
@@ -172,6 +174,7 @@ public class MoneyTracker {
         try {
             HibernateUtil.getCurrentSession().beginTransaction();
             UserHelper.deleteByLogin(HibernateUtil.getCurrentSession(), login);
+            HibernateUtil.getCurrentSession().getTransaction().commit();
         } catch (HibernateException ex) {
             if (HibernateUtil.getCurrentSession().getTransaction().isActive()) {
                 HibernateUtil.getCurrentSession().getTransaction().rollback();
@@ -193,6 +196,7 @@ public class MoneyTracker {
         try {
             HibernateUtil.getCurrentSession().beginTransaction();
             result = ProductHelper.createIfNotExists(HibernateUtil.getCurrentSession(), name, description, cost);
+            HibernateUtil.getCurrentSession().getTransaction().commit();
         } catch (HibernateException ex) {
             if (HibernateUtil.getCurrentSession().getTransaction().isActive()) {
                 HibernateUtil.getCurrentSession().getTransaction().rollback();
@@ -233,6 +237,7 @@ public class MoneyTracker {
         try {
             HibernateUtil.getCurrentSession().beginTransaction();
             result = ProductHelper.getByName(HibernateUtil.getCurrentSession(), name);
+            HibernateUtil.getCurrentSession().getTransaction().commit();
         } catch (HibernateException ex) {
             if (HibernateUtil.getCurrentSession().getTransaction().isActive()) {
                 HibernateUtil.getCurrentSession().getTransaction().rollback();
@@ -253,6 +258,7 @@ public class MoneyTracker {
         try {
             HibernateUtil.getCurrentSession().beginTransaction();
             result = ProductHelper.getById(HibernateUtil.getCurrentSession(), id);
+            HibernateUtil.getCurrentSession().getTransaction().commit();
         } catch (HibernateException ex) {
             if (HibernateUtil.getCurrentSession().getTransaction().isActive()) {
                 HibernateUtil.getCurrentSession().getTransaction().rollback();
@@ -273,6 +279,7 @@ public class MoneyTracker {
         try {
             HibernateUtil.getCurrentSession().beginTransaction();
             result = ProductHelper.getByPrice(HibernateUtil.getCurrentSession(), id);
+            HibernateUtil.getCurrentSession().getTransaction().commit();
         } catch (HibernateException ex) {
             if (HibernateUtil.getCurrentSession().getTransaction().isActive()) {
                 HibernateUtil.getCurrentSession().getTransaction().rollback();
@@ -293,6 +300,7 @@ public class MoneyTracker {
         try {
             HibernateUtil.getCurrentSession().beginTransaction();
             result = ProductHelper.getProductWithMaxPrice(HibernateUtil.getCurrentSession());
+            HibernateUtil.getCurrentSession().getTransaction().commit();
         } catch (HibernateException ex) {
             if (HibernateUtil.getCurrentSession().getTransaction().isActive()) {
                 HibernateUtil.getCurrentSession().getTransaction().rollback();
@@ -313,6 +321,7 @@ public class MoneyTracker {
         try {
             HibernateUtil.getCurrentSession().beginTransaction();
             result = ProductHelper.getProductWithMinPrice(HibernateUtil.getCurrentSession());
+            HibernateUtil.getCurrentSession().getTransaction().commit();
         } catch (HibernateException ex) {
             if (HibernateUtil.getCurrentSession().getTransaction().isActive()) {
                 HibernateUtil.getCurrentSession().getTransaction().rollback();
@@ -331,6 +340,7 @@ public class MoneyTracker {
         try {
             HibernateUtil.getCurrentSession().beginTransaction();
             ProductHelper.deleteById(HibernateUtil.getCurrentSession(), id);
+            HibernateUtil.getCurrentSession().getTransaction().commit();
         } catch (HibernateException ex) {
             if (HibernateUtil.getCurrentSession().getTransaction().isActive()) {
                 HibernateUtil.getCurrentSession().getTransaction().rollback();
@@ -348,6 +358,7 @@ public class MoneyTracker {
         try {
             HibernateUtil.getCurrentSession().beginTransaction();
             ProductHelper.deleteByName(HibernateUtil.getCurrentSession(), name);
+            HibernateUtil.getCurrentSession().getTransaction().commit();
         } catch (HibernateException ex) {
             if (HibernateUtil.getCurrentSession().getTransaction().isActive()) {
                 HibernateUtil.getCurrentSession().getTransaction().rollback();
@@ -367,6 +378,7 @@ public class MoneyTracker {
         try {
             HibernateUtil.getCurrentSession().beginTransaction();
             result = ProductHelper.changeDescByName(HibernateUtil.getCurrentSession(), name, description);
+            HibernateUtil.getCurrentSession().getTransaction().commit();
         } catch (HibernateException ex) {
             if (HibernateUtil.getCurrentSession().getTransaction().isActive()) {
                 HibernateUtil.getCurrentSession().getTransaction().rollback();
@@ -387,6 +399,7 @@ public class MoneyTracker {
         try {
             HibernateUtil.getCurrentSession().beginTransaction();
             result = ProductHelper.changeDescById(HibernateUtil.getCurrentSession(), id, description);
+            HibernateUtil.getCurrentSession().getTransaction().commit();
         } catch (HibernateException ex) {
             if (HibernateUtil.getCurrentSession().getTransaction().isActive()) {
                 HibernateUtil.getCurrentSession().getTransaction().rollback();
@@ -407,6 +420,7 @@ public class MoneyTracker {
         try {
             HibernateUtil.getCurrentSession().beginTransaction();
             result = ProductHelper.changeNameById(HibernateUtil.getCurrentSession(), id, description);
+            HibernateUtil.getCurrentSession().getTransaction().commit();
         } catch (HibernateException ex) {
             if (HibernateUtil.getCurrentSession().getTransaction().isActive()) {
                 HibernateUtil.getCurrentSession().getTransaction().rollback();
@@ -427,6 +441,7 @@ public class MoneyTracker {
         try {
             HibernateUtil.getCurrentSession().beginTransaction();
             result = ProductHelper.changePriceById(HibernateUtil.getCurrentSession(), id, cost);
+            HibernateUtil.getCurrentSession().getTransaction().commit();
         } catch (HibernateException ex) {
             if (HibernateUtil.getCurrentSession().getTransaction().isActive()) {
                 HibernateUtil.getCurrentSession().getTransaction().rollback();
@@ -447,6 +462,7 @@ public class MoneyTracker {
         try {
             HibernateUtil.getCurrentSession().beginTransaction();
             result = ProductHelper.changePriceByName(HibernateUtil.getCurrentSession(), name, cost);
+            HibernateUtil.getCurrentSession().getTransaction().commit();
         } catch (HibernateException ex) {
             if (HibernateUtil.getCurrentSession().getTransaction().isActive()) {
                 HibernateUtil.getCurrentSession().getTransaction().rollback();
@@ -472,7 +488,7 @@ public class MoneyTracker {
                 long result_id = result.getId();
                 HibernateUtil.getCurrentSession().beginTransaction();
                 ProductHelper.changeNameById(HibernateUtil.getCurrentSession(), result_id, name);
-                ProductHelper.changeDescByName(HibernateUtil.getCurrentSession(), result.getName(), desc);
+                ProductHelper.changeDescById(HibernateUtil.getCurrentSession(), result_id, desc);
                 ProductHelper.changePriceById(HibernateUtil.getCurrentSession(), result_id, price);
                 HibernateUtil.getCurrentSession().getTransaction().commit();
             }
@@ -486,6 +502,7 @@ public class MoneyTracker {
                 HibernateUtil.getCurrentSession().close();
             }
         }
+        //System.out.println(result);
         return result;
     }
 

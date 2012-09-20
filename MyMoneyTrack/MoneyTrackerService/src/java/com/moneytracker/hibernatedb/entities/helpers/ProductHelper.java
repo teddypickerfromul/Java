@@ -128,7 +128,7 @@ public class ProductHelper {
         }
 
         Product result = getByName(session, name);
-        result.setName(name);
+        result.setDescription(desc);
         session.update(result);
 
         return result;
