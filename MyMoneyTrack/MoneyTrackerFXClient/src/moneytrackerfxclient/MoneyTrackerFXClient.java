@@ -9,10 +9,14 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.JavaFXBuilderFactory;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.TableCell;
+import javafx.scene.control.TableColumn;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
+import javafx.util.Callback;
 import moneytrackerconsoleclient.*;
 import moneytrackerconsoleclient.methods.*;
+import moneytrackerfxclient.forms.controllers.custom.EditingStringCell;
 import moneytrackerfxclient.utils.*;
 
 public class MoneyTrackerFXClient extends Application {
@@ -96,7 +100,7 @@ public class MoneyTrackerFXClient extends Application {
     public void gotoProductsForm() {
         try {
             getStage().setTitle("MoneyTracker::Товары");
-            replaceSceneContent("forms/products_form.fxml");
+            replaceSceneContent("forms/products_form.fxml");            
             getStage().setWidth(1024.0);
             getStage().setHeight(800.0);
             //TODO: вынести в AppSettings
