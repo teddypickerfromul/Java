@@ -40,7 +40,8 @@
                     <columns>
                         <TableColumn maxWidth="220.0" styleClass="column_header" minWidth="180.0" prefWidth="180.0" text="Наименование товара" fx:id="products_table_name" />
                         <TableColumn maxWidth="360.0" styleClass="column_header" minWidth="360.0" prefWidth="360.0" text="Краткое описание" fx:id="products_table_desc" />
-                        <TableColumn maxWidth="171.0" styleClass="column_header" minWidth="171.0" prefWidth="171.0" text="Стоимость за условную единицу, р." fx:id="products_table_cost" />
+                        <TableColumn maxWidth="141.0" styleClass="column_header" minWidth="100.0" prefWidth="141.0" text="Стоимость за условную единицу, р." fx:id="products_table_cost" />
+                        <TableColumn styleClass="column_header" maxWidth="30.0" minWidth="30.0" prefWidth="30.0" fx:id="products_table_remove" />
                     </columns>
                 </TableView>
                 <AnchorPane fx:id="new_product_pane" styleClass="new_product_pane" layoutX="49.0" layoutY="546.0" prefHeight="102.0" prefWidth="711.0">
