@@ -24,11 +24,11 @@ public class Login_formController implements Initializable {
     @FXML
     private PasswordField pass_field;
     @FXML
-    private AnchorPane AnchorPane;
+    private AnchorPane login_pane;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        //registerOnEnterHandler();
+        registerOnEnterHandler();
     }
 
     public String getLogin() {
@@ -41,7 +41,7 @@ public class Login_formController implements Initializable {
 
     @FXML
     protected boolean checkCredentials() throws LoginErrorException_Exception {
-        if (!MoneyTrackerFXClient.getInstance().login(/*MoneyTrackerController.getInstance(),*/this.getLogin(), this.getPassword())) {
+        if (!MoneyTrackerFXClient.getInstance().login(this.getLogin(), this.getPassword())) {
             return false;
         } else {
             return true;
@@ -55,14 +55,16 @@ public class Login_formController implements Initializable {
 
     @FXML
     private void registerOnEnterHandler() {
-        AnchorPane.addEventFilter(KeyEvent.KEY_PRESSED, new EventHandler<KeyEvent>() {
+        pass_field.addEventFilter(KeyEvent.KEY_PRESSED, new EventHandler<KeyEvent>() {
             @Override
             public void handle(KeyEvent keyEvent) {
                 if (keyEvent.getCode() == KeyCode.ENTER) {
-                    try {
-                        checkCredentials();
-                    } catch (LoginErrorException_Exception ex) {
-                        Logger.getLogger(Login_formController.class.getName()).log(Level.SEVERE, null, ex);
+                    if (!(login_field.getText().isEmpty()) && !pass_field.getText().isEmpty()) {
+                        try {
+                            checkCredentials();
+                        } catch (LoginErrorException_Exception ex) {
+                            Logger.getLogger(Login_formController.class.getName()).log(Level.SEVERE, null, ex);
+                        }
                     }
                 }
             }

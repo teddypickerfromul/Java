@@ -1,6 +1,5 @@
 //TODO: Сделать обертку для <Product, String> и <Product, double>
 
-
 package moneytrackerfxclient.forms.controllers.custom;
 
 import java.util.ArrayList;

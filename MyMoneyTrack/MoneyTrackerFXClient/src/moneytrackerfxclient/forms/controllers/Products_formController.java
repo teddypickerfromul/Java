@@ -6,32 +6,59 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Observable;
 import java.util.ResourceBundle;
+import java.util.logging.Logger;
 import javafx.animation.FadeTransition;
+import javafx.beans.property.BooleanProperty;
+import javafx.beans.property.SimpleBooleanProperty;
+import javafx.beans.value.ObservableValue;
+import javafx.beans.value.ObservableValueBase;
 import javafx.collections.FXCollections;
+import javafx.collections.ListChangeListener;
+import javafx.collections.ListChangeListener.Change;
 import javafx.collections.ObservableList;
+import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.event.EventType;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableColumn.CellDataFeatures;
 import javafx.scene.control.TableColumn.CellEditEvent;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.CheckBoxTableCell;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.util.Callback;
 import javafx.util.Duration;
 import moneytrackerconsoleclient.methods.Product;
 import moneytrackerfxclient.MoneyTrackerFXClient;
-import moneytrackerfxclient.forms.controllers.custom.CheckBoxCell;
+//import moneytrackerfxclient.forms.controllers.custom.CheckBoxCell;
 import moneytrackerfxclient.forms.controllers.custom.EditingDoubleCell;
 import moneytrackerfxclient.forms.controllers.custom.EditingStringCell;
+import moneytrackerfxclient.forms.controllers.custom.ProductWrapper;
 
 public class Products_formController implements Initializable {
 
+//    private static volatile Products_formController instance;
+//    
+//        public static Products_formController getInstance() {
+//        Products_formController localInstance = instance;
+//        if (localInstance == null) {
+//            synchronized (Products_formController.class) {
+//                localInstance = instance;
+//                if (localInstance == null) {
+//                    instance = localInstance = new Products_formController();
+//                    //client = new MoneyTrackerClient();
+//                }
+//            }
+//        }
+//        return localInstance;
+//    }
     @FXML
     private AnchorPane content_pane;
     @FXML
@@ -52,50 +79,67 @@ public class Products_formController implements Initializable {
     private TextField product_price_field;
     @FXML
     private TextArea product_desc_text_area;
-    private List<Product> plainProductList = new ArrayList<Product>() {};
-    
-    private final ObservableList <Boolean> productsToRemove = FXCollections.observableArrayList();
-    
-    private final ObservableList <Product> observableProductList = FXCollections.observableArrayList();
+    @FXML
+    private Button removeProductsButton;
+    private List<Product> plainProductList = new ArrayList<Product>() {
+    };
+    private final ObservableList<ProductWrapper> observableProductList = FXCollections.observableArrayList();
+    private List<String> toRemoveList = new ArrayList<String>();
+
+    public List<String> getToRemoveList() {
+        return toRemoveList;
+    }
 
     public void updateProductsList() {
+        this.observableProductList.addListener(
+                new ListChangeListener<ProductWrapper>() {
+                    @Override
+                    public void onChanged(Change<? extends ProductWrapper> change) {
+                        System.out.println("Detected a change! ");
+                    }
+                });
+
         plainProductList = MoneyTrackerFXClient.getInstance().getClientController().getClientPort().getAllProducts();
         Iterator it = plainProductList.iterator();
         while (it.hasNext()) {
-            observableProductList.add((Product) it.next());
-            
-            productsToRemove.add(Boolean.FALSE);
+            observableProductList.add(new ProductWrapper((Product) it.next()));
+            plainProductList.remove(it);
         }
     }
 
-
     //TODO: исправить привязку к типу поля Product
     public void setProductsTableCellValueFactories() {
-        products_table_name.setCellValueFactory(new PropertyValueFactory<Product, String>("name"));
-        products_table_desc.setCellValueFactory(new PropertyValueFactory<Product, String>("description"));
-        products_table_cost.setCellValueFactory(new PropertyValueFactory<Product, Double>("cost"));
-        products_table_remove.setCellValueFactory(new PropertyValueFactory("selected"));
+
+        products_table_name.setCellValueFactory(new PropertyValueFactory<ProductWrapper, String>("name"));
+        products_table_desc.setCellValueFactory(new PropertyValueFactory<ProductWrapper, String>("description"));
+        products_table_cost.setCellValueFactory(new PropertyValueFactory<ProductWrapper, Double>("cost"));
+        //products_table_remove.setCellValueFactory(new PropertyValueFactory("to_delete"));
+        products_table_remove.setCellValueFactory(new PropertyValueFactory<ProductWrapper, BooleanProperty>("to_delete"));
         products_table.setItems(observableProductList);
     }
 
     protected void clearLists() {
         plainProductList.clear();
         observableProductList.clear();
-        productsToRemove.clear();
+        toRemoveList.clear();
     }
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        //this.removeProductsButton.setDisable(true);
         products_table.setEditable(true);
         products_table_name.setEditable(true);
         products_table_desc.setEditable(true);
         products_table_cost.setEditable(true);
         products_table_remove.setEditable(true);
+        greetUser();
         registerColumnHandlers();
         setProductNameColumnCellHandler();
-        setProductDescColumnCellHandler();
+
         setProductCostColumnCellHandler();
 
+        //setProductDeleteCellHandler();
+        setProductDescColumnCellHandler();
         setProductsTableCellValueFactories();
         updateProductsList();
         fadeOutContentPane();
@@ -105,10 +149,16 @@ public class Products_formController implements Initializable {
         products_table_name.setCellFactory(createEditableCellFactory());
         products_table_desc.setCellFactory(createEditableCellFactory());
         products_table_cost.setCellFactory(createEditableDoubleCellFactory());
-        products_table_remove.setCellFactory(createCheckBoxCellFactory());
+        //products_table_remove.setCellFactory(new Callback<TableColumn<ProductWrapper, Boolean>, TableCell<ProductWrapper, Boolean>>() {
+        //    public TableCell<ProductWrapper, Boolean> call(TableColumn<ProductWrapper, Boolean> p) {
+        //        return new CheckBoxCell<ProductWrapper, Boolean>();
+        //    }
+        //});
+        products_table_remove.setCellFactory(CheckBoxTableCell.forTableColumn(products_table_remove));
     }
 
     public void updateUI() {
+        //this.removeProductsButton.setDisable(true);
         clearLists();
         setProductsTableCellValueFactories();
         updateProductsList();
@@ -146,6 +196,20 @@ public class Products_formController implements Initializable {
         }
     }
 
+    @FXML
+    protected void processDelete() {
+        Iterator it = observableProductList.iterator();
+        while (it.hasNext()) {
+            ProductWrapper item = (ProductWrapper) it.next();
+            if (item.to_deleteProperty().getValue().booleanValue() == true) {
+                //this.removeProductsButton.setDisable(false);
+                MoneyTrackerFXClient.getInstance().getClientController().getClientPort().deleteProductByName(item.getName());
+                System.out.println("item " + item.getName() + " was deleted");
+            }
+        }
+        updateUI();
+    }
+
     private Callback<TableColumn, TableCell> createEditableCellFactory() {
         Callback<TableColumn, TableCell> cellFactory = new Callback<TableColumn, TableCell>() {
             @Override
@@ -158,34 +222,41 @@ public class Products_formController implements Initializable {
 
     private Callback<TableColumn, TableCell> createEditableDoubleCellFactory() {
         Callback<TableColumn, TableCell> cellFactory = new Callback<TableColumn, TableCell>() {
-
             @Override
             public TableCell call(TableColumn p) {
                 return new EditingDoubleCell();
             }
         };
-        return cellFactory;       
-    }
-    
-    
-    private Callback<TableColumn, TableCell> createCheckBoxCellFactory() {
-        Callback<TableColumn, TableCell> cellFactory = new Callback<TableColumn, TableCell>() {
-            @Override
-            public TableCell call(TableColumn p) {
-                return new CheckBoxCell();
-            }
-        };
         return cellFactory;
     }
 
+//    private Callback<TableColumn, TableCell> createCheckBoxCellFactory() {
+//        Callback<TableColumn, TableCell> cellFactory = new Callback<TableColumn, TableCell>() {
+//            @Override
+//            public TableCell call(TableColumn p) {
+//                return new CheckBoxCell();
+//            }
+//        };
+//        return cellFactory;
+//    }
+    private void setProductDeleteCellHandler() {
+        /* products_table_remove.setOnEditCommit(new EventHandler<CellEditEvent<ProductWrapper, Boolean>>() {
+         @Override
+         public void handle(CellEditEvent<ProductWrapper, Boolean> t) {
+         //System.out.println(t.getRowValue()+" old value :"+t.getOldValue()+" new value :"+t.getNewValue());
+         System.out.println(t.getNewValue());
+         }
+         });*/
+    }
+
     private void setProductNameColumnCellHandler() {
-        products_table_name.setOnEditCommit(new EventHandler<CellEditEvent<Product, String>>() {
+        products_table_name.setOnEditCommit(new EventHandler<CellEditEvent<ProductWrapper, String>>() {
             @Override
-            public void handle(CellEditEvent<Product, String> t) {
+            public void handle(CellEditEvent<ProductWrapper, String> t) {
                 if (!(t.getNewValue().equals(t.getOldValue()))) {
                     if (t.getNewValue().length() <= 85) {
                         String old_name = t.getOldValue();
-                        Product updated = (Product) t.getTableView().getItems().get(t.getTablePosition().getRow());
+                        ProductWrapper updated = (ProductWrapper) t.getTableView().getItems().get(t.getTablePosition().getRow());
                         updated.setName(t.getNewValue());
                         MoneyTrackerFXClient.getInstance().getClientController().getClientPort().updateProductByAllParams(old_name, updated.getName(), updated.getDescription(), updated.getCost());
                     } else {
@@ -197,12 +268,12 @@ public class Products_formController implements Initializable {
     }
 
     private void setProductDescColumnCellHandler() {
-        products_table_desc.setOnEditCommit(new EventHandler<CellEditEvent<Product, String>>() {
+        products_table_desc.setOnEditCommit(new EventHandler<CellEditEvent<ProductWrapper, String>>() {
             @Override
-            public void handle(CellEditEvent<Product, String> t) {
+            public void handle(CellEditEvent<ProductWrapper, String> t) {
                 if (!(t.getNewValue().equals(t.getOldValue()))) {
                     if (t.getNewValue().length() <= 1000) {
-                        Product updated = (Product) t.getTableView().getItems().get(t.getTablePosition().getRow());
+                        ProductWrapper updated = (ProductWrapper) t.getTableView().getItems().get(t.getTablePosition().getRow());
                         System.out.println(updated.getName() + " : " + t.getNewValue());
                         MoneyTrackerFXClient.getInstance().getClientController().getClientPort().updateProductDescriptionByName(updated.getName(), t.getNewValue());
                     } else {
@@ -214,12 +285,12 @@ public class Products_formController implements Initializable {
     }
 
     private void setProductCostColumnCellHandler() {
-        products_table_cost.setOnEditCommit(new EventHandler<CellEditEvent<Product, Double>>() {
+        products_table_cost.setOnEditCommit(new EventHandler<CellEditEvent<ProductWrapper, Double>>() {
             @Override
-            public void handle(CellEditEvent<Product, Double> t) {
+            public void handle(CellEditEvent<ProductWrapper, Double> t) {
                 if (!(t.getNewValue().equals(t.getOldValue()))) {
                     if (Double.valueOf(t.getNewValue()) >= 0.0) {
-                        Product updated = (Product) t.getTableView().getItems().get(t.getTablePosition().getRow());
+                        ProductWrapper updated = (ProductWrapper) t.getTableView().getItems().get(t.getTablePosition().getRow());
                         MoneyTrackerFXClient.getInstance().getClientController().getClientPort().updateProductPriceByName(updated.getName(), Double.valueOf(t.getNewValue()));
                     } else {
                         System.out.println("Product's description length must be less or equal to 1000 characters!");
@@ -232,5 +303,12 @@ public class Products_formController implements Initializable {
     @FXML
     protected void greetUser() {
         UserName.setText(MoneyTrackerFXClient.getInstance().getCurrentUser().getLogin());
+    }
+
+    @FXML
+    protected void printAll() {
+        System.out.println(observableProductList.get(0).to_deleteProperty().getValue().booleanValue());
+        System.out.println(observableProductList.get(1).to_deleteProperty().getValue().booleanValue());
+        System.out.println(observableProductList.get(2).to_deleteProperty().getValue().booleanValue());
     }
 }

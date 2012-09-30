@@ -3,12 +3,16 @@ package moneytrackerfxclient.forms.controllers.custom;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
+
+import javafx.event.EventHandler;
+
 import javafx.geometry.Pos;
+
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ContentDisplay;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
-import moneytrackerconsoleclient.methods.Product;
+import javafx.scene.input.MouseEvent;
 
 public class CheckBoxCell<S, T> extends TableCell<S, T> {
 
@@ -39,22 +43,5 @@ public class CheckBoxCell<S, T> extends TableCell<S, T> {
                 checkBox.selectedProperty().bindBidirectional((BooleanProperty) ov);
             }
         }
-    }
-
-    @Override
-    public void startEdit() {
-        super.startEdit();
-        if (isEmpty()) {
-            return;
-        }
-        checkBox.setDisable(false);
-        checkBox.requestFocus();
-
-    }
-
-    @Override
-    public void cancelEdit() {
-        super.cancelEdit();
-        checkBox.setDisable(true);
     }
 }

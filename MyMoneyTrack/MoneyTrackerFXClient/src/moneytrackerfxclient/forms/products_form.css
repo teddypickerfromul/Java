@@ -206,5 +206,22 @@
     -fx-border-radius: 0;
 }*/
 
+.removeProductsButton {
+    -fx-background-radius: 0,0,0;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-background-color: 
+        linear-gradient(#ff5400, #be1d00);
+    -fx-font-size: 85%;
+}
+
+.removeProductsButton:hover {
+    -fx-background-radius: 0,0,0;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-background-color:
+        linear-gradient(#9c2100, #a03400);
+    -fx-font-size: 85%;
+}
 
 
