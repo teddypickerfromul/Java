@@ -1,6 +1,5 @@
 package moneytrackerfxclient.utils;
 
-import com.sun.deploy.util.SessionState;
 import moneytrackerconsoleclient.*;
 import moneytrackerconsoleclient.methods.MoneyTracker;
 

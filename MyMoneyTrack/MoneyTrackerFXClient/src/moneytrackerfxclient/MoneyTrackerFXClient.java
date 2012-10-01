@@ -9,14 +9,9 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.JavaFXBuilderFactory;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.TableCell;
-import javafx.scene.control.TableColumn;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
-import javafx.util.Callback;
-import moneytrackerconsoleclient.*;
 import moneytrackerconsoleclient.methods.*;
-import moneytrackerfxclient.forms.controllers.custom.EditingStringCell;
 import moneytrackerfxclient.utils.*;
 
 public class MoneyTrackerFXClient extends Application {

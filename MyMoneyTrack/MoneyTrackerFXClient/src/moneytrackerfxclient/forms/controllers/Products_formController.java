@@ -4,28 +4,18 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Observable;
 import java.util.ResourceBundle;
-import java.util.logging.Logger;
 import javafx.animation.FadeTransition;
 import javafx.beans.property.BooleanProperty;
-import javafx.beans.property.SimpleBooleanProperty;
-import javafx.beans.value.ObservableValue;
-import javafx.beans.value.ObservableValueBase;
 import javafx.collections.FXCollections;
-import javafx.collections.ListChangeListener;
-import javafx.collections.ListChangeListener.Change;
 import javafx.collections.ObservableList;
-import javafx.event.Event;
 import javafx.event.EventHandler;
-import javafx.event.EventType;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableColumn.CellDataFeatures;
 import javafx.scene.control.TableColumn.CellEditEvent;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
@@ -37,28 +27,12 @@ import javafx.util.Callback;
 import javafx.util.Duration;
 import moneytrackerconsoleclient.methods.Product;
 import moneytrackerfxclient.MoneyTrackerFXClient;
-//import moneytrackerfxclient.forms.controllers.custom.CheckBoxCell;
 import moneytrackerfxclient.forms.controllers.custom.EditingDoubleCell;
 import moneytrackerfxclient.forms.controllers.custom.EditingStringCell;
 import moneytrackerfxclient.forms.controllers.custom.ProductWrapper;
 
 public class Products_formController implements Initializable {
 
-//    private static volatile Products_formController instance;
-//    
-//        public static Products_formController getInstance() {
-//        Products_formController localInstance = instance;
-//        if (localInstance == null) {
-//            synchronized (Products_formController.class) {
-//                localInstance = instance;
-//                if (localInstance == null) {
-//                    instance = localInstance = new Products_formController();
-//                    //client = new MoneyTrackerClient();
-//                }
-//            }
-//        }
-//        return localInstance;
-//    }
     @FXML
     private AnchorPane content_pane;
     @FXML
@@ -91,14 +65,6 @@ public class Products_formController implements Initializable {
     }
 
     public void updateProductsList() {
-        this.observableProductList.addListener(
-                new ListChangeListener<ProductWrapper>() {
-                    @Override
-                    public void onChanged(Change<? extends ProductWrapper> change) {
-                        System.out.println("Detected a change! ");
-                    }
-                });
-
         plainProductList = MoneyTrackerFXClient.getInstance().getClientController().getClientPort().getAllProducts();
         Iterator it = plainProductList.iterator();
         while (it.hasNext()) {
@@ -113,7 +79,6 @@ public class Products_formController implements Initializable {
         products_table_name.setCellValueFactory(new PropertyValueFactory<ProductWrapper, String>("name"));
         products_table_desc.setCellValueFactory(new PropertyValueFactory<ProductWrapper, String>("description"));
         products_table_cost.setCellValueFactory(new PropertyValueFactory<ProductWrapper, Double>("cost"));
-        //products_table_remove.setCellValueFactory(new PropertyValueFactory("to_delete"));
         products_table_remove.setCellValueFactory(new PropertyValueFactory<ProductWrapper, BooleanProperty>("to_delete"));
         products_table.setItems(observableProductList);
     }
@@ -149,11 +114,6 @@ public class Products_formController implements Initializable {
         products_table_name.setCellFactory(createEditableCellFactory());
         products_table_desc.setCellFactory(createEditableCellFactory());
         products_table_cost.setCellFactory(createEditableDoubleCellFactory());
-        //products_table_remove.setCellFactory(new Callback<TableColumn<ProductWrapper, Boolean>, TableCell<ProductWrapper, Boolean>>() {
-        //    public TableCell<ProductWrapper, Boolean> call(TableColumn<ProductWrapper, Boolean> p) {
-        //        return new CheckBoxCell<ProductWrapper, Boolean>();
-        //    }
-        //});
         products_table_remove.setCellFactory(CheckBoxTableCell.forTableColumn(products_table_remove));
     }
 
@@ -184,12 +144,20 @@ public class Products_formController implements Initializable {
     }
 
     @FXML
+    protected void clearAllTextFields() {
+        this.product_price_field.clear();
+        this.product_desc_text_area.clear();
+        this.product_name_field.clear();
+    }
+
+    @FXML
     protected boolean addNewProduct() {
         int product_name_length = product_name_field.getText().length();
         int product_desc_length = product_desc_text_area.getText().length();
         if (product_name_length < 85 && product_name_length > 0 && product_desc_length < 1000 && product_desc_length > 0 && product_price_field.getText().length() != 0) {
             MoneyTrackerFXClient.getInstance().getClientController().getClientPort().createNewProduct(product_name_field.getText(), product_desc_text_area.getText(), new Double(product_price_field.getText()));
             updateUI();
+            clearAllTextFields();
             return true;
         } else {
             return false;
@@ -197,13 +165,14 @@ public class Products_formController implements Initializable {
     }
 
     @FXML
-    protected void processDelete() {
+    protected synchronized void processDelete() {
         Iterator it = observableProductList.iterator();
         while (it.hasNext()) {
             ProductWrapper item = (ProductWrapper) it.next();
             if (item.to_deleteProperty().getValue().booleanValue() == true) {
                 //this.removeProductsButton.setDisable(false);
                 MoneyTrackerFXClient.getInstance().getClientController().getClientPort().deleteProductByName(item.getName());
+                it.remove();
                 System.out.println("item " + item.getName() + " was deleted");
             }
         }
@@ -228,25 +197,6 @@ public class Products_formController implements Initializable {
             }
         };
         return cellFactory;
-    }
-
-//    private Callback<TableColumn, TableCell> createCheckBoxCellFactory() {
-//        Callback<TableColumn, TableCell> cellFactory = new Callback<TableColumn, TableCell>() {
-//            @Override
-//            public TableCell call(TableColumn p) {
-//                return new CheckBoxCell();
-//            }
-//        };
-//        return cellFactory;
-//    }
-    private void setProductDeleteCellHandler() {
-        /* products_table_remove.setOnEditCommit(new EventHandler<CellEditEvent<ProductWrapper, Boolean>>() {
-         @Override
-         public void handle(CellEditEvent<ProductWrapper, Boolean> t) {
-         //System.out.println(t.getRowValue()+" old value :"+t.getOldValue()+" new value :"+t.getNewValue());
-         System.out.println(t.getNewValue());
-         }
-         });*/
     }
 
     private void setProductNameColumnCellHandler() {
@@ -303,12 +253,5 @@ public class Products_formController implements Initializable {
     @FXML
     protected void greetUser() {
         UserName.setText(MoneyTrackerFXClient.getInstance().getCurrentUser().getLogin());
-    }
-
-    @FXML
-    protected void printAll() {
-        System.out.println(observableProductList.get(0).to_deleteProperty().getValue().booleanValue());
-        System.out.println(observableProductList.get(1).to_deleteProperty().getValue().booleanValue());
-        System.out.println(observableProductList.get(2).to_deleteProperty().getValue().booleanValue());
     }
 }
