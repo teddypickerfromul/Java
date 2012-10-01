@@ -12,6 +12,9 @@ import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableCell;
@@ -23,6 +26,10 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.CheckBoxTableCell;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.VBoxBuilder;
+import javafx.scene.text.Text;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 import javafx.util.Callback;
 import javafx.util.Duration;
 import moneytrackerconsoleclient.methods.Product;
@@ -100,10 +107,7 @@ public class Products_formController implements Initializable {
         greetUser();
         registerColumnHandlers();
         setProductNameColumnCellHandler();
-
         setProductCostColumnCellHandler();
-
-        //setProductDeleteCellHandler();
         setProductDescColumnCellHandler();
         setProductsTableCellValueFactories();
         updateProductsList();
@@ -123,6 +127,16 @@ public class Products_formController implements Initializable {
         setProductsTableCellValueFactories();
         updateProductsList();
         fadeOutContentPane();
+    }
+
+    @FXML
+    private void errorPopup(String message) {
+        Stage dialogStage = new Stage();
+        dialogStage.initModality(Modality.WINDOW_MODAL);
+        dialogStage.setScene(new Scene(VBoxBuilder.create().
+                children(new Text(message), new Button("Ок")).
+                alignment(Pos.CENTER).padding(new Insets(5)).build()));
+        dialogStage.show();
     }
 
     @FXML
@@ -210,7 +224,8 @@ public class Products_formController implements Initializable {
                         updated.setName(t.getNewValue());
                         MoneyTrackerFXClient.getInstance().getClientController().getClientPort().updateProductByAllParams(old_name, updated.getName(), updated.getDescription(), updated.getCost());
                     } else {
-                        System.out.println("Product's name length must be less or equal to 85 characters!");
+                        //System.out.println("Product's name length must be less or equal to 85 characters!");
+                        errorPopup("Product's name length must be less or equal to 85 characters!");
                     }
                 }
             }
@@ -227,7 +242,8 @@ public class Products_formController implements Initializable {
                         System.out.println(updated.getName() + " : " + t.getNewValue());
                         MoneyTrackerFXClient.getInstance().getClientController().getClientPort().updateProductDescriptionByName(updated.getName(), t.getNewValue());
                     } else {
-                        System.out.println("Product's description length must be less or equal to 1000 characters!");
+                        //System.out.println("Product's description length must be less or equal to 1000 characters!");
+                        errorPopup("Product's description length must be less or equal to 1000 characters!");
                     }
                 }
             }
@@ -244,6 +260,7 @@ public class Products_formController implements Initializable {
                         MoneyTrackerFXClient.getInstance().getClientController().getClientPort().updateProductPriceByName(updated.getName(), Double.valueOf(t.getNewValue()));
                     } else {
                         System.out.println("Product's description length must be less or equal to 1000 characters!");
+                        errorPopup("Product's description length must be less or equal to 1000 characters!");
                     }
                 }
             }
