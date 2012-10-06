@@ -1,19 +1,25 @@
 package moneytrackerfxclient.forms.controllers;
 
+import java.awt.GraphicsDevice;
+import java.awt.GraphicsEnvironment;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.animation.FadeTransition;
 import javafx.beans.property.BooleanProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.geometry.Insets;
-import javafx.geometry.Pos;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -26,8 +32,6 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.CheckBoxTableCell;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.VBoxBuilder;
-import javafx.scene.text.Text;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.util.Callback;
@@ -129,16 +133,25 @@ public class Products_formController implements Initializable {
         fadeOutContentPane();
     }
 
-    @FXML
-    private void errorPopup(String message) {
-        Stage popupStage = new Stage();
-        popupStage.initModality(Modality.WINDOW_MODAL);
-        popupStage.setScene(new Scene(VBoxBuilder.create().
-                children(new Text(message), new Button(java.util.ResourceBundle.getBundle("moneytrackerfxclient/resources/strings").getString("popopErrorButtonTitle"))).
-                alignment(Pos.CENTER).padding(new Insets(2)).build()));
-        popupStage.setTitle(java.util.ResourceBundle.getBundle("moneytrackerfxclient/resources/strings").getString("popupErrorMsg"));
-        popupStage.setWidth(360);
-        popupStage.setHeight(200);
+    private void errorPopup(String message) throws IOException {
+        GraphicsDevice gd = GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice();
+        final Stage popupStage = new Stage();
+        Parent root = FXMLLoader.load(getClass().getResource("/moneytrackerfxclient/forms/popup_form.fxml"));
+        Scene scene = new Scene(root);
+        Label errLabel = (Label) root.lookup("#error_msg_label");
+        Button accept_btn = (Button) root.lookup("#accept_button");
+        popupStage.setScene(scene);
+        popupStage.setTitle(message);
+        popupStage.initModality(Modality.APPLICATION_MODAL);
+        popupStage.setX(gd.getDisplayMode().getWidth() / 2 - popupStage.getWidth() / 2);
+        popupStage.setY(gd.getDisplayMode().getHeight() / 2 - popupStage.getHeight() / 2);
+        errLabel.setText(message);
+        accept_btn.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                popupStage.close();
+            }
+        });
         popupStage.show();
     }
 
@@ -228,8 +241,12 @@ public class Products_formController implements Initializable {
                         updated.setName(t.getNewValue());
                         MoneyTrackerFXClient.getInstance().getClientController().getClientPort().updateProductByAllParams(old_name, updated.getName(), updated.getDescription(), updated.getCost());
                     } else {
-                        //System.out.println("Product's name length must be less or equal to 85 characters!");
-                        errorPopup(java.util.ResourceBundle.getBundle("moneytrackerfxclient/resources/strings").getString("productNameError"));
+                        try {
+                            //System.out.println("Product's name length must be less or equal to 85 characters!");
+                            errorPopup(java.util.ResourceBundle.getBundle("moneytrackerfxclient/resources/strings").getString("productNameError"));
+                        } catch (IOException ex) {
+                            Logger.getLogger(Products_formController.class.getName()).log(Level.SEVERE, null, ex);
+                        }
                     }
                 }
             }
@@ -246,8 +263,12 @@ public class Products_formController implements Initializable {
                         System.out.println(updated.getName() + " : " + t.getNewValue());
                         MoneyTrackerFXClient.getInstance().getClientController().getClientPort().updateProductDescriptionByName(updated.getName(), t.getNewValue());
                     } else {
-                        //System.out.println("Product's description length must be less or equal to 1000 characters!");
-                        errorPopup(java.util.ResourceBundle.getBundle("moneytrackerfxclient/resources/strings").getString("productDescError"));
+                        try {
+                            //System.out.println("Product's description length must be less or equal to 1000 characters!");
+                            errorPopup(java.util.ResourceBundle.getBundle("moneytrackerfxclient/resources/strings").getString("productDescError"));
+                        } catch (IOException ex) {
+                            Logger.getLogger(Products_formController.class.getName()).log(Level.SEVERE, null, ex);
+                        }
                     }
                 }
             }
@@ -263,8 +284,12 @@ public class Products_formController implements Initializable {
                         ProductWrapper updated = (ProductWrapper) t.getTableView().getItems().get(t.getTablePosition().getRow());
                         MoneyTrackerFXClient.getInstance().getClientController().getClientPort().updateProductPriceByName(updated.getName(), Double.valueOf(t.getNewValue()));
                     } else {
-                        //System.out.println("Product's description length must be less or equal to 1000 characters!");                      
-                        errorPopup(java.util.ResourceBundle.getBundle("moneytrackerfxclient/resources/strings").getString("productCostError"));
+                        try {
+                            //System.out.println("Product's description length must be less or equal to 1000 characters!");                      
+                            errorPopup(java.util.ResourceBundle.getBundle("moneytrackerfxclient/resources/strings").getString("productCostError"));
+                        } catch (IOException ex) {
+                            Logger.getLogger(Products_formController.class.getName()).log(Level.SEVERE, null, ex);
+                        }
                     }
                 }
             }

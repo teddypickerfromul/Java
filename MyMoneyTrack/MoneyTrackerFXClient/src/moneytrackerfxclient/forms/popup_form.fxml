@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.net.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="error_pane" fx:id="error_pane" prefHeight="200.0" prefWidth="360.0" styleClass="error_pane" xmlns:fx="http://javafx.com/fxml">
+    <children>
+        <Button fx:id="accept_button" layoutX="142.0" layoutY="157.0" mnemonicParsing="false" prefHeight="29.0" prefWidth="77.0" styleClass="accept_button" text="OK" />
+        <ImageView id="error_icon.png" fitHeight="62.999900817871094" fitWidth="66.0" layoutX="148.0" layoutY="7.0">
+            <image>
+                <Image url="@error_icon.png" preserveRatio="true" smooth="true" />
+            </image>
+        </ImageView>
+        <Label fx:id="error_msg_label" alignment="CENTER" contentDisplay="CENTER" layoutX="14.0" layoutY="86.0" prefHeight="49.0" prefWidth="332.0" styleClass="error_msg_label" text="Label" wrapText="true" />
+    </children>
+    <stylesheets>
+        <URL value="@popup_form.css" />
+    </stylesheets>
+</AnchorPane>

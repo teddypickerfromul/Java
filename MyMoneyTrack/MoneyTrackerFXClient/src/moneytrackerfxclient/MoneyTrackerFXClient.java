@@ -95,7 +95,7 @@ public class MoneyTrackerFXClient extends Application {
     public void gotoProductsForm() {
         try {
             getStage().setTitle("MoneyTracker::Товары");
-            replaceSceneContent("forms/products_form.fxml");            
+            replaceSceneContent("forms/products_form.fxml");
             getStage().setWidth(1024.0);
             getStage().setHeight(800.0);
             //TODO: вынести в AppSettings
