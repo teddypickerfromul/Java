@@ -211,7 +211,7 @@ public class MoneyTracker {
     }
 
     @WebMethod(operationName = "getAllProducts")
-    public List <Product> getAllProducts() {
+    public List<Product> getAllProducts() {
         List result;
         result = null;
         try {
@@ -353,6 +353,28 @@ public class MoneyTracker {
         }
     }
 
+    @WebMethod(operationName = "deleteProductListByNames")
+    public void deleteProductListByNames(List<String> productList) {
+        if (productList != null) {
+            Iterator<String> it = productList.iterator();
+            while (it.hasNext()) {
+                try {
+                    HibernateUtil.getCurrentSession().beginTransaction();
+                    ProductHelper.deleteByName(HibernateUtil.getCurrentSession(), it.next());
+                    HibernateUtil.getCurrentSession().getTransaction().commit();
+                } catch (HibernateException ex) {
+                    if (HibernateUtil.getCurrentSession().getTransaction().isActive()) {
+                        HibernateUtil.getCurrentSession().getTransaction().rollback();
+                    }
+                } finally {
+                    if (HibernateUtil.getCurrentSession() != null) {
+                        HibernateUtil.getCurrentSession().close();
+                    }
+                }
+            }
+        }
+    }
+
     @WebMethod(operationName = "deleteProductByName")
     public void deleteProductByName(String name) {
         try {
@@ -475,16 +497,16 @@ public class MoneyTracker {
         }
         return result;
     }
-    
-    @WebMethod(operationName="updateProductByAllParams")
-    public Product updateProductByAllParams(String old_name, String name, String desc, double price){
+
+    @WebMethod(operationName = "updateProductByAllParams")
+    public Product updateProductByAllParams(String old_name, String name, String desc, double price) {
         Product result;
         result = null;
-        try{
+        try {
             HibernateUtil.getCurrentSession().beginTransaction();
             result = ProductHelper.getByName(HibernateUtil.getCurrentSession(), old_name);
             HibernateUtil.getCurrentSession().getTransaction().commit();
-            if(result != null){
+            if (result != null) {
                 long result_id = result.getId();
                 HibernateUtil.getCurrentSession().beginTransaction();
                 ProductHelper.changeNameById(HibernateUtil.getCurrentSession(), result_id, name);
@@ -492,13 +514,13 @@ public class MoneyTracker {
                 ProductHelper.changePriceById(HibernateUtil.getCurrentSession(), result_id, price);
                 HibernateUtil.getCurrentSession().getTransaction().commit();
             }
-        } catch (HibernateException ex){
-            if(HibernateUtil.getCurrentSession().getTransaction().isActive()) {
+        } catch (HibernateException ex) {
+            if (HibernateUtil.getCurrentSession().getTransaction().isActive()) {
                 HibernateUtil.getCurrentSession().getTransaction().rollback();
             }
             ex.printStackTrace();
         } finally {
-            if(HibernateUtil.getCurrentSession() != null) {
+            if (HibernateUtil.getCurrentSession() != null) {
                 HibernateUtil.getCurrentSession().close();
             }
         }
