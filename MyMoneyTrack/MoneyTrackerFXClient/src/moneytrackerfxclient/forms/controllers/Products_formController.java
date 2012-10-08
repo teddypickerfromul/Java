@@ -166,6 +166,11 @@ public class Products_formController implements Initializable {
         MoneyTrackerFXClient.getInstance().gotoAppForm();
     }
 
+    @FXML
+    protected void gotoOutlaysForm() {
+        MoneyTrackerFXClient.getInstance().gotoOutlaysForm();
+    }
+    
     protected void fadeOutContentPane() {
         FadeTransition fadeTransition = new FadeTransition(Duration.millis(1000), this.content_pane);
         fadeTransition.setFromValue(0.0);

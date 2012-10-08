@@ -23,7 +23,7 @@
             <children>
                 <Button fx:id="to_main_button" layoutY="217.0" mnemonicParsing="false" prefHeight="54.0" prefWidth="211.0" text="Главное" />
                 <Button fx:id="to_goodies_button" onAction="#gotoProductsForm" layoutY="271.0" mnemonicParsing="false" prefHeight="54.0" prefWidth="211.0" text="Товары" />
-                <Button fx:id="to_outlays_button" layoutY="325.0" mnemonicParsing="false" prefHeight="54.0" prefWidth="211.0" text="Мои расходы" />
+                <Button fx:id="to_outlays_button" onAction="#gotoOutlaysForm" layoutY="325.0" mnemonicParsing="false" prefHeight="54.0" prefWidth="211.0" text="Мои расходы" />
                 <Button fx:id="to_incomes_button" layoutY="379.0" mnemonicParsing="false" prefHeight="54.0" prefWidth="211.0" text="Мои доходы" />
                 <Button fx:id="to_budget_button" layoutY="433.0" mnemonicParsing="false" prefHeight="54.0" prefWidth="211.0" text="Отчёты" />
                 <ImageView fx:id="logo" fitHeight="143.99990000000253" fitWidth="143.99990000000253" layoutX="29.0" layoutY="38.0" pickOnBounds="true" preserveRatio="true">

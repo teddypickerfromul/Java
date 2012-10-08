@@ -140,6 +140,11 @@ public class App_stubController implements Initializable {
     }
 
     @FXML
+    protected void gotoOutlaysForm() {
+        MoneyTrackerFXClient.getInstance().gotoOutlaysForm();
+    }
+
+    @FXML
     protected void updateProductsCountLabel() {
         ov_products_label.setText(Integer.toString(this.userProductsCount));
     }

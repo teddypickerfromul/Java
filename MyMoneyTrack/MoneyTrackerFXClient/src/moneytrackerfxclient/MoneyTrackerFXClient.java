@@ -107,6 +107,21 @@ public class MoneyTrackerFXClient extends Application {
         }
     }
 
+    public void gotoOutlaysForm() {
+        try {
+            getStage().setTitle("MoneyTracker::Расходы");
+            replaceSceneContent("forms/outlays_form.fxml");
+            getStage().setWidth(1024.0);
+            getStage().setHeight(800.0);
+            //TODO: вынести в AppSettings
+            GraphicsDevice gd = GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice();
+            getStage().setX(gd.getDisplayMode().getWidth() / 2 - getStage().getWidth() / 2);
+            getStage().setY(gd.getDisplayMode().getHeight() / 2 - getStage().getHeight() / 2);
+        } catch (Exception ex) {
+            Logger.getLogger(MoneyTrackerFXClient.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
     //TODO: перенести все размеры в AppSettings
     public void resetStageSize() {
         getStage().setWidth(600.0);
