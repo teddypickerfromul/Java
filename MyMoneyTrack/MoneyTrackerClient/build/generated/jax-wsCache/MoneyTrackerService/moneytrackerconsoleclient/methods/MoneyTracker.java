@@ -34,8 +34,8 @@ public interface MoneyTracker {
      * @return
      *     returns moneytrackerconsoleclient.methods.User
      * @throws InvalidFileFormatException_Exception
-     * @throws RegErrorException_Exception
      * @throws IOException_Exception
+     * @throws RegErrorException_Exception
      */
     @WebMethod
     @WebResult(targetNamespace = "")
@@ -267,6 +267,18 @@ public interface MoneyTracker {
      * @param arg0
      */
     @WebMethod
+    @RequestWrapper(localName = "deleteProductListByNames", targetNamespace = "http://moneytracker.com/", className = "moneytrackerconsoleclient.methods.DeleteProductListByNames")
+    @ResponseWrapper(localName = "deleteProductListByNamesResponse", targetNamespace = "http://moneytracker.com/", className = "moneytrackerconsoleclient.methods.DeleteProductListByNamesResponse")
+    @Action(input = "http://moneytracker.com/MoneyTracker/deleteProductListByNamesRequest", output = "http://moneytracker.com/MoneyTracker/deleteProductListByNamesResponse")
+    public void deleteProductListByNames(
+        @WebParam(name = "arg0", targetNamespace = "")
+        List<String> arg0);
+
+    /**
+     * 
+     * @param arg0
+     */
+    @WebMethod
     @RequestWrapper(localName = "deleteProductByName", targetNamespace = "http://moneytracker.com/", className = "moneytrackerconsoleclient.methods.DeleteProductByName")
     @ResponseWrapper(localName = "deleteProductByNameResponse", targetNamespace = "http://moneytracker.com/", className = "moneytrackerconsoleclient.methods.DeleteProductByNameResponse")
     @Action(input = "http://moneytracker.com/MoneyTracker/deleteProductByNameRequest", output = "http://moneytracker.com/MoneyTracker/deleteProductByNameResponse")
@@ -363,6 +375,30 @@ public interface MoneyTracker {
         String arg0,
         @WebParam(name = "arg1", targetNamespace = "")
         double arg1);
+
+    /**
+     * 
+     * @param arg3
+     * @param arg2
+     * @param arg1
+     * @param arg0
+     * @return
+     *     returns moneytrackerconsoleclient.methods.Product
+     */
+    @WebMethod
+    @WebResult(targetNamespace = "")
+    @RequestWrapper(localName = "updateProductByAllParams", targetNamespace = "http://moneytracker.com/", className = "moneytrackerconsoleclient.methods.UpdateProductByAllParams")
+    @ResponseWrapper(localName = "updateProductByAllParamsResponse", targetNamespace = "http://moneytracker.com/", className = "moneytrackerconsoleclient.methods.UpdateProductByAllParamsResponse")
+    @Action(input = "http://moneytracker.com/MoneyTracker/updateProductByAllParamsRequest", output = "http://moneytracker.com/MoneyTracker/updateProductByAllParamsResponse")
+    public Product updateProductByAllParams(
+        @WebParam(name = "arg0", targetNamespace = "")
+        String arg0,
+        @WebParam(name = "arg1", targetNamespace = "")
+        String arg1,
+        @WebParam(name = "arg2", targetNamespace = "")
+        String arg2,
+        @WebParam(name = "arg3", targetNamespace = "")
+        double arg3);
 
     /**
      * 
@@ -1419,26 +1455,5 @@ public interface MoneyTracker {
     @ResponseWrapper(localName = "GoodbyeResponse", targetNamespace = "http://moneytracker.com/", className = "moneytrackerconsoleclient.methods.GoodbyeResponse")
     @Action(input = "http://moneytracker.com/MoneyTracker/GoodbyeRequest", output = "http://moneytracker.com/MoneyTracker/GoodbyeResponse")
     public String goodbye();
-
-    /**
-     * 
-     * @param arg2
-     * @param arg1
-     * @param arg0
-     * @return
-     *     returns moneytrackerconsoleclient.methods.Product
-     */
-    @WebMethod
-    @WebResult(targetNamespace = "")
-    @RequestWrapper(localName = "updateProductByAllParams", targetNamespace = "http://moneytracker.com/", className = "moneytrackerconsoleclient.methods.UpdateProductByAllParams")
-    @ResponseWrapper(localName = "updateProductByAllParamsResponse", targetNamespace = "http://moneytracker.com/", className = "moneytrackerconsoleclient.methods.UpdateProductByAllParamsResponse")
-    @Action(input = "http://moneytracker.com/MoneyTracker/updateProductByAllParamsRequest", output = "http://moneytracker.com/MoneyTracker/updateProductByAllParamsResponse")
-    public Product updateProductByAllParams(
-        @WebParam(name = "arg0", targetNamespace = "")
-        String arg0,
-        @WebParam(name = "arg1", targetNamespace = "")
-        String arg1,
-        @WebParam(name = "arg2", targetNamespace = "")
-        double arg2);
 
 }

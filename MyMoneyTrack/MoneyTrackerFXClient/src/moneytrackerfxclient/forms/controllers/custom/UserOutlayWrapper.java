@@ -12,15 +12,41 @@ public class UserOutlayWrapper extends UserOutlay {
 
     private final UserOutlay _outlay;
     private BooleanProperty to_delete;
+    //TODO:Убрать 
+    private String productName;
+    private Double overralSum;
 
     public UserOutlayWrapper(UserOutlay outlay) {
-        _outlay = outlay;
+        this._outlay = outlay;
+        this.overralSum = this._outlay.getOverral();
+        this.productName = this._outlay.getProduct().getName();
+        //this.overralSum = this.getProduct().getCost() * this._outlay.getProductsCount();
         this.to_delete = new SimpleBooleanProperty(false);
         this.to_delete.addListener(new ChangeListener<Boolean>() {
             public void changed(ObservableValue<? extends Boolean> ov, Boolean t, Boolean t1) {
                 setDeleted(t1);
             }
         });
+    }
+
+    public void setProductName(String productName) {
+        this.productName = productName;
+    }
+
+    public String getProductName() {
+        return productName;
+    }
+
+    public void updateOverralSum(int count) {
+        this.overralSum = count * this.getProduct().getCost();
+    }
+
+    public double getOverralSum() {
+        return this.overralSum;
+    }
+
+    public void setOverralSum(Double newSum) {
+        this.overralSum = newSum;
     }
 
     public String getDatetime() {
@@ -31,7 +57,12 @@ public class UserOutlayWrapper extends UserOutlay {
         _outlay.setDatetime(value);
     }
 
-    public Product getProduct() {
+    public String _product_nameProperty() {
+        /*return this._product_name;*/
+        return this.product.getName();
+    }
+
+    public Product /*String*/ getProduct() {
         return _outlay.getProduct();
     }
 
@@ -55,7 +86,6 @@ public class UserOutlayWrapper extends UserOutlay {
         _outlay.setUser(value);
     }
 
-    
     public BooleanProperty to_deleteProperty() {
         return to_delete;
     }

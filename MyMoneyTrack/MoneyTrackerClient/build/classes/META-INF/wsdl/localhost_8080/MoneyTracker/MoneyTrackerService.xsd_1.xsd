@@ -36,6 +36,10 @@
 
 <xs:element name="deleteProductByNameResponse" type="tns:deleteProductByNameResponse"/>
 
+<xs:element name="deleteProductListByNames" type="tns:deleteProductListByNames"/>
+
+<xs:element name="deleteProductListByNamesResponse" type="tns:deleteProductListByNamesResponse"/>
+
 <xs:element name="deleteUserById" type="tns:deleteUserById"/>
 
 <xs:element name="deleteUserByIdResponse" type="tns:deleteUserByIdResponse"/>
@@ -283,6 +287,10 @@
 <xs:element name="registerUser" type="tns:registerUser"/>
 
 <xs:element name="registerUserResponse" type="tns:registerUserResponse"/>
+
+<xs:element name="updateProductByAllParams" type="tns:updateProductByAllParams"/>
+
+<xs:element name="updateProductByAllParamsResponse" type="tns:updateProductByAllParamsResponse"/>
 
 <xs:element name="updateProductDescriptionById" type="tns:updateProductDescriptionById"/>
 
@@ -629,6 +637,16 @@
 </xs:sequence>
 </xs:complexType>
 
+<xs:complexType name="deleteProductListByNames">
+<xs:sequence>
+<xs:element name="arg0" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="deleteProductListByNamesResponse">
+<xs:sequence/>
+</xs:complexType>
+
 <xs:complexType name="getAllUserBudgetsByDescription">
 <xs:sequence>
 <xs:element name="arg0" type="xs:string" minOccurs="0"/>
@@ -893,6 +911,7 @@
 <xs:complexType name="userOutlay">
 <xs:sequence>
 <xs:element name="datetime" type="xs:string" minOccurs="0"/>
+<xs:element name="overral" type="xs:double"/>
 <xs:element name="product" type="tns:product" minOccurs="0"/>
 <xs:element name="products_count" type="xs:int"/>
 <xs:element name="user" type="tns:user" minOccurs="0"/>
@@ -1299,6 +1318,21 @@
 <xs:complexType name="updateUserBudgetAmountResponse">
 <xs:sequence>
 <xs:element name="return" type="tns:userBudget" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="updateProductByAllParams">
+<xs:sequence>
+<xs:element name="arg0" type="xs:string" minOccurs="0"/>
+<xs:element name="arg1" type="xs:string" minOccurs="0"/>
+<xs:element name="arg2" type="xs:string" minOccurs="0"/>
+<xs:element name="arg3" type="xs:double"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="updateProductByAllParamsResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:product" minOccurs="0"/>
 </xs:sequence>
 </xs:complexType>
 

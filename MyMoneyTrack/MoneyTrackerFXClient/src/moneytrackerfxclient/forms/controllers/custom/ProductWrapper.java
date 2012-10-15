@@ -7,10 +7,10 @@ import javafx.beans.value.ObservableValue;
 import moneytrackerconsoleclient.methods.Product;
 
 public class ProductWrapper extends Product {
-    
+
     final Product _product;
     private BooleanProperty to_delete;
-    
+
     public ProductWrapper(Product product) {
         _product = product;
         this.to_delete = new SimpleBooleanProperty(false);
@@ -20,45 +20,49 @@ public class ProductWrapper extends Product {
             }
         });
     }
-    
+
     public BooleanProperty to_deleteProperty() {
         return to_delete;
     }
-    
+
     public void setDeleted(Boolean _deleted) {
         this.to_delete.setValue(_deleted);
     }
-    
+
     public double getCost() {
         return _product.getCost();
     }
-    
+
     public void setCost(double value) {
         _product.setCost(value);
     }
-    
+
     public String getDescription() {
         return _product.getDescription();
     }
-    
+
     public void setDescription(String value) {
         _product.setDescription(value);
     }
-    
+
     public String getName() {
         return _product.getName();
     }
-    
+
     public void setName(String value) {
         _product.setName(value);
     }
-    
-    public Product getProduct() {
-        return _product;
+
+    public /*Product*/ String getProduct() {
+        return _product.getName();
     }
-    
+
     public ProductWrapper getInstance() {
         return this;
     }
-    
+
+    @Override
+    public String toString() {
+        return _product.getName();
+    }
 }

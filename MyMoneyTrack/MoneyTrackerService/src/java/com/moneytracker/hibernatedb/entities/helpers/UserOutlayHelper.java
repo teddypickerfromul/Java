@@ -36,7 +36,8 @@ public class UserOutlayHelper {
             result.setProduct(product);
             result.setDatetime(datetime);
             result.setProducts_count(products_count);
-            result.setOverral();
+            result.updateOverral();
+            //result.setOverral(/*0.0*/);
 
             session.saveOrUpdate(result);
         }
@@ -374,7 +375,8 @@ public class UserOutlayHelper {
             result.setProduct(product);
             result.setDatetime(datetime);
             result.setProducts_count(products_count);
-            result.setOverral();
+            result.updateOverral();
+            //result.setOverral(/*0.0*/);
             session.update(result);
         }
         return result;
@@ -391,7 +393,8 @@ public class UserOutlayHelper {
         UserOutlay result = getById(session, id);
         if (result != null) {
             result.setProduct(product);
-            result.setOverral();
+            //result.setOverral(/*0.0*/);
+            result.updateOverral();
             session.update(result);
         }
         return result;
@@ -405,7 +408,8 @@ public class UserOutlayHelper {
         UserOutlay result = getById(session, id);
         if (result != null) {
             result.setProducts_count(products_count);
-            result.setOverral();
+            result.updateOverral();
+            //result.setOverral(/*0.0*/);
             session.update(result);
         }
         return result;

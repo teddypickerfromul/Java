@@ -106,6 +106,12 @@
 <message name="deleteProductByIdResponse">
 <part name="parameters" element="tns:deleteProductByIdResponse"/>
 </message>
+<message name="deleteProductListByNames">
+<part name="parameters" element="tns:deleteProductListByNames"/>
+</message>
+<message name="deleteProductListByNamesResponse">
+<part name="parameters" element="tns:deleteProductListByNamesResponse"/>
+</message>
 <message name="deleteProductByName">
 <part name="parameters" element="tns:deleteProductByName"/>
 </message>
@@ -141,6 +147,12 @@
 </message>
 <message name="updateProductPriceByNameResponse">
 <part name="parameters" element="tns:updateProductPriceByNameResponse"/>
+</message>
+<message name="updateProductByAllParams">
+<part name="parameters" element="tns:updateProductByAllParams"/>
+</message>
+<message name="updateProductByAllParamsResponse">
+<part name="parameters" element="tns:updateProductByAllParamsResponse"/>
 </message>
 <message name="createNewUserIncome">
 <part name="parameters" element="tns:createNewUserIncome"/>
@@ -567,6 +579,10 @@
 <input wsam:Action="http://moneytracker.com/MoneyTracker/deleteProductByIdRequest" message="tns:deleteProductById"/>
 <output wsam:Action="http://moneytracker.com/MoneyTracker/deleteProductByIdResponse" message="tns:deleteProductByIdResponse"/>
 </operation>
+<operation name="deleteProductListByNames">
+<input wsam:Action="http://moneytracker.com/MoneyTracker/deleteProductListByNamesRequest" message="tns:deleteProductListByNames"/>
+<output wsam:Action="http://moneytracker.com/MoneyTracker/deleteProductListByNamesResponse" message="tns:deleteProductListByNamesResponse"/>
+</operation>
 <operation name="deleteProductByName">
 <input wsam:Action="http://moneytracker.com/MoneyTracker/deleteProductByNameRequest" message="tns:deleteProductByName"/>
 <output wsam:Action="http://moneytracker.com/MoneyTracker/deleteProductByNameResponse" message="tns:deleteProductByNameResponse"/>
@@ -590,6 +606,10 @@
 <operation name="updateProductPriceByName">
 <input wsam:Action="http://moneytracker.com/MoneyTracker/updateProductPriceByNameRequest" message="tns:updateProductPriceByName"/>
 <output wsam:Action="http://moneytracker.com/MoneyTracker/updateProductPriceByNameResponse" message="tns:updateProductPriceByNameResponse"/>
+</operation>
+<operation name="updateProductByAllParams">
+<input wsam:Action="http://moneytracker.com/MoneyTracker/updateProductByAllParamsRequest" message="tns:updateProductByAllParams"/>
+<output wsam:Action="http://moneytracker.com/MoneyTracker/updateProductByAllParamsResponse" message="tns:updateProductByAllParamsResponse"/>
 </operation>
 <operation name="createNewUserIncome">
 <input wsam:Action="http://moneytracker.com/MoneyTracker/createNewUserIncomeRequest" message="tns:createNewUserIncome"/>
@@ -981,6 +1001,15 @@
 <soap:body use="literal"/>
 </output>
 </operation>
+<operation name="deleteProductListByNames">
+<soap:operation soapAction=""/>
+<input>
+<soap:body use="literal"/>
+</input>
+<output>
+<soap:body use="literal"/>
+</output>
+</operation>
 <operation name="deleteProductByName">
 <soap:operation soapAction=""/>
 <input>
@@ -1027,6 +1056,15 @@
 </output>
 </operation>
 <operation name="updateProductPriceByName">
+<soap:operation soapAction=""/>
+<input>
+<soap:body use="literal"/>
+</input>
+<output>
+<soap:body use="literal"/>
+</output>
+</operation>
+<operation name="updateProductByAllParams">
 <soap:operation soapAction=""/>
 <input>
 <soap:body use="literal"/>

@@ -18,6 +18,7 @@ import javax.xml.bind.annotation.XmlType;
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
  *         &lt;element name="datetime" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
+ *         &lt;element name="overral" type="{http://www.w3.org/2001/XMLSchema}double"/>
  *         &lt;element name="product" type="{http://moneytracker.com/}product" minOccurs="0"/>
  *         &lt;element name="products_count" type="{http://www.w3.org/2001/XMLSchema}int"/>
  *         &lt;element name="user" type="{http://moneytracker.com/}user" minOccurs="0"/>
@@ -32,6 +33,7 @@ import javax.xml.bind.annotation.XmlType;
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "userOutlay", propOrder = {
     "datetime",
+    "overral",
     "product",
     "productsCount",
     "user"
@@ -39,6 +41,7 @@ import javax.xml.bind.annotation.XmlType;
 public class UserOutlay {
 
     protected String datetime;
+    protected double overral;
     protected Product product;
     @XmlElement(name = "products_count")
     protected int productsCount;
@@ -66,6 +69,22 @@ public class UserOutlay {
      */
     public void setDatetime(String value) {
         this.datetime = value;
+    }
+
+    /**
+     * Gets the value of the overral property.
+     * 
+     */
+    public double getOverral() {
+        return overral;
+    }
+
+    /**
+     * Sets the value of the overral property.
+     * 
+     */
+    public void setOverral(double value) {
+        this.overral = value;
     }
 
     /**

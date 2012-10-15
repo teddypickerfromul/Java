@@ -37,6 +37,7 @@ public class ObjectFactory {
     private final static QName _GetOverralUserBudgetSumByOwner_QNAME = new QName("http://moneytracker.com/", "getOverralUserBudgetSumByOwner");
     private final static QName _GetAllUserIncomesByDay_QNAME = new QName("http://moneytracker.com/", "getAllUserIncomesByDay");
     private final static QName _GetUserOutlaysByUserResponse_QNAME = new QName("http://moneytracker.com/", "getUserOutlaysByUserResponse");
+    private final static QName _DeleteProductListByNames_QNAME = new QName("http://moneytracker.com/", "deleteProductListByNames");
     private final static QName _GetProductWithMaxPrice_QNAME = new QName("http://moneytracker.com/", "getProductWithMaxPrice");
     private final static QName _GetUserBudgetByAllParams_QNAME = new QName("http://moneytracker.com/", "getUserBudgetByAllParams");
     private final static QName _UpdateProductDescriptionByName_QNAME = new QName("http://moneytracker.com/", "updateProductDescriptionByName");
@@ -111,6 +112,7 @@ public class ObjectFactory {
     private final static QName _GetOverralUserOutlaySumByUserAndDayResponse_QNAME = new QName("http://moneytracker.com/", "getOverralUserOutlaySumByUserAndDayResponse");
     private final static QName _GetProductWithMinPriceResponse_QNAME = new QName("http://moneytracker.com/", "getProductWithMinPriceResponse");
     private final static QName _GetOverralUserOutlaySumByUserAndProduct_QNAME = new QName("http://moneytracker.com/", "getOverralUserOutlaySumByUserAndProduct");
+    private final static QName _DeleteProductListByNamesResponse_QNAME = new QName("http://moneytracker.com/", "deleteProductListByNamesResponse");
     private final static QName _GetOverralUserOutlaySumByUserAndProductResponse_QNAME = new QName("http://moneytracker.com/", "getOverralUserOutlaySumByUserAndProductResponse");
     private final static QName _GetAllUserOutlaysByYearResponse_QNAME = new QName("http://moneytracker.com/", "getAllUserOutlaysByYearResponse");
     private final static QName _GetProductByNameResponse_QNAME = new QName("http://moneytracker.com/", "getProductByNameResponse");
@@ -494,6 +496,14 @@ public class ObjectFactory {
      */
     public GetOverralUserOutlaySumByUserAndProduct createGetOverralUserOutlaySumByUserAndProduct() {
         return new GetOverralUserOutlaySumByUserAndProduct();
+    }
+
+    /**
+     * Create an instance of {@link DeleteProductListByNamesResponse }
+     * 
+     */
+    public DeleteProductListByNamesResponse createDeleteProductListByNamesResponse() {
+        return new DeleteProductListByNamesResponse();
     }
 
     /**
@@ -1257,6 +1267,14 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link DeleteProductListByNames }
+     * 
+     */
+    public DeleteProductListByNames createDeleteProductListByNames() {
+        return new DeleteProductListByNames();
+    }
+
+    /**
      * Create an instance of {@link GetUserOutlaysByUserResponse }
      * 
      */
@@ -1699,6 +1717,15 @@ public class ObjectFactory {
     @XmlElementDecl(namespace = "http://moneytracker.com/", name = "getUserOutlaysByUserResponse")
     public JAXBElement<GetUserOutlaysByUserResponse> createGetUserOutlaysByUserResponse(GetUserOutlaysByUserResponse value) {
         return new JAXBElement<GetUserOutlaysByUserResponse>(_GetUserOutlaysByUserResponse_QNAME, GetUserOutlaysByUserResponse.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link DeleteProductListByNames }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://moneytracker.com/", name = "deleteProductListByNames")
+    public JAXBElement<DeleteProductListByNames> createDeleteProductListByNames(DeleteProductListByNames value) {
+        return new JAXBElement<DeleteProductListByNames>(_DeleteProductListByNames_QNAME, DeleteProductListByNames.class, null, value);
     }
 
     /**
@@ -2365,6 +2392,15 @@ public class ObjectFactory {
     @XmlElementDecl(namespace = "http://moneytracker.com/", name = "getOverralUserOutlaySumByUserAndProduct")
     public JAXBElement<GetOverralUserOutlaySumByUserAndProduct> createGetOverralUserOutlaySumByUserAndProduct(GetOverralUserOutlaySumByUserAndProduct value) {
         return new JAXBElement<GetOverralUserOutlaySumByUserAndProduct>(_GetOverralUserOutlaySumByUserAndProduct_QNAME, GetOverralUserOutlaySumByUserAndProduct.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link DeleteProductListByNamesResponse }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://moneytracker.com/", name = "deleteProductListByNamesResponse")
+    public JAXBElement<DeleteProductListByNamesResponse> createDeleteProductListByNamesResponse(DeleteProductListByNamesResponse value) {
+        return new JAXBElement<DeleteProductListByNamesResponse>(_DeleteProductListByNamesResponse_QNAME, DeleteProductListByNamesResponse.class, null, value);
     }
 
     /**

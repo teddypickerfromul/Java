@@ -10,7 +10,7 @@ import org.hibernate.cfg.*;
 
 @Entity
 @Table(name = "USERS_OUTLAYS"/*, uniqueConstraints = {
-    @UniqueConstraint(columnNames = {"USER_OUTLAY_ID"})}*/)
+@UniqueConstraint(columnNames = {"USER_OUTLAY_ID"})}*/)
 public class UserOutlay {
 
     @Id
@@ -37,12 +37,26 @@ public class UserOutlay {
         return overral;
     }
 
-    public void setOverral() {
+    public void updateOverral() {
         this.overral = product.getCost() * this.products_count;
+    }
+    
+    //TODO: избавиться от флага is_update
+    public void setOverral(double ovl/*, boolean is_update*/) {
+        /*if (is_update == true) {
+            this.overral = ovl;
+        } else {*/
+            /*this.overral = product.getCost() * this.products_count;*/
+            this.overral = ovl;
+        /*}*/
     }
 
     public void setProducts_count(int products_count) {
         this.products_count = products_count;
+    }
+    
+    public int getProducts_count(){
+        return this.products_count;
     }
 
     public void setDatetime(String datetime) {
@@ -55,10 +69,6 @@ public class UserOutlay {
 
     public void setUser(User user) {
         this.user = user;
-    }
-
-    public int getProducts_count() {
-        return products_count;
     }
 
     public String getDatetime() {

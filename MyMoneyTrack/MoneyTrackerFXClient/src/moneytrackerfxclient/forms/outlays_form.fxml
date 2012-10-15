@@ -38,7 +38,7 @@
         <AnchorPane fx:id="content_pane" layoutX="211.0" layoutY="25.0" prefHeight="775.0" prefWidth="814.0" styleClass="content_pane">
             <children>
                 <AnchorPane fx:id="new_product_pane" layoutX="28.0" layoutY="630.0" prefHeight="102.0" prefWidth="707.0" />
-                <TableView id="outlay_" fx:id="outlays_table" layoutX="28.0" layoutY="29.0" prefHeight="559.0" prefWidth="707.0">
+                <TableView id="outlay_table" fx:id="outlays_table" layoutX="28.0" layoutY="29.0" prefHeight="559.0" prefWidth="707.0">
                     <columns>
                         <TableColumn prefWidth="75.0" text="Время покупки" fx:id="outlay_datetime_column" />
                         <TableColumn prefWidth="75.0" text="Продукт" fx:id="outlay_product_column" />
