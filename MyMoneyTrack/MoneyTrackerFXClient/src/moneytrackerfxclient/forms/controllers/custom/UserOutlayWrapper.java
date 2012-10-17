@@ -50,7 +50,7 @@ public class UserOutlayWrapper extends UserOutlay {
     }
 
     public String getDatetime() {
-        return _outlay.getDatetime();
+        return this._outlay.getDatetime();
     }
 
     public void setDatetime(String value) {
@@ -63,7 +63,7 @@ public class UserOutlayWrapper extends UserOutlay {
     }
 
     public Product /*String*/ getProduct() {
-        return _outlay.getProduct();
+        return this._outlay.getProduct();
     }
 
     public void setProduct(Product value) {
@@ -71,7 +71,7 @@ public class UserOutlayWrapper extends UserOutlay {
     }
 
     public int getProductsCount() {
-        return _outlay.getProductsCount();
+        return this._outlay.getProductsCount();
     }
 
     public void setProductsCount(int value) {
@@ -79,7 +79,7 @@ public class UserOutlayWrapper extends UserOutlay {
     }
 
     public User getUser() {
-        return _outlay.getUser();
+        return this._outlay.getUser();
     }
 
     public void setUser(User value) {
@@ -87,7 +87,7 @@ public class UserOutlayWrapper extends UserOutlay {
     }
 
     public BooleanProperty to_deleteProperty() {
-        return to_delete;
+        return this.to_delete;
     }
 
     public void setDeleted(Boolean _deleted) {

@@ -39,12 +39,14 @@ public class EditingDoubleCell extends TableCell<Product, Double> {
             }
         });
     }
+    
     @Override
     public void cancelEdit() {
         super.cancelEdit();
         setText(getItem().toString());
         setContentDisplay(ContentDisplay.TEXT_ONLY);
     }
+    
     @Override
     public void updateItem(Double item, boolean empty) {
         super.updateItem(item, empty);
@@ -64,6 +66,7 @@ public class EditingDoubleCell extends TableCell<Product, Double> {
             }
         }
     }
+    
     private void createTextField() {
         textField = new TextField(getString());
         textField.setMinWidth(this.getWidth() - this.getGraphicTextGap() * 2);
@@ -91,6 +94,7 @@ public class EditingDoubleCell extends TableCell<Product, Double> {
                 }
             }
         });
+        
     }
     private String getString() {
         return getItem() == null ? "" : getItem().toString();
